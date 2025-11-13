@@ -1,0 +1,282 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+//icons
+import { Search, Globe, SlidersHorizontal, ChartPie } from "@lucide/astro";
+
+//components
+import Subtitle from "@/components/micros/Subtitle.astro";
+
+//data
+const features = [
+  {
+    icon: Search,
+    title: "Advanced Search",
+    description:
+      "Find the perfect recipe with our powerful and intuitive search.",
+  },
+  {
+    icon: Globe,
+    title: "Browse by Cuisine",
+    description:
+      "Travel the world from your kitchen with recipes from every corner of the globe.",
+  },
+  {
+    icon: SlidersHorizontal,
+    title: "Ingredient Filtering",
+    description: "Find recipes using the ingredients you already have.",
+  },
+  {
+    icon: ChartPie,
+    title: "Nutritional Info",
+    description:
+      "Stay on track with your health goals with nutritional breakdowns.",
+  },
+];
+---
+
+<Layout>
+  <div class="py-8 md:py-16 max-w-7xl mx-auto">
+    <!-- HeroSection -->
+    <section class="flex flex-1 justify-center py-5" data-scroll-animate>
+      <div class="flex flex-col w-full px-4">
+        <div
+          class="flex min-h-[60vh] flex-col items-center justify-center gap-6 rounded-xl bg-cover bg-center bg-no-repeat p-4 text-center sm:gap-8"
+          data-alt="A vibrant overhead shot of a colorful salad being prepared on a dark wooden table."
+          style="
+                  background-image: linear-gradient(
+                      rgba(0, 0, 0, 0.4) 0%,
+                      rgba(18, 18, 18, 0.8) 100%
+                    ),
+                    url('https://lh3.googleusercontent.com/aida-public/AB6AXuD5XZX2dLLgaGk70HhSGUlQNRQob-9FKKD4RSCnBh-G4wcL9bH8j5mR0eZEMMU0Hpkh9EsK5jOvvPF3QoPD-OGyp661Ir9xRF3RaUMI3NOOcJYhk5RA7mN6wt4ZAz3Wf31GTRy_LMFTBckrZ3ELSjcIj-D4gGFRzTNN2IsfD4vwr7itoWPINheXZlBM9MAic8tUPdhR5mzWYX5wFVySMJ9Z1XokIvZFzr44spd72jwXyl8TuLHaE_6edNFjcG_12yw0mzarB3g519Gz');
+                "
+        >
+          <div class="flex flex-col gap-2">
+            <h1
+              class="text-4xl font-black leading-tight tracking-[-0.033em] text-text-dark sm:text-5xl lg:text-6xl"
+              data-scroll-animate
+            >
+              Discover Your Next Favorite Meal
+            </h1>
+            <h2
+              class="text-sm font-normal leading-normal text-text-dark/90 sm:text-base"
+              data-scroll-animate
+            >
+              Thousands of recipes at your fingertips, from global cuisines to
+              dietary needs.
+            </h2>
+          </div>
+          <button
+            class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-base font-bold leading-normal tracking-[0.015em] text-[#121212] transition-transform hover:scale-105"
+            data-scroll-animate
+          >
+            <span class="truncate">Explore Recipes</span>
+          </button>
+        </div>
+      </div>
+    </section>
+    <!-- FeatureSection Cards -->
+    <section class="flex flex-1 justify-center py-10 sm:py-20">
+      <div class="layout-content-container flex flex-1 flex-col gap-10 px-4">
+        <div class="flex flex-col items-center gap-4 text-center">
+          <h1
+            class="max-w-[720px] text-[32px] font-bold leading-tight tracking-light text-text-light dark:text-text-dark sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]"
+            data-scroll-animate
+          >
+            Everything For Your Culinary Adventure
+          </h1>
+          <p
+            class="max-w-[720px] text-base font-normal leading-normal text-text-light/80 dark:text-text-dark/80"
+            data-scroll-animate
+          >
+            Our platform is designed to make finding and cooking recipes simple
+            and enjoyable.
+          </p>
+        </div>
+        <div
+          class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-4 p-0"
+          data-scroll-animate
+        >
+          {
+            features.map((feature) => (
+              <div class="flex flex-1 flex-col gap-3 rounded-lg border border-border-light/60 dark:border-border-dark/60 bg-card-light dark:bg-card-dark p-4 transition-colors hover:bg-white/10" data-scroll-animate>
+                <div class="text-primary">
+                  <feature.icon size={24} />
+                </div>
+                <div class="flex flex-col gap-1">
+                  <h2 class="text-base font-bold leading-tight text-text-light dark:text-text-dark">
+                    {feature.title}
+                  </h2>
+                  <p class="text-sm font-normal leading-normal text-text-light/70 dark:text-text-dark/70">
+                    {feature.description}
+                  </p>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+    <!-- Alternating Feature Section 1 -->
+    <section class="flex flex-1 justify-center py-10 sm:py-20">
+      <div
+        class="layout-content-container flex flex-1 items-center gap-10 px-4 flex-col md:flex-row"
+        data-scroll-animate
+      >
+        <div class="flex w-full flex-col gap-4 md:w-1/2" data-scroll-animate>
+          <Subtitle title="CATEGORIES & CUISINES" />
+          <h1
+            class="text-[32px] font-bold leading-tight tracking-light text-text-light dark:text-text-dark sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]"
+          >
+            Explore a World of Flavors
+          </h1>
+          <p
+            class="text-base font-normal leading-normal text-text-light/80 dark:text-text-dark/80"
+          >
+            Dive into our extensive collection. Whether you're craving Italian
+            pasta, spicy Thai curry, or a classic American burger, we have
+            something for every palate.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2" data-scroll-animate>
+          <div
+            class="aspect-square w-full rounded-xl bg-cover bg-center bg-no-repeat"
+            data-alt="A collage of four different dishes: a bowl of pasta, a plate of tacos, a steaming bowl of pho, and a slice of chocolate cake."
+            style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDtVhnweSTslewYqM29HzEOXjM44piDgfBRhI_JjNXAVNKCoOFCW2o8f7TEJ6rsKda5zy8kkxtFl_Q6vzf7-p_f6tIr0Ov0te_VHEKIIYkQvAoUbNwTlOEQ5MODyt6A3p6ctSBMzzop4Ah7FAfz7s8KsDcMcPPgoOe2kCCsW0IzO1TUw2JI4zkARLTbagltBiUjoHkDczgaTYO9lVTZDeE83rZTJhMmMJwYdSNRSfhEJYs-WK-UtlrOkFMr1jmTkNtG09uKcIEjBFCD');
+                  "
+          >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Alternating Feature Section 2 -->
+    <section class="flex flex-1 justify-center py-10 sm:py-20">
+      <div
+        class="layout-content-container flex flex-1 items-center gap-10 px-4 flex-col md:flex-row-reverse"
+        data-scroll-animate
+      >
+        <div class="flex w-full flex-col gap-4 md:w-1/2" data-scroll-animate>
+          <Subtitle title="RECIPE PAGES" />
+          <h1
+            class="text-[32px] font-bold leading-tight tracking-light text-text-light dark:text-text-dark sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]"
+          >
+            Detailed, Easy-to-Follow Recipes
+          </h1>
+          <p
+            class="text-base font-normal leading-normal text-text-light/80 dark:text-text-dark/80"
+          >
+            Every recipe is designed for clarity, with step-by-step
+            instructions, precise ingredient lists, and helpful cooking tips to
+            ensure your dish turns out perfect every time.
+          </p>
+        </div>
+        <div class="w-full md:w-1/2" data-scroll-animate>
+          <div
+            class="aspect-square w-full rounded-xl bg-cover bg-center bg-no-repeat"
+            data-alt="A top-down view of a person following a recipe on a tablet, with fresh ingredients like tomatoes, basil, and garlic arranged around it."
+            style="
+                    background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuB7d7aRcsatvdTJ4EE_ZDuApJCX3r8MvQ6ZbL7evKg9oCeaAPRDTEacAKZ-urcWgZWKvnYyzH8JYuYlQEp2QoWbsA4sAY9yt6EpIYN5-jCNAMGn7vzTpw5JFM8vFDr19F_X7ZlIEfZmWqkBX9nM2tviip_6vgUj4DvHFx7TqaUSBNHUBk1fbUxXaArLE2dgT4UWNgDtW13QVHvNL2_b8aWPvRc8l9Vg9BmSLNal2l3yer1TMBrD8ZjIZvPWpZ2ilb26NErRQysVd_vD');
+                  "
+          >
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Testimonials Section -->
+    <section class="flex flex-1 justify-center py-10 sm:py-20">
+      <div
+        class="layout-content-container flex flex-1 flex-col items-center gap-10 px-4 text-center"
+        data-scroll-animate
+      >
+        <div class="flex flex-col gap-4" data-scroll-animate>
+          <h1
+            class="max-w-[720px] text-[32px] font-bold leading-tight tracking-light text-text-light dark:text-text-dark sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]"
+          >
+            Loved by Home Cooks Everywhere
+          </h1>
+        </div>
+        <div class="grid w-full grid-cols-1 gap-6 md:grid-cols-3" data-scroll-animate>
+          <div
+            class="flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-white/5 p-6"
+            data-scroll-animate
+          >
+            <img
+              class="h-16 w-16 rounded-full object-cover"
+              data-alt="Profile picture of Sarah L."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPDtaLcCdak4-U3kCT_FKN-BNj7L_BvFiHO5dxNeC4yQkl3vOK7YGFVM1iechIzBGHIA9zuURdQxt8II4lpGQNrn7p7lkruSS_UIXl31dpjo2GCCvT8Z5H9PFwoK8fzzpTli94BClJrh8s0UQzqMKGzfxyZp53ko9EuXWwWcXOAATtipRz6sFPIPIKf6J0TpJERUu57-8_OYrSLLFnVqmJgsMfRtmzEVrAOJiEgQkJG_NHPNeSdmKEIkJE1dw0082mLcxCGiINhC5x"
+            />
+            <p
+              class="text-base font-normal italic text-text-light/80 dark:text-text-dark/80"
+            >
+              "This website transformed my cooking! The ingredient search is a
+              lifesaver for using up leftovers."
+            </p>
+            <p class="font-bold text-text-light">- Sarah L.</p>
+          </div>
+          <div
+            class="flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-primary/10 p-6"
+            data-scroll-animate
+          >
+            <img
+              class="h-16 w-16 rounded-full object-cover"
+              data-alt="Profile picture of Mike R."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuBzo8H4IE5s5pvNA1NYCSg6SUIHNbUJf_RQcv-rvEKR89zi3Z-qJuAA7WWa0t-SSsqx4WqY9j3WuxLnMCcg1apKtLndySbBN7Pe7yW-9ZEmrHAjKiIWMHos0sQVNOeTr_9KZseBYv3mg_FnifOYeOVWBsIVxSjQbQDXZxIl9hwxusRQQnmGBBVc4VvcuFlO5AmdMQV01pznul7QBbvjMA5wYe8CV-9oVE66R08ZILoPU3isfcfctxduWazMN7DvAutDhbWlP9vv7xZb"
+            />
+            <p
+              class="text-base font-normal italic text-text-light/80 dark:text-text-dark/80"
+            >
+              "I've traveled the world through my kitchen thanks to the amazing
+              cuisine categories. The recipes are authentic and delicious."
+            </p>
+            <p class="font-bold text-text-light">- Mike R.</p>
+          </div>
+          <div
+            class="flex flex-col items-center gap-4 rounded-lg border border-white/10 bg-white/5 p-6"
+            data-scroll-animate
+          >
+            <img
+              class="h-16 w-16 rounded-full object-cover"
+              data-alt="Profile picture of Jessica P."
+              src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6DWPDiMfDB9IqeZ854mg_N6PB8Z6fZpabR9PQeRS27RazomZH07eC2Jx5UkbO785RdgESMoYLqGxSjx4nOqDmvcdV9qDjUJe0UWRyWqf-VTVpZCEHguiKF_PtHwPjj9ohpqDiIprjJdTQo3LGP5lAfhrcJQkOw1aXDLgQqwozu9kbD90otll2eyANWVS8IX96b88aE8EPIeyop8XUXAKR31OlVGLMcdKxUtOt4M3EB1hDF6a9b_b-v4WHSGRySJcv8sqyuCVL0bnr"
+            />
+            <p
+              class="text-base font-normal italic text-text-light/80 dark:text-text-dark/80"
+            >
+              "The step-by-step instructions are so clear. I've gone from a
+              novice to a confident cook!"
+            </p>
+            <p class="font-bold text-text-light">- Jessica P.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Final CTA -->
+    <section class="flex flex-1 justify-center py-10 sm:py-20" data-scroll-animate>
+      <div
+        class="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 text-center sm:p-12"
+      >
+        <div class="flex flex-col gap-2">
+          <h1
+            class="text-3xl font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark sm:text-4xl lg:text-5xl"
+            data-scroll-animate
+          >
+            Start Your Culinary Journey Today
+          </h1>
+          <h2
+            class="text-base font-normal leading-normal text-text-light/90 dark:text-text-dark/90"
+            data-scroll-animate
+          >
+            Sign up for free and get access to thousands of recipes.
+          </h2>
+        </div>
+        <button
+          class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-base font-bold leading-normal tracking-[0.015em] text-[#121212] transition-transform hover:scale-105"
+          data-scroll-animate
+        >
+          <span class="truncate">Sign Up for Free</span>
+        </button>
+      </div>
+    </section>
+  </div>
+</Layout>

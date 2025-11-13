@@ -1,0 +1,478 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+//components
+import Badge from "@/components/micros/Badge.astro";
+import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
+
+// Mock data for recipes
+const recipes = [
+  {
+    id: 1,
+    name: "Grilled Chicken Salad",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDxauAww6pASADA8ua4RengG23RTuxU8SDZ4OfFnOm9H-EgM2LqC6CGswJNwwEUUPL_ytXTfPhFjUxDxdQWofLcesZYov40AfJ4xLdUxcNPkalOVxPAkuRXE5O39DVzq3-KmrToPd1POsCQeB--bmLTt9cY47mjbhVaw8wn-g_VUTFTg21pfVuJFUN-hnE8w2uu9UdKOGrgKsTYQO_GuVRe78N8x4qnZzQVsI1gR2AD2t0kBG3HViUU44fbkIyByfl4Irc6WWKnIni_",
+    cookingTime: "30 min",
+    category: "Chicken",
+    difficulty: "Easy",
+    description:
+      "A healthy and delicious grilled chicken salad with fresh greens and a light vinaigrette.",
+  },
+  {
+    id: 2,
+    name: "Chicken Tikka Masala",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDv7WCfrtG6OuSjY703FfxXjW8TgSjYwz9ys7UOFAbt-1-CvSHxJGYpuO6f73XGjidzYgO90W5N5wnhS0ai9jWb_VqJrF4UjBBWOM7fjnuEaSV5WR1mrltAxhwMGIWDCE19gepMhVi_UX4hyDC20783zzF9S1qKe6cJYyfKr8jcPeVfIhDDOENP16Wj_NxVh9micPeQwSq2wQ52R3xfHf4i-vjfDGH3Va4zSYsFRbkNXykVW7PSU1uou37Sj3GFXO0L64bapC5B1tpF",
+    cookingTime: "45 min",
+    category: "Chicken",
+    difficulty: "Medium",
+    description:
+      "A classic Indian dish with tender chicken in a creamy, spiced tomato sauce.",
+  },
+  {
+    id: 3,
+    name: "Classic Roast Chicken",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCWEofQSQ1jAaOYkGN47ZHj7tf7b3xmg8cqYKrt8PiOkBi3r5X5mzoK8-Hxx6YTOgV9xyc0PSemUAmfaVYAuYQOcNmiQT-_uKNWFQQTGfZs7PvsLSY-nj-_DCnJHvg2ggKoWoqM-T2fU7v33TpvOhBTF1qiG0YTd8QJ7whImhn-_1vhqd6EWiFigjUgZokkiYQ8rLvTUNC__io3uYeiHf6WG1Kc9c6ncFg5JwCHu1tTPNn-IacAnE8bAfyA7IIn5WfGYEb1cV-08lgZ",
+    cookingTime: "90 min",
+    category: "Chicken",
+    difficulty: "Hard",
+    description:
+      "A perfectly roasted chicken, juicy on the inside with crispy, golden-brown skin.",
+  },
+];
+---
+
+<Layout
+  title="Search Meals | MealsDB"
+  description="Search for your favorite meals and recipes on MealsDB."
+>
+  <div class="py-16">
+    <div class="layout-content-container mx-auto flex max-w-6xl flex-col gap-8">
+      <!-- Page Heading & Search Bar -->
+      <section class="flex flex-col gap-6">
+        <div class="flex flex-col gap-3 text-center">
+          <h1
+            class="text-text-main-dark text-4xl sm:text-5xl font-black leading-tight tracking-[-0.033em]"
+          >
+            Find Your Next Meal
+          </h1>
+          <p
+            class="text-text-secondary-dark text-lg font-normal leading-normal"
+          >
+            Search for a meal, ingredient, or cuisine...
+          </p>
+        </div>
+        <div class="relative">
+          <div id="searchbox"></div>
+          <!-- <label class="flex flex-col min-w-40 h-14 w-full">
+            <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+              <div
+                class="text-text-light dark:text-text-dark flex bg-card-light dark:bg-card-dark items-center justify-center pl-4 rounded-l-lg border-y border-l border-border-light dark:border-border-dark"
+              >
+                <span class="material-symbols-outlined">search</span>
+              </div>
+              <input
+                class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-lg text-text-main-dark focus:outline-0 focus:ring-2 focus:ring-primary/50 border-y border-r border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:border-primary/50 h-full placeholder:text-text-secondary-dark px-4 rounded-l-none border-l-0 pl-2 text-base font-normal leading-normal"
+                placeholder="Search for meals, cuisines, ingredients..."
+                value="Chicken"
+              />
+              <button
+                aria-label="Clear search"
+                class="text-text-secondary-dark absolute right-4 top-1/2 -translate-y-1/2 hover:text-text-main-dark"
+              >
+                <span class="material-symbols-outlined">close</span>
+              </button>
+            </div>
+          </label>
+        </div> -->
+        </div>
+        <!-- Filters Section -->
+        <section>
+          <details
+            class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+          >
+            <summary
+              class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
+            >
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-text-secondary-dark"
+                  >tune</span
+                >
+                <p
+                  class="text-text-main-dark text-base font-semibold leading-normal"
+                >
+                  Advanced Filters
+                </p>
+              </div>
+              <span
+                class="material-symbols-outlined text-text-main-dark group-open:rotate-180 transition-transform"
+                >expand_more</span
+              >
+            </summary>
+            <div
+              class="border-t border-border-light dark:border-border-dark p-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              <!-- Cuisine Filter -->
+              <div class="flex flex-col gap-3">
+                <h3 class="text-sm font-medium text-text-secondary-dark">
+                  Cuisine
+                </h3>
+                <div class="flex gap-2 flex-wrap">
+                  <Badge label="Italian" />
+                  <Badge label="Mexican" />
+                  <Badge label="Japanese" />
+                  <Badge label="Indian" />
+                </div>
+              </div>
+              <!-- Dietary Restrictions Filter -->
+              <div class="flex flex-col gap-3">
+                <h3 class="text-sm font-medium text-text-secondary-dark">
+                  Dietary Restrictions
+                </h3>
+                <div class="flex gap-2 flex-wrap">
+                  <Badge label="Vegan" />
+                  <Badge label="Gluten-Free" />
+                  <Badge label="Vegetarian" />
+                </div>
+              </div>
+              <!-- Cooking Time Filter -->
+              <div class="flex flex-col gap-3">
+                <h3 class="text-sm font-medium text-text-secondary-dark">
+                  Max Cooking Time:
+                  <span class="font-bold text-text-main-dark">60 mins</span>
+                </h3>
+                <input
+                  class="w-full h-2 bg-border-dark rounded-lg appearance-none cursor-pointer accent-primary"
+                  max="120"
+                  min="15"
+                  step="5"
+                  type="range"
+                  value="60"
+                />
+              </div>
+            </div>
+            <div
+              class="flex justify-end gap-3 border-t border-border-light dark:border-border-dark p-4"
+            >
+              <button
+                class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-border-light text-text-main-dark text-sm font-bold hover:bg-border-light/80 transition-colors"
+              >
+                <span class="truncate">Clear All</span>
+              </button>
+              <button
+                class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-primary text-background-dark text-sm font-bold hover:bg-primary/90 transition-colors"
+              >
+                <span class="truncate">Apply Filters</span>
+              </button>
+            </div>
+          </details>
+        </section>
+        <!-- Search Results -->
+
+        <div class="search-panel">
+          <div class="search-panel__filters hidden">
+            <div id="clear-refinements"></div>
+            <h5>Categories</h5>
+            <div id="category-list"></div>
+            <h5>Tags</h5>
+            <div id="tag-list"></div>
+          </div>
+          <div class="search-panel__results">
+            <!-- <div id="stats"></div> -->
+            <!-- <div id="hits"></div> -->
+            <!-- <div id="pagination"></div> -->
+          </div>
+        </div>
+        <section class="flex flex-col gap-6">
+          <div class="flex items-baseline justify-between">
+            <h2 class="text-2xl font-bold text-text-main-dark" id="stats"></h2>
+            <div class="flex items-center gap-2">
+              <label class="text-sm text-text-secondary-dark" for="sort"
+                >Sort by:</label
+              >
+              <select
+                class="form-select bg-surface-dark border-border-dark rounded-md text-sm text-text-main-dark focus:ring-primary/50 focus:border-primary/50"
+                id="sort"
+                name="sort"
+              >
+                <option>Relevance</option>
+                <option>Newest</option>
+                <option>Cooking Time</option>
+              </select>
+            </div>
+          </div>
+          <!-- Results Grid -->
+          <div id="hits"></div>
+          <!-- Pagination -->
+          <div id="pagination"></div>
+          <!-- <div class="flex items-center justify-center pt-8">
+          <nav class="flex items-center gap-2">
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary-dark hover:border-primary/50 hover:text-primary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              disabled=""
+            >
+              <span class="material-symbols-outlined">chevron_left</span>
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-primary border border-primary text-background-dark font-bold text-sm"
+            >
+              1
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary-dark font-bold text-sm hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              2
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary-dark font-bold text-sm hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              3
+            </button>
+            <span class="text-text-secondary-dark px-2">...</span>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary-dark font-bold text-sm hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              10
+            </button>
+            <button
+              class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-secondary-dark hover:border-primary/50 hover:text-primary transition-colors"
+            >
+              <span class="material-symbols-outlined">chevron_right</span>
+            </button>
+          </nav>
+        </div> -->
+        </section>
+      </section>
+    </div>
+
+    <script>
+      import { algoliasearch } from "algoliasearch";
+      import instantsearch from "instantsearch.js";
+      import {
+        searchBox,
+        hits,
+        pagination,
+        refinementList,
+        clearRefinements,
+        stats,
+        configure,
+      } from "instantsearch.js/es/widgets";
+
+      const searchClient = algoliasearch(
+        "GC5TS4PFK2",
+        "05ab21682a73a5f888b8d2f92ddfbd06"
+      );
+
+      const search = instantsearch({
+        indexName: "astro_mealsdb_content",
+        searchClient,
+      });
+
+      // Search box widget
+      search.addWidgets([
+        searchBox({
+          container: "#searchbox",
+          placeholder: "Search for products...",
+          cssClasses: {
+            form: "relative",
+            input:
+              "relative w-full h-14 px-4 pl-12 transition-all border rounded outline-none focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400",
+            submit:
+              "absolute left-0.5 top-3 bg-transparent text-slate-800 px-4 py-1 rounded",
+            reset: "absolute right-16 top-2 text-slate-800 px-2 py-1 rounded",
+            submitIcon: "w-6 h-6",
+            resetIcon: "w-6 h-6",
+          },
+          templates: {
+            submit:
+              '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>',
+            reset: "",
+          },
+        }),
+      ]);
+
+      // Configure default search parameters
+      search.addWidgets([
+        configure({
+          hitsPerPage: 10,
+        }),
+      ]);
+
+      // Stats widget
+      search.addWidgets([
+        stats({
+          container: "#stats",
+          templates: {
+            text(data) {
+              let count = "";
+              if (data.hasManyResults) {
+                count += `Showing ${data.nbHits} results`;
+              } else if (data.hasOneResult) {
+                count += `1 result`;
+              } else {
+                count += `no result`;
+              }
+              return `${count} found in ${data.processingTimeMS}ms`;
+            },
+          },
+        }),
+      ]);
+
+      // Hits widget
+      search.addWidgets([
+        hits({
+          container: "#hits",
+          templates: {
+            item(hit, { html, components }) {
+              return `
+            <article
+                class="flex flex-col overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group cursor-pointer hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1"
+              >
+                <article class="relative">
+                  ${
+                    hit.thumbnail
+                      ? `
+                    <img src="${hit.thumbnail}" alt="${hit.title}" class="h-48 w-full object-cover" />
+                  `
+                      : ""
+                  }
+                  <div
+                    class="absolute top-3 right-3 flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-dark/70 px-3 backdrop-blur-sm"
+                  >
+                    <p class="text-white text-sm font-medium leading-normal">${hit.addons?.cookTime}</p>
+                  </div>
+                </article>
+                <div class="flex flex-col gap-3 p-4">
+                  <div class="flex gap-2">
+                    ${
+                      hit.category
+                        ? `
+                    <span class="text-xs font-semibold uppercase tracking-wider text-primary">${hit.category}</span>
+                  `
+                        : ""
+                    }
+                  ${
+                    hit.cuisine
+                      ? `
+                    <span class="text-xs font-semibold uppercase tracking-wider text-text-secondary-dark">${hit.cuisine}</span>
+                  `
+                      : ""
+                  }
+                  </div>
+                  <h3
+                    class="text-lg font-bold leading-tight text-text-main-dark group-hover:text-primary transition-colors"
+                  >
+                    ${hit._highlightResult?.title?.value || hit.title}
+                  </h3>
+                  <p class="text-sm text-text-secondary-dark line-clamp-2">
+                    ${hit._highlightResult?.description?.value || hit.description}
+                    A delicious and easy-to-follow recipe that brings together fresh ingredients and bold flavors for a satisfying meal.
+                  </p>
+                </div>
+              </article>
+            `;
+            },
+            empty(results) {
+              return `
+              <div
+                class="sm:col-span-2 lg:col-span-3 flex flex-col items-center justify-center text-center gap-4 py-16 px-6 bg-surface-dark rounded-xl border border-dashed border-border-dark"
+              >
+                <span
+                  class="material-symbols-outlined text-5xl text-text-secondary-dark"
+                  >search_off</span
+                >
+                <h3 class="text-xl font-bold text-text-main-dark">
+                  No Results Found for query <strong class="text-primary">${results.query}</strong>
+                </h3>
+                <p class="text-text-secondary-dark max-w-sm">
+                  We couldn't find any meals matching your search. Try a different
+                  search term or adjust your filters.
+                </p>
+              </div>
+            `;
+            },
+          },
+          cssClasses: {
+            list: "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6",
+            item: "col-span-1",
+          },
+        }),
+      ]);
+
+      // Refinement lists (filters)
+      search.addWidgets([
+        refinementList({
+          container: "#category-list",
+          attribute: "category",
+          searchable: true,
+          searchablePlaceholder: "Search categories...",
+          showMore: true,
+        }),
+      ]);
+
+      search.addWidgets([
+        refinementList({
+          container: "#tag-list",
+          attribute: "tags",
+          searchable: true,
+          searchablePlaceholder: "Search tags...",
+          showMore: true,
+          limit: 5,
+        }),
+      ]);
+
+      // Clear refinements button
+      search.addWidgets([
+        clearRefinements({
+          container: "#clear-refinements",
+          templates: {
+            resetLabel({ hasRefinements }) {
+              return `<span>Clear filters ${hasRefinements ? "✕" : ""}</span>`;
+            },
+          },
+        }),
+      ]);
+
+      // Pagination widget
+      search.addWidgets([
+        pagination({
+          container: "#pagination",
+          padding: 2, // Number of page numbers to show around current page
+          showFirst: true, // Show first page button
+          showLast: true, // Show last page button
+          showPrevious: true, // Show previous button
+          showNext: true, // Show next button
+          // Custom templates for prev/next buttons
+          templates: {
+            previous: `
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"></path><path d="M10.8284 12.0007L15.7782 16.9504L14.364 18.3646L8 12.0007L14.364 5.63672L15.7782 7.05093L10.8284 12.0007Z"></path></svg>
+      `,
+            next: `
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"></path><path d="M13.1717 12.0007L8.22192 7.05093L9.63614 5.63672L16.0001 12.0007L9.63614 18.3646L8.22192 16.9504L13.1717 12.0007Z"></path></svg>
+      `,
+            first: `
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"></path><path d="M4.83582 12L11.0429 18.2071L12.4571 16.7929L7.66424 12L12.4571 7.20712L11.0429 5.79291L4.83582 12ZM10.4857 12L16.6928 18.2071L18.107 16.7929L13.3141 12L18.107 7.20712L16.6928 5.79291L10.4857 12Z"></path></svg>
+      `,
+            last: `
+        <svg class="w-6 h-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill="none" d="M0 0h24v24H0z"></path><path d="M19.1642 12L12.9571 5.79291L11.5429 7.20712L16.3358 12L11.5429 16.7929L12.9571 18.2071L19.1642 12ZM13.5143 12L7.30722 5.79291L5.89301 7.20712L10.6859 12L5.89301 16.7929L7.30722 18.2071L13.5143 12Z"></path></svg>
+      `,
+          },
+          cssClasses: {
+            list: "flex items-center justify-center text-sm list-none md:gap-1 text-slate-700",
+            item: "",
+            link: "flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-light dark:text-text-dark font-bold text-sm hover:border-primary hover:text-primary hover:bg-primary/10 transition-colors group-[.ais-Pagination-item--selected]:bg-primary group-[.ais-Pagination-item--selected]:border-primary group-[.ais-Pagination-item--selected]:text-text-light",
+            selectedItem: "group",
+            disabledItem: "text-gray-400 cursor-not-allowed",
+            firstPageItem: "mr-1",
+            lastPageItem: "ml-1",
+            previousPageItem: "mr-1",
+            nextPageItem: "ml-1",
+          },
+        }),
+      ]);
+
+      search.start();
+    </script>
+  </div>
+</Layout>

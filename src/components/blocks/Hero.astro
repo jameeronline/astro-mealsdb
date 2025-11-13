@@ -1,0 +1,55 @@
+---
+import AlgoliaAutoComplete from "@/components/modules/AlgoliaAutoComplete.astro"
+---
+
+<!-- HeroSection -->
+<section class="relative" data-scroll-animate>
+  <div class="py-16 md:py-24">
+    <div
+      class="flex min-h-[480px] flex-col gap-6 rounded-xl bg-cover bg-center bg-no-repeat items-center justify-center p-8"
+      data-alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
+      style="
+                background-image: linear-gradient(
+                    rgba(0, 0, 0, 0.2) 0%,
+                    rgba(0, 0, 0, 0.5) 100%
+                  ),
+                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuApdKgwbmxdKX5_EVDRIM6ET7GDM2qafKVU8fvfbfOQeIw_sm08E7UJTEOIDcobZt3K-IxvV-OgcOoUH9ErpcCaVcGWnvODeaeRCczvqe4AtnnFitiXshs7dsIX0liaVtrsHfCZ-IaQH0MmcrU6seKRtNilE_M3R0ph4kMoHLNDLcWI9TOhGRemn2Efc1eXcXBsm9hdRhH_MTSc2C0nR3eR8T2IRztJ61NQGeCAQ-F9dqgbapgQfZQJaGX3Tf_-NQZPjEL2oB5sKBtE');
+              "
+    >
+      <div class="flex flex-col gap-4 text-center text-white max-w-2xl">
+        <h1
+          class="text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
+        >
+          Find Your Next Favorite Meal
+        </h1>
+        <p class="text-base sm:text-lg">
+          Search thousands of recipes by category, cuisine, or ingredient.
+        </p>
+      </div>
+      <div class="flex flex-col w-full max-w-xl mt-4">
+        <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+          <!-- <div
+            class="text-[#6b8961] flex border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark items-center justify-center pl-4 rounded-l-lg border-r-0"
+          >
+            <span class="material-symbols-outlined">search</span>
+          </div> -->
+          <AlgoliaAutoComplete />
+          <!-- <input
+            class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:border-primary h-full placeholder:text-[#6b8961] border-r-0 border-l-0 px-4 text-base"
+            placeholder="Search for a meal..."
+            value=""
+          />
+          <div
+            class="flex items-center justify-center rounded-r-lg border-l-0 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark pr-2"
+          >
+            <button
+              class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-5 bg-primary text-text-light text-sm font-bold tracking-[0.015em]"
+            >
+              <span class="truncate">Search</span>
+            </button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

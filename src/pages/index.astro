@@ -1,11 +1,40 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import axios from "axios";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/blocks/Hero.astro";
+import FilteredMeals from "../components/blocks/FilteredMeals.astro";
+
+//api fetched data with error handling
+let categories = [];
+try {
+  const categoriesResponse = await axios.get(
+    "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
+  );
+
+  categories = categoriesResponse.data.meals || [];
+} catch (error) {
+  console.error("Failed to fetch categories:", error);
+  // Fallback data or empty array
+  categories = [];
+}
+
+//api fetched data for areas with error handling
+let areas = [];
+try {
+  const areasResponse = await axios.get(
+    "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
+  );
+
+  areas = areasResponse.data.meals || [];
+} catch (error) {
+  console.error("Failed to fetch areas:", error);
+  // Fallback data or empty array
+  areas = [];
+}
 ---
 
 <Layout>
-	<Welcome />
+  <Hero />
+  <FilteredMeals categories={categories} areas={areas} />
 </Layout>

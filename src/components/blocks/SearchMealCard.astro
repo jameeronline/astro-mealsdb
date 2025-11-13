@@ -1,0 +1,40 @@
+---
+const { recipe } = Astro.props;
+const { title, description, image, cookingTime, tags } = recipe;
+---
+
+<div
+  class="flex flex-col overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group cursor-pointer hover:border-primary/50 transition-all duration-300 transform hover:-translate-y-1"
+>
+  <div class="relative">
+    <img
+      class="h-48 w-full object-cover"
+      data-alt="A whole roasted chicken on a platter with herbs."
+      src={image}
+    />
+    <div
+      class="absolute top-3 right-3 flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-dark/70 px-3 backdrop-blur-sm"
+    >
+      <p class="text-white text-sm font-medium leading-normal">{cookingTime}</p>
+    </div>
+  </div>
+  <div class="flex flex-col gap-3 p-4">
+    <div class="flex gap-2">
+      <span class="text-xs font-semibold uppercase tracking-wider text-primary"
+        >Chicken</span
+      >
+      <span
+        class="text-xs font-semibold uppercase tracking-wider text-text-secondary-dark"
+        >Hard</span
+      >
+    </div>
+    <h3
+      class="text-lg font-bold leading-tight text-text-main-dark group-hover:text-primary transition-colors"
+    >
+      {title}
+    </h3>
+    <p class="text-sm text-text-secondary-dark">
+      {description}
+    </p>
+  </div>
+</div>

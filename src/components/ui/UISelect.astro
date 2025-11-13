@@ -1,0 +1,37 @@
+---
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/starwind/select";
+
+//interface
+interface Props {
+  items: Array<{ value: string; label: string }>;
+  placeholder?: string;
+}
+
+//props
+const { items, placeholder } = Astro.props;
+---
+
+<Select>
+  <SelectTrigger
+    class="w-30 flex h-9 shrink-0 items-center justify-between gap-x-2 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark px-4 transition-colors hover:bg-primary/20"
+  >
+    <SelectValue placeholder={placeholder} class="text-sm font-medium" />
+  </SelectTrigger>
+  <SelectContent
+    class="bg-card-light dark:bg-card-dark border-border-light dark:border-border-dark"
+  >
+    {
+      items.map((item) => (
+        <SelectItem value={item.value} class="hover:bg-primary/20">
+          {item.label}
+        </SelectItem>
+      ))
+    }
+  </SelectContent>
+</Select>

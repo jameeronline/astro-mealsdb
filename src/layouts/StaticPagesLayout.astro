@@ -1,0 +1,67 @@
+---
+import Layout from "./Layout.astro";
+
+//import icons
+import { Home, Info, Phone, GitHub, ExternalLink } from "@lucide/astro";
+
+//get frontmatter props
+const { frontmatter } = Astro.props;
+const { title, description } = frontmatter;
+
+const staticPages = {
+    legal: {
+        title: "Legal",
+        icon: Info,
+        items: [
+            { title: "Privacy Policy", href: "/static/privacy-policy" },
+            { title: "Terms and Conditions", href: "/static/terms-and-conditions" }
+        ]
+    },
+    company: {
+        title: "Company",
+        icon: Home,
+        items: [
+            { title: "About Us", href: "/static/about" },
+            { title: "Contact", href: "/static/contact" },
+            { title: "GitHub", href: "https://github.com", external: true }
+        ]
+    }
+};
+
+---
+<Layout title={title} description={description}>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 min-h-screen my-8 md:my-16 px-4">
+        <aside class="col-span-1">
+            <nav class="bg-card-light/75 dark:bg-card-dark rounded-xl h-full">
+                <ul class="flex flex-col space-y-10 p-6">
+                    {Object.entries(staticPages).map(([key, section]) => (
+                        <li key={key}>
+                            <h3 class="flex items-center gap-2 text-lg font-semibold text-text-light dark:text-text-dark mb-4">
+                                <section.icon size={20} />
+                                {section.title}
+                            </h3>
+                            <ul class="ml-6 space-y-1">
+                                {section.items.map((item) => (
+                                    <li key={item.title}>
+                                        <a 
+                                            href={item.href} 
+                                            class="flex items-center gap-2 py-2 text-sm font-medium text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary transition-colors"
+                                            target={item.external ? "_blank" : undefined}
+                                            rel={item.external ? "noopener noreferrer" : undefined}
+                                        >
+                                            {item.title}
+                                            {item.external && <ExternalLink size={16} />}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
+        </aside>
+        <article class="col-span-3 prose prose-primary dark:prose-invert">
+            <slot />
+        </article>
+    </div>
+</Layout>

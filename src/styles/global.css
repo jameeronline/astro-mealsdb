@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/forms";
+
+/* Base theme variables */
+@theme {
+  /* Font configurations */
+  --font-display: "IBM Plex Sans Variable", sans-serif;
+  --font-body: "Work Sans Variable", sans-serif;
+
+  /* Border radius */
+  --radius: 0.25rem;
+  --radius-lg: 0.5rem;
+  --radius-xl: 0.75rem;
+  --radius-full: 9999px;
+
+  /* Default theme (Green) */
+  --color-primary: #39e079;
+  --color-primary-hover: #2dd968;
+  --color-primary-light: #e8f9ef;
+  --color-primary-dark: #2a8a4f;
+
+  --color-background-light: #f6f8f7;
+  --color-background-dark: #122017;
+  --color-text-light: #131811;
+  --color-text-dark: #f6f8f6;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1a2c16;
+  --color-border-light: #dee6db;
+  --color-border-dark: #2a3f25;
+}
+
+/* Blue Theme */
+:root[data-theme="blue"],
+.theme-blue {
+  --color-primary: #3b82f6;
+  --color-primary-hover: #2563eb;
+  --color-primary-light: #eff6ff;
+  --color-primary-dark: #1d4ed8;
+
+  --color-background-light: #f1f5f9;
+  --color-background-dark: #0f172a;
+  --color-text-light: #0f172a;
+  --color-text-dark: #f1f5f9;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1e293b;
+  --color-border-light: #cbd5e1;
+  --color-border-dark: #334155;
+}
+
+/* Orange Theme */
+:root[data-theme="orange"],
+.theme-orange {
+  --color-primary: #f97316;
+  --color-primary-hover: #ea580c;
+  --color-primary-light: #fff7ed;
+  --color-primary-dark: #c2410c;
+
+  --color-background-light: #fefcfb;
+  --color-background-dark: #1c1917;
+  --color-text-light: #1c1917;
+  --color-text-dark: #fafaf9;
+  --color-card-light: #ffffff;
+  --color-card-dark: #292524;
+  --color-border-light: #e7e5e4;
+  --color-border-dark: #44403c;
+}
+
+/* Red Theme */
+:root[data-theme="red"],
+.theme-red {
+  --color-primary: #ef4444;
+  --color-primary-hover: #dc2626;
+  --color-primary-light: #fef2f2;
+  --color-primary-dark: #b91c1c;
+
+  --color-background-light: #fefefe;
+  --color-background-dark: #1f1415;
+  --color-text-light: #1f1415;
+  --color-text-dark: #fefefe;
+  --color-card-light: #ffffff;
+  --color-card-dark: #2d1b1e;
+  --color-border-light: #f3e8ea;
+  --color-border-dark: #3f2326;
+}
+
+/* Purple Theme */
+:root[data-theme="purple"],
+.theme-purple {
+  --color-primary: #8b5cf6;
+  --color-primary-hover: #7c3aed;
+  --color-primary-light: #f5f3ff;
+  --color-primary-dark: #6d28d9;
+
+  --color-background-light: #faf9ff;
+  --color-background-dark: #1a1625;
+  --color-text-light: #1a1625;
+  --color-text-dark: #faf9ff;
+  --color-card-light: #ffffff;
+  --color-card-dark: #2a2438;
+  --color-border-light: #e9e5f5;
+  --color-border-dark: #3e3451;
+}
+
+/* Teal Theme */
+:root[data-theme="teal"],
+.theme-teal {
+  --color-primary: #14b8a6;
+  --color-primary-hover: #0d9488;
+  --color-primary-light: #f0fdfa;
+  --color-primary-dark: #0f766e;
+
+  --color-background-light: #f7fffe;
+  --color-background-dark: #134e4a;
+  --color-text-light: #134e4a;
+  --color-text-dark: #f7fffe;
+  --color-card-light: #ffffff;
+  --color-card-dark: #1f2937;
+  --color-border-light: #d1fae5;
+  --color-border-dark: #065f46;
+}
+
+/* Dark mode overrides for all themes */
+:root[data-theme="blue"].dark,
+:root[data-theme="orange"].dark,
+:root[data-theme="red"].dark,
+:root[data-theme="purple"].dark,
+:root[data-theme="teal"].dark,
+.theme-blue.dark,
+.theme-orange.dark,
+.theme-red.dark,
+.theme-purple.dark,
+.theme-teal.dark {
+  color-scheme: dark;
+}
+
+/* Utility classes for easy theme application */
+.bg-primary {
+  background-color: var(--color-primary);
+}
+.text-primary {
+  color: var(--color-primary);
+}
+.border-primary {
+  border-color: var(--color-primary);
+}
+.hover\:bg-primary:hover {
+  background-color: var(--color-primary-hover);
+}
+.bg-primary-light {
+  background-color: var(--color-primary-light);
+}
+.bg-primary-dark {
+  background-color: var(--color-primary-dark);
+}
+
+.bg-background {
+  background-color: var(--color-background-light);
+}
+.dark\:bg-background:where(.dark, .dark *) {
+  background-color: var(--color-background-dark);
+}
+.text-foreground {
+  color: var(--color-text-light);
+}
+.dark\:text-foreground:where(.dark, .dark *) {
+  color: var(--color-text-dark);
+}
+.bg-card {
+  background-color: var(--color-card-light);
+}
+.dark\:bg-card:where(.dark, .dark *) {
+  background-color: var(--color-card-dark);
+}
+.border-border {
+  border-color: var(--color-border-light);
+}
+.dark\:border-border:where(.dark, .dark *) {
+  border-color: var(--color-border-dark);
+}
+
+  /* Scroll animations */
+  /* To disable scroll animations remove the class "sroll-animation" from root html in the layout file */
+  .scroll-animation [data-scroll-animate] {
+    @apply translate-y-4 transform opacity-0 transition-all duration-1000 [&.scroll-animated]:translate-y-0 [&.scroll-animated]:opacity-100 [&:nth-child(1)]:delay-[50ms] [&:nth-child(10)]:delay-[725ms] [&:nth-child(11)]:delay-[800ms] [&:nth-child(12)]:delay-[875ms] [&:nth-child(2)]:delay-[125ms] [&:nth-child(3)]:delay-[200ms] [&:nth-child(4)]:delay-[275ms] [&:nth-child(5)]:delay-[350ms] [&:nth-child(6)]:delay-[425ms] [&:nth-child(7)]:delay-[500ms] [&:nth-child(8)]:delay-[575ms] [&:nth-child(9)]:delay-[650ms];
+  }

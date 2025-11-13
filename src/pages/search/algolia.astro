@@ -1,0 +1,497 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+  <h1 class="text-3xl font-bold mb-6">Search Recipes</h1>
+  <div class="search-container">
+    <div id="searchbox"></div>
+    <div class="search-panel">
+      <div class="search-panel__filters">
+        <div id="clear-refinements"></div>
+        <h5>Categories</h5>
+        <div id="category-list"></div>
+        <h5>Tags</h5>
+        <div id="tag-list"></div>
+      </div>
+      <div class="search-panel__results">
+        <div id="stats"></div>
+        <div id="hits"></div>
+        <div id="pagination"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    import { algoliasearch } from "algoliasearch";
+    import instantsearch from "instantsearch.js";
+    import {
+      searchBox,
+      hits,
+      pagination,
+      refinementList,
+      clearRefinements,
+      stats,
+      configure,
+    } from "instantsearch.js/es/widgets";
+
+    const searchClient = algoliasearch(
+      "GC5TS4PFK2",
+      "05ab21682a73a5f888b8d2f92ddfbd06"
+    );
+
+    const search = instantsearch({
+      indexName: "astro_mealsdb_content",
+      searchClient,
+    });
+
+    // Search box widget
+    search.addWidgets([
+      searchBox({
+        container: '#searchbox',
+        placeholder: 'Search for recipes...',
+        showReset: true,
+        showSubmit: true,
+        showLoadingIndicator: true,
+      })
+    ]);
+
+    // Configure default search parameters
+    search.addWidgets([
+      configure({
+        hitsPerPage: 10,
+      })
+    ]);
+
+    // Stats widget
+    search.addWidgets([
+      stats({
+        container: '#stats',
+        templates: {
+          text(data) {
+            let count = '';
+            if (data.hasManyResults) {
+              count += `${data.nbHits} results`;
+            } else if (data.hasOneResult) {
+              count += `1 result`;
+            } else {
+              count += `no result`;
+            }
+            return `${count} found in ${data.processingTimeMS}ms`;
+          },
+        },
+      })
+    ]);
+
+    // Hits widget
+    search.addWidgets([
+      hits({
+        container: '#hits',
+        templates: {
+          item(hit, { html, components }) {
+            return `
+              <article class="hit">
+                <div class="hit-image">
+                  ${hit.thumbnail ? `
+                    <img src="${hit.thumbnail}" alt="${hit.title}" class="hit-thumbnail" />
+                  ` : ''}
+                </div>
+                <div class="hit-content">
+                  <h3 class="hit-title">
+                    <a href="${hit.url}">
+                      ${hit._highlightResult?.title?.value || hit.title}
+                    </a>
+                  </h3>
+                  ${hit.category ? `
+                    <span class="hit-category">${hit.category}</span>
+                  ` : ''}
+                  ${hit.cuisine ? `
+                    <span class="hit-cuisine">${hit.cuisine}</span>
+                  ` : ''}
+                  ${hit.tags && hit.tags.length > 0 ? `
+                    <div class="hit-tags">
+                      ${hit.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                    </div>
+                  ` : ''}
+                  ${hit.ingredients && hit.ingredients.length > 0 ? `
+                    <div class="hit-ingredients">
+                      <strong>Ingredients:</strong> ${hit.ingredients.slice(0, 3).map(ing => ing.name).join(', ')}${hit.ingredients.length > 3 ? '...' : ''}
+                    </div>
+                  ` : ''}
+                </div>
+              </article>
+            `;
+          },
+          empty(results) {
+            return `
+              <div class="no-results">
+                <p>No results found for <strong>${results.query}</strong>.</p>
+              </div>
+            `;
+          },
+        },
+      })
+    ]);
+
+    // Refinement lists (filters)
+    search.addWidgets([
+      refinementList({
+        container: '#category-list',
+        attribute: 'category',
+        searchable: true,
+        searchablePlaceholder: 'Search categories...',
+        showMore: true,
+      })
+    ]);
+
+    search.addWidgets([
+      refinementList({
+        container: '#tag-list',
+        attribute: 'tags',
+        searchable: true,
+        searchablePlaceholder: 'Search tags...',
+        showMore: true,
+        limit: 5,
+      })
+    ]);
+
+    // Clear refinements button
+    search.addWidgets([
+      clearRefinements({
+        container: '#clear-refinements',
+        templates: {
+          resetLabel({ hasRefinements }) {
+            return `<span>Clear filters ${hasRefinements ? '✕' : ''}</span>`;
+          },
+        },
+      })
+    ]);
+
+    // Pagination widget
+    search.addWidgets([
+      pagination({
+        container: '#pagination',
+        padding: 2,
+        showFirst: true,
+        showLast: true,
+        showPrevious: true,
+        showNext: true,
+      })
+    ]);
+
+    search.start();
+  </script>
+
+  <style>
+    .search-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Search box */
+    :global(.ais-SearchBox) {
+      margin-bottom: 2rem;
+    }
+
+    :global(.ais-SearchBox-form) {
+      display: flex;
+      gap: 8px;
+    }
+
+    :global(.ais-SearchBox-input) {
+      flex: 1;
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #e0e0e0;
+      border-radius: 8px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    :global(.ais-SearchBox-input:focus) {
+      border-color: #5468ff;
+    }
+
+    :global(.ais-SearchBox-submit),
+    :global(.ais-SearchBox-reset) {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #5468ff;
+      color: white;
+      transition: background-color 0.2s;
+    }
+
+    :global(.ais-SearchBox-submit:hover),
+    :global(.ais-SearchBox-reset:hover) {
+      background: #3e54d3;
+    }
+
+    :global(.ais-SearchBox-reset) {
+      background: #e0e0e0;
+      color: #333;
+    }
+
+    :global(.ais-SearchBox-reset:hover) {
+      background: #d0d0d0;
+    }
+
+    /* Search panel layout */
+    .search-panel {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 2rem;
+    }
+
+    @media (max-width: 768px) {
+      .search-panel {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .search-panel__filters {
+      background: #f8f9fa;
+      padding: 20px;
+      border-radius: 8px;
+      height: fit-content;
+      position: sticky;
+      top: 20px;
+    }
+
+    .search-panel__filters h5 {
+      margin: 1.5rem 0 0.5rem 0;
+      font-size: 14px;
+      text-transform: uppercase;
+      color: #666;
+    }
+
+    .search-panel__filters h5:first-of-type {
+      margin-top: 0;
+    }
+
+    /* Stats */
+    :global(.ais-Stats) {
+      margin-bottom: 1rem;
+      color: #666;
+      font-size: 14px;
+    }
+
+    /* Hits */
+    :global(.ais-Hits-list) {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .hit {
+      display: flex;
+      gap: 1rem;
+      padding: 20px;
+      border: 1px solid #e0e0e0;
+      border-radius: 8px;
+      background: white;
+      transition: box-shadow 0.2s;
+    }
+
+    .hit:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .hit-image {
+      flex-shrink: 0;
+    }
+
+    .hit-thumbnail {
+      width: 80px;
+      height: 80px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+
+    .hit-content {
+      flex: 1;
+    }
+
+    .hit-title {
+      margin: 0 0 0.5rem 0;
+      font-size: 20px;
+    }
+
+    .hit-title a {
+      color: #5468ff;
+      text-decoration: none;
+    }
+
+    .hit-title a:hover {
+      text-decoration: underline;
+    }
+
+    :global(.ais-Highlight-highlighted) {
+      background: #ffd700;
+      font-style: normal;
+      font-weight: 600;
+    }
+
+    .hit-category, .hit-cuisine {
+      display: inline-block;
+      padding: 4px 12px;
+      background: #e3f2fd;
+      color: #1976d2;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: 500;
+      margin-right: 8px;
+    }
+
+    .hit-cuisine {
+      background: #f3e5f5;
+      color: #7b1fa2;
+    }
+
+    .hit-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin: 0.5rem 0;
+    }
+
+    .tag {
+      padding: 4px 8px;
+      background: #f5f5f5;
+      border-radius: 4px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .hit-ingredients {
+      margin-top: 0.5rem;
+      font-size: 14px;
+      color: #666;
+    }
+
+    .no-results {
+      text-align: center;
+      padding: 40px;
+      color: #666;
+    }
+
+    /* Refinement lists */
+    :global(.ais-RefinementList-list) {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    :global(.ais-RefinementList-item) {
+      margin: 0.5rem 0;
+    }
+
+    :global(.ais-RefinementList-label) {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    :global(.ais-RefinementList-checkbox) {
+      cursor: pointer;
+    }
+
+    :global(.ais-RefinementList-count) {
+      margin-left: auto;
+      padding: 2px 8px;
+      background: #e0e0e0;
+      border-radius: 12px;
+      font-size: 12px;
+    }
+
+    :global(.ais-RefinementList-showMore) {
+      margin-top: 0.5rem;
+      padding: 6px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      font-size: 12px;
+      width: 100%;
+    }
+
+    /* Clear refinements */
+    :global(.ais-ClearRefinements) {
+      margin-bottom: 1rem;
+    }
+
+    :global(.ais-ClearRefinements-button) {
+      width: 100%;
+      padding: 8px 16px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: white;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    :global(.ais-ClearRefinements-button:hover) {
+      background: #f5f5f5;
+    }
+
+    :global(.ais-ClearRefinements-button--disabled) {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    /* Pagination */
+    :global(.ais-Pagination) {
+      margin-top: 2rem;
+    }
+
+    :global(.ais-Pagination-list) {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      list-style: none;
+      padding: 0;
+      flex-wrap: wrap;
+    }
+
+    :global(.ais-Pagination-item) {
+      display: inline-block;
+    }
+
+    :global(.ais-Pagination-link) {
+      display: block;
+      padding: 8px 12px;
+      border: 1px solid #e0e0e0;
+      border-radius: 4px;
+      background: white;
+      color: #333;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    :global(.ais-Pagination-link:hover) {
+      background: #5468ff;
+      color: white;
+      border-color: #5468ff;
+    }
+
+    :global(.ais-Pagination-item--selected .ais-Pagination-link) {
+      background: #5468ff;
+      color: white;
+      border-color: #5468ff;
+    }
+
+    :global(.ais-Pagination-item--disabled .ais-Pagination-link) {
+      opacity: 0.3;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  </style>
+</Layout>

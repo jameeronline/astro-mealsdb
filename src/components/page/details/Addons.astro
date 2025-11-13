@@ -1,0 +1,37 @@
+---
+interface Props {
+    addons: {
+        servings: string;
+        prepTime: string;
+        cookTime: string;
+    };
+}
+
+const { addons } = Astro.props;
+const { servings, prepTime, cookTime } = addons;
+---
+
+<div class="flex items-center gap-4 md:gap-6">
+  <div class="text-center">
+    <p class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold">
+      Prep Time
+    </p>
+    <p class="text-lg font-bold text-gray-900 dark:text-gray-100">{prepTime}</p>
+  </div>
+  <div class="border-l h-8 border-gray-300 dark:border-gray-600"></div>
+  <div class="text-center">
+    <p class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold">
+      Cook Time
+    </p>
+    <p class="text-lg font-bold text-gray-900 dark:text-gray-100">
+      {cookTime}
+    </p>
+  </div>
+  <div class="border-l h-8 border-gray-300 dark:border-gray-600"></div>
+  <div class="text-center">
+    <p class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold">
+      Servings
+    </p>
+    <p class="text-lg font-bold text-gray-900 dark:text-gray-100">{servings}</p>
+  </div>
+</div>

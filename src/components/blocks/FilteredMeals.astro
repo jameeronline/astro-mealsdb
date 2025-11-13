@@ -1,0 +1,189 @@
+---
+import UISelect from "../ui/UISelect.astro";
+
+// Sample meals data
+const meals = [
+  {
+    id: 1,
+    name: "Classic Pepperoni Pizza",
+    category: "Pizza",
+    cuisine: "Italian",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCFk-Etc6HwPWeew72osBoAWGLeO7O6kyqm4DxXzwWNeGPpRvd3Uh_Sbw4cr33nqyiViKUFm3XvZiH0HrD9DiRi_HX7eE3MTaxDl664ILghCHw0eCZypjmBoUu5h52YMTK57nZKJJ8aU9gA0aJZUqXPArLJlyne6wYXKsZeqZ9Fdpgt1b_KX9_xXLANu0mfD-RoT9WkMbYlsORkAtelzWIMMhRYG0EFM-5-O-0Wps-X5AbMyCOcespORO9lgDUInlJNo3Noi95VmxZS",
+    alt: "A delicious looking pizza with pepperoni and basil",
+  },
+  {
+    id: 2,
+    name: "Summer Berry Salad",
+    category: "Salad",
+    cuisine: "Healthy",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA3BGfshN3BKTGlA4Gx4TYjKnlMpcDQLUr0YkHTEewq3Tb7tHuhNAlENJjgX2RgLihSJYVvfmrcPXO0iJl7Yq8KgsAUzDGwGzmEZc59qeXnJttEOVWbqEAA_YNqU-CLF6w_VByCIzm4NrBYH_hm3i8V-kOQ77hnrIPcWxuf3PAAqi6PN6YrlEqGLBqGtRJoARRcmEVJYYAxe0MzSGcyLM6RneT1ER86hXNs74KQTkG6tIqUBopuoL3dr8SiCHidqkWVDA2bY377zYNX",
+    alt: "A colorful fresh salad in a white bowl",
+  },
+  {
+    id: 3,
+    name: "Fluffy Buttermilk Pancakes",
+    category: "Breakfast",
+    cuisine: "American",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuC8rJiRHEdQjotpFGq2guEsGfskBe-3c07CxExwN6g_yliUJuhOKIvZ9rj0I-yn8qXqmyQKt1czLhTi66-vrGG3ATxktESvpi3eVDL_GVsSwoYB1_DbaK18hhV5oT4ZXucIewtBqUHIJHEYDOnyLWI2aDTNRgP5ErkBoTwLFFAOsvXtbkFq6t5Eg2sg6ftEAFWUjj5ASolb7CGYypcruXAXvTolpA-rI1mWp3hpun0vHXnTm-T12nbBy87xnJN-aS5p9mP7LdJ5I4ME",
+    alt: "A stack of fluffy pancakes with syrup and berries",
+  },
+  {
+    id: 4,
+    name: "Vibrant Quinoa Bowl",
+    category: "Vegan",
+    cuisine: "Lunch",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA2Nx8SpgAWvpqOi5Wei76OjqghtrBZWvetyLRRiSLt-inSDm2Xii4fvfgFQpQYHHckJ1mX2iprg6glP3M4whBG7r99HaTW-1zZxVCSH3PuRJzY7aGJwlyw8xHJ4mHklDhD7JjUw4rhLiiJN9L9ASqg6PN3yawktvqgNiyfBbMdbVyzQjkFoLcJr7HqQOfqtTY_e0wf9vG3NfSAW9frDlCZlw9et61C3AcUTp_2IP1NvB3hITlsl0_slrEA1raqLzxtZIcYqz5_DlsK",
+    alt: "A healthy quinoa bowl with fresh vegetables",
+  },
+  {
+    id: 5,
+    name: "Simple Tomato Basil Pasta",
+    category: "Pasta",
+    cuisine: "Italian",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuAqF5lxaeKwNskV_OCXmdIRSmdfPMfaRjhp_9r3j350ZSHmV9ruKviEeUR_QmNnEn6piv4YSyyni9q7lM710in8xAP529V8J1NVEqFiwK40TbOFxfiwR7W-W7HHlTqkrKgIo4b58CbWegTYVXxNRPYoNzElklsviSlWF9xA1dgUh9VQAQZW2JpKcQiJD1ztBqu3PAWKdLTa_wCMXfcRj7-0XjG1fqeDk4jAw3V0hR_kZwziYVix4qF25JEQQdvFCqVMMRL1EESxHyfz",
+    alt: "Pasta with tomatoes and basil on a white plate",
+  },
+  {
+    id: 6,
+    name: "Grilled Chicken Caesar Salad",
+    category: "Salad",
+    cuisine: "American",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA3BGfshN3BKTGlA4Gx4TYjKnlMpcDQLUr0YkHTEewq3Tb7tHuhNAlENJjgX2RgLihSJYVvfmrcPXO0iJl7Yq8KgsAUzDGwGzmEZc59qeXnJttEOVWbqEAA_YNqU-CLF6w_VByCIzm4NrBYH_hm3i8V-kOQ77hnrIPcWxuf3PAAqi6PN6YrlEqGLBqGtRJoARRcmEVJYYAxe0MzSGcyLM6RneT1ER86hXNs74KQTkG6tIqUBopuoL3dr8SiCHidqkWVDA2bY377zYNX",
+    alt: "Caesar salad with grilled chicken and croutons",
+  },
+  {
+    id: 7,
+    name: "Chocolate Chip Cookies",
+    category: "Dessert",
+    cuisine: "American",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuC8rJiRHEdQjotpFGq2guEsGfskBe-3c07CxExwN6g_yliUJuhOKIvZ9rj0I-yn8qXqmyQKt1czLhTi66-vrGG3ATxktESvpi3eVDL_GVsSwoYB1_DbaK18hhV5oT4ZXucIewtBqUHIJHEYDOnyLWI2aDTNRgP5ErkBoTwLFFAOsvXtbkFq6t5Eg2sg6ftEAFWUjj5ASolb7CGYypcruXAXvTolpA-rI1mWp3hpun0vHXnTm-T12nbBy87xnJN-aS5p9mP7LdJ5I4ME",
+    alt: "Freshly baked chocolate chip cookies on a plate",
+  },
+  {
+    id: 8,
+    name: "Thai Green Curry",
+    category: "Curry",
+    cuisine: "Thai",
+    imageUrl:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuA2Nx8SpgAWvpqOi5Wei76OjqghtrBZWvetyLRRiSLt-inSDm2Xii4fvfgFQpQYHHckJ1mX2iprg6glP3M4whBG7r99HaTW-1zZxVCSH3PuRJzY7aGJwlyw8xHJ4mHklDhD7JjUw4rhLiiJN9L9ASqg6PN3yawktvqgNiyfBbMdbVyzQjkFoLcJr7HqQOfqtTY_e0wf9vG3NfSAW9frDlCZlw9et61C3AcUTp_2IP1NvB3hITlsl0_slrEA1raqLzxtZIcYqz5_DlsK",
+    alt: "Thai green curry with vegetables and rice",
+  },
+];
+
+//components
+import Card from "@/components/ui/Card.astro";
+
+//interface
+interface Props {
+  categories: { strCategory: string }[];
+  areas: { strArea: string }[];
+}
+
+//props
+const { categories, areas } = Astro.props;
+
+//const categories = [...new Set(meals.map((meal) => meal.category))];
+---
+
+<!-- Filterable Meal Grid -->
+<section class="py-12" data-scroll-animate>
+  <!-- Section Header -->
+  <h2
+    class="text-text-light dark:text-text-dark text-[22px] font-bold leading-tight tracking-[-0.015em] pb-4"
+    data-scroll-animate
+  >
+    Discover Meals
+  </h2>
+  <!-- Filters and Toolbar -->
+  <div
+    class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 py-3 border-y border-border-light dark:border-border-dark mb-8"
+    data-scroll-animate
+  >
+    <div class="flex flex-wrap gap-3">
+      <UISelect
+        items={categories.map((category) => ({
+          value: category.strCategory,
+          label: category.strCategory,
+        }))}
+        placeholder="Category"
+      />
+
+      <UISelect
+        items={areas.map((area) => ({
+          value: area.strArea,
+          label: area.strArea,
+        }))}
+        placeholder="Cuisine"
+      />
+    </div>
+    <div class="flex items-center gap-2">
+      <p class="text-sm font-medium mr-2 hidden sm:block">View:</p>
+      <button class="p-2 rounded-lg bg-primary/20 text-primary">
+        <span class="material-symbols-outlined">grid_view</span>
+      </button>
+      <button
+        class="p-2 rounded-lg hover:bg-primary/20 text-text-light dark:text-text-dark/70 hover:text-primary dark:hover:text-primary transition-colors"
+      >
+        <span class="material-symbols-outlined">view_list</span>
+      </button>
+    </div>
+  </div>
+  <!-- Meal Grid -->
+  <div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+  >
+    {
+      meals.map((meal) => (
+        <Card
+          title={meal.name}
+          category={meal.category}
+          cuisine={meal.cuisine}
+          imageUrl={meal.imageUrl}
+          alt={meal.alt}
+        />
+      ))
+    }
+  </div>
+  <!-- Pagination -->
+  <nav aria-label="Pagination" class="flex items-center justify-center pt-16">
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-border-dark text-sm font-medium hover:bg-primary/20 transition-colors"
+      href="#"
+    >
+      <span class="material-symbols-outlined text-base">chevron_left</span>
+    </a>
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg bg-primary text-text-light text-sm font-bold mx-1"
+      href="#">1</a
+    >
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors mx-1"
+      href="#">2</a
+    >
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors mx-1"
+      href="#">3</a
+    >
+    <span
+      class="inline-flex items-center justify-center size-9 text-sm font-medium mx-1"
+      >...</span
+    >
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg text-sm font-medium hover:bg-primary/20 transition-colors mx-1"
+      href="#">10</a
+    >
+    <a
+      class="inline-flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-border-dark text-sm font-medium hover:bg-primary/20 transition-colors"
+      href="#"
+    >
+      <span class="material-symbols-outlined text-base">chevron_right</span>
+    </a>
+  </nav>
+</section>

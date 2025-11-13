@@ -1,0 +1,447 @@
+---
+---
+
+<div class="theme-switcher">
+  <div class="theme-switcher-container">
+    <!-- Current theme display button -->
+    <button
+      id="theme-toggle"
+      class="theme-toggle-btn"
+      aria-label="Change theme"
+      aria-expanded="false"
+    >
+      <span id="current-theme-icon" class="current-theme-icon theme-green"
+      ></span>
+      <span id="current-theme-text">Green</span>
+      <svg
+        id="chevron-icon"
+        class="chevron-icon"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 9l-7 7-7-7"></path>
+      </svg>
+    </button>
+
+    <!-- Theme dropdown panel -->
+    <div id="theme-panel" class="theme-panel">
+      <div class="theme-options">
+        <button class="theme-option" data-theme="green">
+          <span class="theme-color-preview theme-green"></span>
+          <span class="theme-name">Green</span>
+          <span class="theme-check">✓</span>
+        </button>
+        <button class="theme-option" data-theme="blue">
+          <span class="theme-color-preview theme-blue"></span>
+          <span class="theme-name">Blue</span>
+          <span class="theme-check">✓</span>
+        </button>
+        <button class="theme-option" data-theme="orange">
+          <span class="theme-color-preview theme-orange"></span>
+          <span class="theme-name">Orange</span>
+          <span class="theme-check">✓</span>
+        </button>
+        <button class="theme-option" data-theme="red">
+          <span class="theme-color-preview theme-red"></span>
+          <span class="theme-name">Red</span>
+          <span class="theme-check">✓</span>
+        </button>
+        <button class="theme-option" data-theme="purple">
+          <span class="theme-color-preview theme-purple"></span>
+          <span class="theme-name">Purple</span>
+          <span class="theme-check">✓</span>
+        </button>
+        <button class="theme-option" data-theme="teal">
+          <span class="theme-color-preview theme-teal"></span>
+          <span class="theme-name">Teal</span>
+          <span class="theme-check">✓</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Theme functionality
+  const themes = [
+    { name: "green", label: "Green", colorClass: "theme-green" },
+    { name: "blue", label: "Blue", colorClass: "theme-blue" },
+    { name: "orange", label: "Orange", colorClass: "theme-orange" },
+    { name: "red", label: "Red", colorClass: "theme-red" },
+    { name: "purple", label: "Purple", colorClass: "theme-purple" },
+    { name: "teal", label: "Teal", colorClass: "theme-teal" },
+  ];
+
+  function getCurrentTheme() {
+    return localStorage.getItem("theme") || "green";
+  }
+
+  function setTheme(themeName: string) {
+    const root = document.documentElement;
+
+    // Remove all theme classes and data attributes
+    themes.forEach((theme) => {
+      root.classList.remove(`theme-${theme.name}`);
+    });
+
+    // Set new theme
+    if (themeName !== "green") {
+      root.setAttribute("data-theme", themeName);
+      root.classList.add(`theme-${themeName}`);
+    } else {
+      root.removeAttribute("data-theme");
+    }
+
+    localStorage.setItem("theme", themeName);
+
+    // Update UI
+    updateThemeUI(themeName);
+  }
+
+  function updateThemeUI(currentTheme: string) {
+    const themeData = themes.find((t) => t.name === currentTheme) || themes[0];
+
+    // Update toggle button
+    const currentIcon = document.getElementById("current-theme-icon");
+    const currentText = document.getElementById("current-theme-text");
+
+    if (currentIcon && currentText) {
+      // Remove all theme color classes
+      themes.forEach((theme) => {
+        currentIcon.classList.remove(theme.colorClass);
+      });
+
+      // Add current theme color class
+      currentIcon.classList.add(themeData.colorClass);
+      currentText.textContent = themeData.label;
+    }
+
+    // Update active state in options
+    const options = document.querySelectorAll(".theme-option");
+    options.forEach((option) => {
+      const optionElement = option as HTMLElement;
+      if (optionElement.dataset.theme === currentTheme) {
+        optionElement.classList.add("active");
+      } else {
+        optionElement.classList.remove("active");
+      }
+    });
+  }
+
+  // Initialize theme
+  function initTheme() {
+    const savedTheme = getCurrentTheme();
+    setTheme(savedTheme);
+  }
+
+  // Toggle panel visibility
+  function togglePanel() {
+    const panel = document.getElementById("theme-panel");
+    const toggle = document.getElementById("theme-toggle");
+    const chevron = document.getElementById("chevron-icon");
+
+    if (panel && toggle && chevron) {
+      const isExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+      toggle.setAttribute("aria-expanded", (!isExpanded).toString());
+      panel.classList.toggle("show", !isExpanded);
+      chevron.style.transform = isExpanded ? "rotate(0deg)" : "rotate(180deg)";
+    }
+  }
+
+  // Close panel when clicking outside
+  function handleOutsideClick(event: Event) {
+    const container = document.querySelector(".theme-switcher-container");
+    if (container && !container.contains(event.target as Node)) {
+      const panel = document.getElementById("theme-panel");
+      const toggle = document.getElementById("theme-toggle");
+      const chevron = document.getElementById("chevron-icon");
+
+      if (panel && toggle && chevron) {
+        toggle.setAttribute("aria-expanded", "false");
+        panel.classList.remove("show");
+        chevron.style.transform = "rotate(0deg)";
+      }
+    }
+  }
+
+  // Initialize on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    initTheme();
+
+    // Toggle button event
+    const toggleBtn = document.getElementById("theme-toggle");
+    if (toggleBtn) {
+      toggleBtn.addEventListener("click", togglePanel);
+    }
+
+    // Theme option events
+    const options = document.querySelectorAll(".theme-option");
+    options.forEach((option) => {
+      option.addEventListener("click", (e) => {
+        const target = e.currentTarget as HTMLElement;
+        const themeName = target.dataset.theme;
+        if (themeName) {
+          setTheme(themeName);
+          togglePanel(); // Close panel after selection
+        }
+      });
+    });
+
+    // Close on outside click
+    document.addEventListener("click", handleOutsideClick);
+
+    // Keyboard navigation
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        const panel = document.getElementById("theme-panel");
+        const toggle = document.getElementById("theme-toggle");
+        const chevron = document.getElementById("chevron-icon");
+
+        if (panel?.classList.contains("show")) {
+          toggle?.setAttribute("aria-expanded", "false");
+          panel.classList.remove("show");
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .theme-switcher {
+    position: relative;
+    display: inline-block;
+  }
+
+  .theme-switcher-container {
+    position: relative;
+  }
+
+  .theme-toggle-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background: hsl(var(--color-card-light));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    color: hsl(var(--foreground));
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.875rem;
+    font-weight: 500;
+    min-width: 120px;
+    user-select: none;
+  }
+
+  .theme-toggle-btn:hover {
+    background: hsl(var(--accent));
+    border-color: hsl(var(--primary));
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .theme-toggle-btn:focus {
+    outline: none;
+    ring: 2px;
+    ring-color: hsl(var(--primary));
+    ring-offset: 2px;
+  }
+
+  .current-theme-icon {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid hsl(var(--border));
+    flex-shrink: 0;
+    display: inline-block;
+  }
+
+  .chevron-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-left: auto;
+  }
+
+  .theme-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.5rem;
+    background: var(--color-card-light);
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.75rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px) scale(0.95);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 500;
+    min-width: 200px;
+  }
+
+  .theme-panel.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  .theme-options {
+    padding: 0.5rem;
+  }
+
+  .theme-option {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    background: transparent;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-size: 0.875rem;
+    color: hsl(var(--foreground));
+    position: relative;
+  }
+
+  .theme-option:hover {
+    background: hsl(var(--accent));
+    transform: translateX(4px);
+  }
+
+  .theme-option.active {
+    background: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+    font-weight: 600;
+  }
+
+  .theme-option.active .theme-check {
+    opacity: 1;
+  }
+
+  .theme-color-preview {
+    width: 1.25rem;
+    height: 1.25rem;
+    border-radius: 0.25rem;
+    border: 1px solid hsl(var(--border));
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Add a subtle inner shadow for depth */
+  .theme-color-preview::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+    pointer-events: none;
+  }
+
+  /* Theme color classes with enhanced colors */
+  .theme-green {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+  }
+  .theme-blue {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  }
+  .theme-orange {
+    background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  }
+  .theme-red {
+    background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  }
+  .theme-purple {
+    background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+  }
+  .theme-teal {
+    background: linear-gradient(135deg, #14b8a6 0%, #0d9488 100%);
+  }
+
+  .theme-name {
+    flex: 1;
+    text-align: left;
+  }
+
+  .theme-check {
+    opacity: 0;
+    font-size: 0.75rem;
+    color: hsl(var(--primary));
+    transition: opacity 0.15s ease;
+    font-weight: bold;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 640px) {
+    .theme-panel {
+      left: 50%;
+      transform: translateX(-50%) translateY(-10px) scale(0.95);
+      width: max-content;
+    }
+
+    .theme-panel.show {
+      transform: translateX(-50%) translateY(0) scale(1);
+    }
+
+    .theme-color-preview {
+      width: 1rem;
+      height: 1rem;
+    }
+
+    .current-theme-icon {
+      width: 0.875rem;
+      height: 0.875rem;
+    }
+  }
+
+  /* Dark mode enhancements */
+  @media (prefers-color-scheme: dark) {
+    .theme-panel {
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .theme-toggle-btn:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    }
+
+    .theme-color-preview::after {
+      box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  /* Focus visible for better accessibility */
+  .theme-option:focus-visible {
+    outline: 2px solid hsl(var(--primary));
+    outline-offset: 2px;
+  }
+
+  /* Animation for theme changes */
+  * {
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  /* Hover effect for color previews */
+  .theme-option:hover .theme-color-preview {
+    transform: scale(1.1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .theme-option.active .theme-color-preview {
+    border-color: hsl(var(--primary));
+    box-shadow: 0 0 0 2px hsl(var(--primary) / 0.2);
+  }
+</style>

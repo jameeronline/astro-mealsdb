@@ -1,0 +1,104 @@
+---
+import { Sun, Moon, Settings, SunDim } from "@lucide/astro";
+---
+
+<label class="inline-flex items-center cursor-pointer gap-2">
+  <span
+    class="text-sm font-medium text-gray-600 dark:text-gray-300 theme-icon"
+    id="themeToggle"
+  >
+    <Settings class="settings w-5 h-5" />
+    <Sun class="sun w-5 h-5 hidden" />
+    <Moon class="moon w-5 h-5 hidden" />
+  </span>
+  <!-- <input type="checkbox" value="" class="sr-only peer" id="themeToggle" /> -->
+  <!-- <div
+    class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600"
+  >
+  </div> -->
+  <!-- <span class="text-sm font-medium text-gray-600 dark:text-gray-300"
+    ><Moon class="moon w-5 h-5" /></span
+  > -->
+</label>
+
+<script client:only>
+  const updateThemeIcon = (currentTheme) => {
+    const settings = document.querySelector(".settings");
+    const sun = document.querySelector(".sun");
+    const moon = document.querySelector(".moon");
+
+    if (currentTheme === "system") {
+      settings?.classList.remove("hidden");
+      sun?.classList.add("hidden");
+      moon?.classList.add("hidden");
+    } else if (currentTheme === "light") {
+      settings?.classList.add("hidden");
+      sun?.classList.remove("hidden");
+      moon?.classList.add("hidden");
+    } else {
+      settings?.classList.add("hidden");
+      sun?.classList.add("hidden");
+      moon?.classList.remove("hidden");
+    }
+  };
+
+  const theme = (() => {
+    const localStorageTheme = localStorage?.getItem("mode") ?? "";
+    if (["dark", "light", "system"].includes(localStorageTheme)) {
+      return localStorageTheme;
+    }
+    return "system";
+  })();
+
+  const applyTheme = (selectedTheme) => {
+    if (selectedTheme === "system") {
+      if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+        document.documentElement.classList.add("dark");
+        document.getElementById("themeToggle").checked = true;
+      } else {
+        document.documentElement.classList.remove("dark");
+        document.getElementById("themeToggle").checked = false;
+      }
+    } else if (selectedTheme === "dark") {
+      document.documentElement.classList.add("dark");
+      document.getElementById("themeToggle").checked = true;
+    } else {
+      document.documentElement.classList.remove("dark");
+      document.getElementById("themeToggle").checked = false;
+    }
+    updateThemeIcon(selectedTheme);
+  };
+
+  applyTheme(theme);
+  window.localStorage.setItem("mode", theme);
+
+  const handleToggleClick = () => {
+    const currentTheme = localStorage.getItem("mode");
+    let newTheme;
+
+    if (currentTheme === "system") {
+      newTheme = "light";
+    } else if (currentTheme === "light") {
+      newTheme = "dark";
+    } else {
+      newTheme = "system";
+    }
+
+    localStorage.setItem("mode", newTheme);
+    applyTheme(newTheme);
+  };
+
+  document
+    .getElementById("themeToggle")
+    ?.addEventListener("click", handleToggleClick);
+
+  // Re-run after client-side navigation
+  document.addEventListener("astro:page-load", () => {
+    const storedTheme = localStorage.getItem("mode") || "system";
+    applyTheme(storedTheme);
+
+    document
+      .getElementById("themeToggle")
+      ?.addEventListener("click", handleToggleClick);
+  });
+</script>

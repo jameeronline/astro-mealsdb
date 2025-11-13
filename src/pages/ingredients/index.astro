@@ -1,0 +1,300 @@
+---
+import Layout from "src/layouts/Layout.astro";
+---
+
+<Layout>
+  <div class="py-8 md:py-16">
+    <div class="flex flex-wrap justify-between gap-3 py-4 mb-6">
+      <div class="flex min-w-72 flex-col gap-3">
+        <p
+          class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
+        >
+          Browse Meal Categories
+        </p>
+        <p
+          class="text-text-muted-light dark:text-[#a3b99d] text-base font-normal leading-normal"
+        >
+          Select a category to discover delicious new recipes.
+        </p>
+      </div>
+    </div>
+    <div class="flex gap-3 py-3 overflow-x-auto mb-6">
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Breakfast
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Lunch
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Dinner
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary pl-4 pr-4 ring-2 ring-primary ring-offset-2 ring-offset-background-light dark:ring-offset-background-dark"
+      >
+        <p class="text-background-dark text-sm font-bold leading-normal">
+          Desserts
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Vegetarian
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Vegan
+        </p>
+      </button>
+      <button
+        class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 transition-colors border border-border-light dark:border-card-dark"
+      >
+        <p
+          class="text-text-light dark:text-white text-sm font-medium leading-normal"
+        >
+          Appetizers
+        </p>
+      </button>
+    </div>
+    <h2
+      class="text-text-light dark:text-primary/80 text-2xl font-bold leading-tight tracking-tight pb-3 pt-5"
+    >
+      Dessert Recipes
+    </h2>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(158px,1fr))] gap-4 py-4">
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="A rich chocolate lava cake with powdered sugar on a white plate"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCqDimOHkOUoxFAHq0VnllTxsW6SuN-BlXLeDRlH2Ntk0fWJwmGw-mWM66InvMjxXLmT-oeN2GZAITuBFutkGvVWaBTJCMS_JEDTmszwlBRGaA1aOPk_CF4bbhPNHQHOqBzgiseN3G7fbVnQbCjAFuZPndg2dLQPTaFE-IJ4JUVRjueZjee368KQCZS4g70ggT7m0B0MgJ9t6L7u1KJI3srXbJpsbXCIGb-zMnqeNzMbKAUygHyj9FpX9eEL6Z6vkvGiKSyfHyNXtsk');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Chocolate Lava Cake
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            Italian, 30 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="A classic New York cheesecake with a cherry topping"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAR_Sz0--KSSjUW1dx0jyV8VQbl-xGgcYGCmk4FXC4vj0v5CDjxoZm-SBjNutplXXsvYJfxCoqJe8upjbP4XyEWI5LDSKFBdFGfGwZOVoivWwcWC2bwxXIGlWVS-WGniEQaxSxBdxRq6DZXyG2heyzemk6-FBG5kqdIOV-vCMpnQm_e0mQqS-NiVB_gZ8u0IXJ-1zmOIzujoL1_Iv3Kdk8r7TTk2SS3x7cN2nfrxC9yS79GAEpGd87G8tiYjieBljkAJ4FJcSRNl2_6');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Classic Cheesecake
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            American, 60 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="A slice of tiramisu dusted with cocoa powder"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCEKhS5F62xxWBn9ZqW6IxQ66YEHOzrbhQTMrMEsviJ8SK3oCrLBKbmPCIdZDZ588sHOes9fXjCJbdq1jm59SLjHtACJxYgXMe6nTv6YXghcHSIZcJPPBoit6V6giZhFPzY5SeKbMY-8O2jD3kaA7LE31QlgUulfimz97HHKn5FlddUjd1_5g0GSIsPdIbtBK5QHgOqZJBEnoxGaO0OcQgh5Gv_WTbiE-81ubrjhdudBrmphxljP43ZEp6JCO2mIFab5vAhlFZHeQQl');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Tiramisu
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            Italian, 25 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="A warm apple crumble with a scoop of vanilla ice cream"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD0oMa9FE9f5tcb_UQit_mlZPYSCn4VJpDbIF4xQaREBujF3y9lh7_YqQ-SQuSDFcKwFToChcL-ywGWgJo8YGGJzEOisoOvIpMq8z9vZ3ckdlglm7oviLWe_iDIV1XOpHH9e40XU3mUcp5Ws7Yw_IrhhfLN5wXgLknwydSh5Gh7VB5BoudmyrTtqXSrQpnfQg0fIkFe4ent3TAqJNXrBl931WhEWm7M4oPC6flkY7QefnCJ8zmEU7dSwxGruD43TSnbOoDD3MRKjYzS');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Apple Crumble
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            British, 45 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="A colorful fruit tart with fresh berries and kiwi"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuApW9Blqf-ThILqs2W7-IPOviNUPu9iRiHNpiZiAF_KXw0VoNLZkt2VVwCJLsPpll5jquCFxLG6FGffUH0sGqT4L8iMPiKa1zTBEQBEBhwx2yyazFB2W-d7HkQOKV22Bek0LJ_ynMMr3KDLgiFmQzwXc6rvsJw08oKM2BUto8nZ2xKDZfYiOHTfEaGxXfNSZFChXUTfLu02W_LtTHzYQxPiUJdT8eQwd00iL7toLD10AeTEBQ3-ckAO4Vs8kXWuthaT9XAyMCpWTXHG');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Fruit Tart
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            French, 50 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+      <div class="flex flex-col gap-3 pb-3 group">
+        <div
+          class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        >
+          <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt="Crispy Belgian waffles with strawberries and syrup"
+            style="
+                        background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAf9_WaNa8MWz5JXoyKTATrzmSFdpMrRoPNJ7FQbWkB_O323d9s7-DatTYX9HCdiorSKNlbwOnxNVR7osR0-HjnErmq_1SKFhMjdw79O7jAc8zFKzvOfbng1Km9Gq4CzEqECfDIw2AOCQ9r8Nje5cFcucKp8s-x2vsSb5fWAqtqRHvr0phL-9XGzSnImwiQC1EB4YCOsdmVPqm_OBpM6zEXZN153k-wA1O9zaUzPkNY1YoTBz1zf2l49c_b_qM2K_YCO8nLpFCttWcX');
+                      "
+          >
+          </div>
+        </div>
+        <div>
+          <p
+            class="text-text-light dark:text-white text-base font-medium leading-normal"
+          >
+            Belgian Waffles
+          </p>
+          <p
+            class="text-text-muted-light dark:text-[#a3b99d] text-sm font-normal leading-normal"
+          >
+            Belgian, 20 mins
+          </p>
+          <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href="#">View Recipe</a
+          >
+        </div>
+      </div>
+    </div>
+    <div class="flex justify-center items-center gap-2 py-4 mt-8">
+      <button
+        class="flex items-center justify-center h-10 px-4 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-border-light dark:border-card-dark"
+        disabled=""
+      >
+        Previous
+      </button>
+      <button
+        class="flex items-center justify-center size-10 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
+      >
+        1
+      </button>
+      <button
+        class="flex items-center justify-center size-10 rounded-lg bg-primary text-background-dark text-sm font-bold"
+      >
+        2
+      </button>
+      <button
+        class="flex items-center justify-center size-10 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
+      >
+        3
+      </button>
+      <button
+        class="flex items-center justify-center h-10 px-4 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
+      >
+        Next
+      </button>
+    </div>
+  </div>
+</Layout>

@@ -1,0 +1,206 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+const faqs = [
+  {
+    question: "Can I cancel anytime?",
+    answer:
+      "Yes, you can cancel your subscription at any time from your account settings. Your access will continue until the end of the current billing period.",
+  },
+  {
+    question: "What payment methods do you accept?",
+    answer:
+      "We accept all major credit cards, including Visa, Mastercard, and American Express. We also support payments through PayPal.",
+  },
+  {
+    question: "What happens after my trial ends?",
+    answer:
+      "After your free trial, your subscription will automatically begin based on the plan you selected. We will notify you before the trial ends so you can make any changes.",
+  },
+  {
+    question: "Can I change my plan later?",
+    answer:
+      "Absolutely. You can upgrade or downgrade your plan at any time. The changes will be prorated and applied to your next billing cycle.",
+  },
+];
+
+const pricingPlans = [
+  {
+    id: "basic",
+    name: "Basic",
+    price: "$0",
+    period: "/month",
+    description: "Perfect for getting started",
+    buttonText: "Get Started",
+    buttonClass: "bg-[#2c3928] text-white transition-colors hover:bg-[#3b4e36]",
+    features: [
+      "Limited recipe access",
+      "Standard blog content",
+      "Contains ads",
+    ],
+    isPopular: false,
+  },
+  {
+    id: "premium",
+    name: "Premium",
+    price: "$9.99",
+    period: "/month",
+    description: "Most popular choice",
+    buttonText: "Choose Premium",
+    buttonClass:
+      "bg-primary text-[#131811] transition-opacity hover:opacity-90",
+    features: [
+      "Unlimited recipe access",
+      "Exclusive articles",
+      "Ad-free experience",
+      "Meal planning tools",
+    ],
+    isPopular: true,
+  },
+  {
+    id: "pro",
+    name: "Pro",
+    price: "$19.99",
+    period: "/month",
+    description: "For power users",
+    buttonText: "Choose Pro",
+    buttonClass: "bg-[#2c3928] text-white transition-colors hover:bg-[#3b4e36]",
+    features: [
+      "All Premium features",
+      "Multi-user access",
+      "Advanced nutritional info",
+      "Downloadable recipe cards",
+    ],
+    isPopular: false,
+  },
+];
+---
+
+<Layout
+  title="Pricing Plans | MealsDB"
+  description="Explore our flexible pricing plans designed to suit your culinary needs. Choose the perfect plan and start your gastronomic journey today!"
+>
+  <div class="py-8">
+    <div class="w-full max-w-6xl mx-auto px-4 py-16 sm:px-10 sm:py-24">
+      <div
+        class="flex flex-wrap justify-between gap-6 px-4 py-3 text-center md:text-left"
+      >
+        <div class="flex w-full flex-col gap-3 mb-10">
+          <h1
+            class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl"
+          >
+            Find the Perfect Plan for Your Culinary Journey
+          </h1>
+          <p
+            class="text-text-light/80 dark:text-text-dark/80 text-base font-normal leading-normal md:text-lg"
+          >
+            Choose the plan that best fits your needs and unlock a world of
+            culinary delights.
+          </p>
+        </div>
+      </div>
+      <div class="flex justify-center px-4 py-3 mb-4">
+        <div
+          class="flex h-10 w-full max-w-sm items-center justify-center rounded-lg bg-background-light dark:bg-background-dark p-1"
+        >
+          <label
+            class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-2 text-sm font-medium leading-normal text-[#a3b99d] has-[:checked]:bg-[#1e271c] has-[:checked]:text-white has-[:checked]:shadow-[0_1px_3px_rgba(0,0,0,0.1)]"
+          >
+            <span class="truncate">Monthly</span>
+            <input
+              class="invisible w-0"
+              name="billing-cycle"
+              type="radio"
+              value="Monthly"
+            />
+          </label>
+          <label
+            class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-2 text-sm font-medium leading-normal text-[#a3b99d] has-[:checked]:bg-[#1e271c] has-[:checked]:text-white has-[:checked]:shadow-[0_1px_3px_rgba(0,0,0,0.1)]"
+          >
+            <span class="truncate">Annual (Save 20%)</span>
+            <input
+              checked=""
+              class="invisible w-0"
+              name="billing-cycle"
+              type="radio"
+              value="Annual (Save 20%)"
+            />
+          </label>
+        </div>
+      </div>
+      <div class="grid grid-cols-1 gap-6 px-4 py-3 md:grid-cols-3">
+        {
+          pricingPlans.map((plan) => (
+            <div
+              class={`flex flex-1 flex-col gap-6 rounded-xl p-6 ${
+                plan.isPopular
+                  ? "border-2 border-solid border-primary bg-card-light dark:bg-card-dark ring-4 ring-primary/20"
+                  : "border border-solid border-border-light bg-card-light dark:border-border-dark dark:bg-card-dark"
+              }`}
+            >
+              <div class="flex flex-col gap-2">
+                <div class="flex items-center justify-between">
+                  <h2 class="text-text-light dark:text-text-dark text-xl font-bold leading-tight">
+                    {plan.name}
+                  </h2>
+                  {plan.isPopular && (
+                    <p class="rounded-full bg-primary px-3 py-1 text-center text-xs font-bold leading-normal tracking-[0.015em] text-[#131811]">
+                      Most Popular
+                    </p>
+                  )}
+                </div>
+                <p class="flex items-baseline gap-1 text-text-light dark:text-text-dark">
+                  <span class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em]">
+                    {plan.price}
+                  </span>
+                  <span class="text-[#a3b99d] text-base font-medium leading-tight">
+                    {plan.period}
+                  </span>
+                </p>
+              </div>
+              <button
+                class={`flex w-full min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold leading-normal tracking-[0.015em] ${plan.buttonClass}`}
+              >
+                <span class="truncate">{plan.buttonText}</span>
+              </button>
+              <div class="flex flex-col gap-3">
+                {plan.features.map((feature) => (
+                  <div class="flex items-center gap-3 text-[13px] font-normal leading-normal text-text-light dark:text-text-dark">
+                    <span class="material-symbols-outlined text-primary text-base">
+                      check_circle
+                    </span>
+                    {feature}
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        }
+      </div>
+      <div class="mt-16 flex flex-col items-center gap-8 px-4 py-3">
+        <h3
+          class="text-center text-3xl font-bold text-text-light dark:text-text-dark"
+        >
+          Frequently Asked Questions
+        </h3>
+        <div class="w-full max-w-2xl space-y-4">
+          {
+            faqs.map((faq) => (
+              <details class="group rounded-lg bg-card-light dark:bg-card-dark p-4 open:ring-1 open:ring-white/10">
+                <summary class="flex cursor-pointer items-center justify-between font-medium text-text-light dark:text-text-dark">
+                  {faq.question}
+                  <span class="material-symbols-outlined transition-transform duration-200 group-open:rotate-180">
+                    expand_more
+                  </span>
+                </summary>
+                <p class="mt-4 text-text-light/80 dark:text-text-dark/80 text-sm leading-normal">
+                  {faq.answer}
+                </p>
+              </details>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

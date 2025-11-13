@@ -1,0 +1,487 @@
+---
+import { getCollection } from "astro:content";
+
+//layout import
+import Layout from "src/layouts/Layout.astro";
+
+//fetch meal details based on slug
+const recipes = await getCollection("recipes");
+console.log(recipes);
+---
+
+<Layout>
+  <div class="flex flex-1 justify-center py-5">
+    <div class="flex flex-col w-full flex-1">
+      <!-- Breadcrumbs -->
+      <div class="flex flex-wrap gap-2 py-4">
+        <a
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
+          href="#">Home</a
+        >
+        <span
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"
+          >/</span
+        >
+        <a
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
+          href="#">Italian</a
+        >
+        <span
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"
+          >/</span
+        >
+        <a
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
+          href="#">Pasta</a
+        >
+        <span
+          class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"
+          >/</span
+        >
+        <span
+          class="text-gray-900 dark:text-gray-100 text-sm font-medium leading-normal"
+          >Lasagna</span
+        >
+      </div>
+      <!-- Hero Section -->
+      <div class="@container mb-8">
+        <div
+          class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[480px]"
+          data-alt="A delicious looking homemade lasagna in a baking dish"
+          style="
+                  background-image: linear-gradient(
+                      0deg,
+                      rgba(0, 0, 0, 0.6) 0%,
+                      rgba(0, 0, 0, 0) 40%
+                    ),
+                    url('https://lh3.googleusercontent.com/aida-public/AB6AXuDwL03ZAQ2_naHvHDlAe3KPmoFNQjHCCcz892cSUp-Qp-5SvAKDSV8jLGk89wFx0DNEgTZl76ypUWUoyxY6f4PYUwPBHCeFtB56HiV27jCNDa2Ze7H_HyL8b5zYIIGLCStGfWLjeIODLVIi15_tLGfbz1vYujG_kSD070u_w_rg9vThTO0QX1BxEBeSx02ORNMylHTIiXpe79Y9cDp2Mm1kwg2cy6x9YNGT6wilHlPkTy2jvWoeQNdUEdGcdymvJwHRxAmsQG5eauwn');
+                "
+        >
+          <div class="flex flex-col p-6 md:p-8">
+            <h1
+              class="text-white tracking-tight text-3xl md:text-5xl font-bold leading-tight"
+            >
+              Classic Homemade Lasagna
+            </h1>
+            <p
+              class="text-gray-200 text-base font-normal leading-normal max-w-2xl mt-2"
+            >
+              A rich and cheesy lasagna with layers of pasta, beef ragu, creamy
+              béchamel sauce, and melted mozzarella. A perfect comfort food for
+              the whole family.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Action Buttons & Info Cards -->
+      <div
+        class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8"
+      >
+        <div class="flex items-center gap-3">
+          <button
+            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
+          >
+            <span class="material-symbols-outlined text-lg">print</span>
+            <span class="truncate">Print Recipe</span>
+          </button>
+          <button
+            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
+          >
+            <span class="material-symbols-outlined text-lg"
+              >favorite_border</span
+            >
+            <span class="truncate">Save</span>
+          </button>
+          <button
+            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
+          >
+            <span class="material-symbols-outlined text-lg">share</span>
+            <span class="truncate">Share</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-4 md:gap-6">
+          <div class="text-center">
+            <p
+              class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold"
+            >
+              Prep Time
+            </p>
+            <p class="text-lg font-bold text-gray-900 dark:text-gray-100">
+              30 mins
+            </p>
+          </div>
+          <div class="border-l h-8 border-gray-300 dark:border-gray-600"></div>
+          <div class="text-center">
+            <p
+              class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold"
+            >
+              Cook Time
+            </p>
+            <p class="text-lg font-bold text-gray-900 dark:text-gray-100">
+              1 hr 15 mins
+            </p>
+          </div>
+          <div class="border-l h-8 border-gray-300 dark:border-gray-600"></div>
+          <div class="text-center">
+            <p
+              class="text-xs text-gray-600 dark:text-gray-400 uppercase font-semibold"
+            >
+              Servings
+            </p>
+            <p class="text-lg font-bold text-gray-900 dark:text-gray-100">8</p>
+          </div>
+        </div>
+      </div>
+      <!-- Main Content Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <!-- Left Column: Ingredients & Instructions -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Ingredients Card -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4"
+            >
+              Ingredients
+            </h2>
+            <ul class="space-y-3">
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >1 pound sweet Italian sausage</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >¾ pound lean ground beef</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >½ cup minced onion</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >2 cloves garlic, crushed</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >1 (28 ounce) can crushed tomatoes</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >12 lasagna noodles</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >16 ounces ricotta cheese</span
+                >
+              </li>
+              <li class="flex items-start gap-3">
+                <input
+                  class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+                  type="checkbox"
+                />
+                <span class="text-gray-700 dark:text-gray-300"
+                  >¾ pound mozzarella cheese, sliced</span
+                >
+              </li>
+            </ul>
+          </div>
+          <!-- Instructions Card -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h2
+              class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4"
+            >
+              Instructions
+            </h2>
+            <ol
+              class="space-y-6 list-decimal list-inside marker:text-primary marker:font-bold"
+            >
+              <li class="text-gray-700 dark:text-gray-300">
+                <span class="ml-2"
+                  >In a Dutch oven, cook sausage, ground beef, onion, and garlic
+                  over medium heat until well browned. Stir in crushed tomatoes
+                  and tomato paste. Bring to a boil, reduce heat, and simmer,
+                  covered, for about 1 1/2 hours, stirring occasionally.</span
+                >
+              </li>
+              <li class="text-gray-700 dark:text-gray-300">
+                <span class="ml-2"
+                  >Bring a large pot of lightly salted water to a boil. Cook
+                  lasagna noodles in boiling water for 8 to 10 minutes. Drain
+                  noodles, and rinse with cold water.</span
+                >
+              </li>
+              <li class="text-gray-700 dark:text-gray-300">
+                <span class="ml-2"
+                  >Preheat oven to 375 degrees F (190 degrees C).</span
+                >
+              </li>
+              <li class="text-gray-700 dark:text-gray-300">
+                <span class="ml-2"
+                  >To assemble, spread 1 1/2 cups of meat sauce in the bottom of
+                  a 9x13 inch baking dish. Arrange 6 noodles lengthwise over
+                  meat sauce. Spread with one half of the ricotta cheese. Top
+                  with a third of mozzarella cheese slices. Spoon 1 1/2 cups
+                  meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan
+                  cheese. Repeat layers.</span
+                >
+              </li>
+              <li class="text-gray-700 dark:text-gray-300">
+                <span class="ml-2"
+                  >Bake in preheated oven for 25 minutes. Remove foil, and bake
+                  an additional 25 minutes. Cool for 15 minutes before serving.</span
+                >
+              </li>
+            </ol>
+          </div>
+        </div>
+        <!-- Right Column: Nutrition, Reviews, etc. -->
+        <div class="lg:col-span-1 space-y-8">
+          <!-- Nutritional Info Panel -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+              Nutritional Information
+            </h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+              Approximate values per serving.
+            </p>
+            <div class="space-y-3">
+              <div
+                class="flex justify-between items-center text-gray-700 dark:text-gray-300"
+              >
+                <p>Calories</p>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">
+                  450 kcal
+                </p>
+              </div>
+              <div class="w-full h-px bg-gray-200 dark:bg-gray-700"></div>
+              <div
+                class="flex justify-between items-center text-gray-700 dark:text-gray-300"
+              >
+                <p>Protein</p>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">
+                  30g
+                </p>
+              </div>
+              <div class="w-full h-px bg-gray-200 dark:bg-gray-700"></div>
+              <div
+                class="flex justify-between items-center text-gray-700 dark:text-gray-300"
+              >
+                <p>Fat</p>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">
+                  22g
+                </p>
+              </div>
+              <div class="w-full h-px bg-gray-200 dark:bg-gray-700"></div>
+              <div
+                class="flex justify-between items-center text-gray-700 dark:text-gray-300"
+              >
+                <p>Carbohydrates</p>
+                <p class="font-semibold text-gray-900 dark:text-gray-100">
+                  35g
+                </p>
+              </div>
+            </div>
+          </div>
+          <!-- User Reviews Panel -->
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+            <div class="flex justify-between items-center mb-4">
+              <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">
+                Reviews
+              </h3>
+              <div class="flex items-center gap-1">
+                <span class="material-symbols-outlined text-yellow-500 !text-xl"
+                  >star</span
+                >
+                <span class="material-symbols-outlined text-yellow-500 !text-xl"
+                  >star</span
+                >
+                <span class="material-symbols-outlined text-yellow-500 !text-xl"
+                  >star</span
+                >
+                <span class="material-symbols-outlined text-yellow-500 !text-xl"
+                  >star</span
+                >
+                <span class="material-symbols-outlined text-yellow-500 !text-xl"
+                  >star_half</span
+                >
+                <span class="text-sm text-gray-600 dark:text-gray-400 ml-1"
+                  >(4.5)</span
+                >
+              </div>
+            </div>
+            <div class="space-y-4">
+              <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                    data-alt="User avatar"
+                    style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1J55XsN-WP0UfSw_w-zm_Z2P8JNp0DFe0nrYhOKmg91k2Uwz1pzmLsPfgE8N8YejJVhyncKGINkbxc5E3pagtsssNByVbgEzdjoBHBk5t1Z0RNSHC0OQL4npLIVR7_PxYdvPvLi2Ch3mAI59TfFKWeHXKdVI6zLwTSaZHQde53scZegPFX9100of068xyW8sEv2zs1rJSIf4n2VA2sbEJeYNI-MAk20POtQPcAtUxrieD33vY5TmPemqLzrPv0U1G3sJZdS6O6cQy');
+                          "
+                  >
+                  </div>
+                  <p class="font-bold text-gray-800 dark:text-gray-200">
+                    Jane Smith
+                  </p>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Absolutely delicious! The whole family loved it. Will
+                  definitely make this again.
+                </p>
+              </div>
+              <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+                <div class="flex items-center gap-2 mb-1">
+                  <div
+                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+                    data-alt="User avatar"
+                    style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPYP-Xvm1TC85pJRtethF-5l9L4560toC-oIVrSKoytru6u6Nq9UnpuXsSA0jI751v4mHGcG0UkI1pJnSY9DQ0nwfueuc8z3sLnl_SNSTW0wVINX0ucc4i-VwjL_RMNSkKNgPnO64dFZLUXh2bISeQBqYFr8Kb7y-qM1aQB_ou2Bi8VL3FMYGzzr1eZdeb7lUyeopFqItwI0qtYv3c-fpm28ykHPnq4eu6UA_JdoAXEgDBzmqh5sIkhq_7t3ss6_Ca-infK9cq5UOq');
+                          "
+                  >
+                  </div>
+                  <p class="font-bold text-gray-800 dark:text-gray-200">
+                    Mike Davis
+                  </p>
+                </div>
+                <p class="text-sm text-gray-600 dark:text-gray-400">
+                  Great recipe. Easy to follow. I added a little bit of red wine
+                  to the sauce for extra flavor.
+                </p>
+              </div>
+            </div>
+            <button
+              class="mt-6 flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold leading-normal tracking-[0.015em]"
+            >
+              <span class="truncate">Write a Review</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Related Meals Section -->
+      <div class="mt-12">
+        <h2
+          class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 px-2"
+        >
+          Related Meals
+        </h2>
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+        >
+          <div
+            class="flex flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-transform hover:-translate-y-1"
+          >
+            <div
+              class="bg-cover bg-center aspect-video"
+              data-alt="A bowl of fettuccine alfredo"
+              style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAIjh3NvB4Asz58uDCAPx9BYf9Iy78puzhkYW-r3K-MylpYvkpdsfxi8p5wzw3X06qxCm3VtKHEtdHarpmrzpuIXvYJI3QtdySiaiciYUUa_xLJ03MNWes7p4dmujYde5roYCMWdkY4HO4_wLbEVQty3u7HpVyS-3-u0fbykikqKT6GPT3hFCCeP5sYgnoy_Y1rOcqcipOyJ1Ab4rqbhb5xSf4Tc1Lgg8nUFcbxA7ZY_wgGoXg77KF-vxf7LTZFIKKReNqNpV3QxwWR');
+                    "
+            >
+            </div>
+            <div class="p-4">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Fettuccine Alfredo
+              </h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Creamy and rich pasta dish.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-transform hover:-translate-y-1"
+          >
+            <div
+              class="bg-cover bg-center aspect-video"
+              data-alt="Spaghetti bolognese in a white bowl"
+              style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAq3Yk7gGKPaBgAzLkC2NyUNWnw7lgPDcYXTog--IH1LVFt2jG0FwOyZAqvj2j8t0WSadCvWHQVvYBZACjnBkFqUtEIT1inzvnSKHgM5Y3Ku08d3sm_o3C3Q9kbVh3zjmYgc79ZtdG_dbif1d03DpRk5V4D4vPq-1vTI2e9F7xjlzRGyflK1Qg2TcKN_-dJp7rVYg5dg1zM2NQZ2TxjGLoU1IH9uQkZhz2TtavL74ZjCqatTkc3xtisInemgtwqwM557x3AHpikpvQB');
+                    "
+            >
+            </div>
+            <div class="p-4">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Spaghetti Bolognese
+              </h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                A classic meat-based sauce.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-transform hover:-translate-y-1"
+          >
+            <div
+              class="bg-cover bg-center aspect-video"
+              data-alt="A slice of margherita pizza"
+              style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuCt8Fy3kFii8oZQD2TP8FBXCr1X-DiN5YLapbwYdlgyfL9H540OJ_Ur1xFhVraj6f-YkdXd5ZTMqodeIsJDtTXguo7FFpnq8LzLJ9Jy1zy3Eso8c_KwjzbEWUaC6AD0T2ntr4W4X1M2O7gqJzSo7E6_WB9TRHtUQbQsxH3uMAZFtLXkoNfLSdDfo87qJSidRJGEyKtLLLcXNBRw60Qfl1vRuSfB3JGFK-hf47p2iK9fE0HhXc9osabR1uD1RN2s79QPU3uiulk4wBrc');
+                    "
+            >
+            </div>
+            <div class="p-4">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Margherita Pizza
+              </h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Simple and delicious classic pizza.
+              </p>
+            </div>
+          </div>
+          <div
+            class="flex flex-col rounded-xl overflow-hidden bg-white dark:bg-gray-800 shadow-sm transition-transform hover:-translate-y-1"
+          >
+            <div
+              class="bg-cover bg-center aspect-video"
+              data-alt="A plate of chicken parmesan"
+              style="
+                      background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBKdYGqJUzyE0eMXa_YU4ZYRqTNMKm-m7r_jRhjBVdcMge4WMjw949lKN2YttYVaadeOVQ5oQhbwng7CWOuti9nbB-UzMfb0MVT9P-hUVoB_mBJrIAWgUTpFt-Qg3ralJ0AorkVFWvnElBlQRzp1ub_ixyP0EjUiTSKPS8VcmDBfzNHLFYX-xz_UIIShUiIS0u9APQXB7ByrLnppaJFv5LDJ3VCdlyOoZD0F1IuqigquRBz4rQIs8xmbF2yG-QNZwabnrG7syMoDooh');
+                    "
+            >
+            </div>
+            <div class="p-4">
+              <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+                Chicken Parmesan
+              </h4>
+              <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                Breaded chicken with sauce and cheese.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>

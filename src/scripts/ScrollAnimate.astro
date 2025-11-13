@@ -1,0 +1,32 @@
+<!-- Scroll animations -->
+<script>
+  const initializeObserver = () => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("scroll-animated");
+        }
+      });
+    });
+
+    const elements = document.querySelectorAll(
+      ".scroll-animation [data-scroll-animate]"
+    );
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", () => {
+    initializeObserver();
+  });
+
+  document.addEventListener("astro:page-loaded", () => {
+    initializeObserver();
+  });
+
+  document.addEventListener("astro:after-swap", () => {
+    initializeObserver();
+  });
+</script>

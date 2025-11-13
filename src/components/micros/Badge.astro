@@ -1,0 +1,24 @@
+---
+interface Props {
+  label: string;
+  color?: string;
+  as?: "button" | "a";
+}
+const { label, color, as = "a" } = Astro.props;
+---
+
+{
+  as === "button" ? (
+    <button class="flex h-8 cursor-pointer shrink-0 items-center justify-center gap-x-2 rounded-full bg-border-light/40 dark:bg-border-dark border-border-light dark:border-border-dark pl-4 pr-4">
+      <p class="text-text-main-dark text-sm font-medium leading-normal">
+        {label}
+      </p>
+    </button>
+  ) : (
+    <a class="flex h-8 cursor-pointer shrink-0 items-center justify-center gap-x-2 rounded-full bg-border-light/40 dark:bg-border-dark border-border-light dark:border-border-dark pl-4 pr-4">
+      <p class="text-text-main-dark text-sm font-medium leading-normal">
+        {label}
+      </p>
+    </a>
+  )
+}

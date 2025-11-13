@@ -1,0 +1,16 @@
+[
+  { "id": 1, "value": "beef", "label": "Beef" },
+  { "id": 2, "value": "breakfast", "label": "Breakfast" },
+  { "id": 3, "value": "chicken", "label": "Chicken" },
+  { "id": 4, "value": "dessert", "label": "Dessert" },
+  { "id": 5, "value": "goat", "label": "Goat" },
+  { "id": 6, "value": "lamb", "label": "Lamb" },
+  { "id": 7, "value": "miscellaneous", "label": "Miscellaneous" },
+  { "id": 8, "value": "pasta", "label": "Pasta" },
+  { "id": 9, "value": "pork", "label": "Pork" },
+  { "id": 10, "value": "seafood", "label": "Seafood" },
+  { "id": 11, "value": "side", "label": "Side" },
+  { "id": 12, "value": "starter", "label": "Starter" },
+  { "id": 13, "value": "vegan", "label": "Vegan" },
+  { "id": 14, "value": "vegetarian", "label": "Vegetarian" }
+]

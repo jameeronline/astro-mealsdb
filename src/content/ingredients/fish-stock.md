@@ -1,0 +1,8 @@
+---
+title: "Fish Stock"
+slug: "fish-stock"
+date: "2025-11-10T17:53:34.359Z"
+thumbnail: "https://www.themealdb.com/images/ingredients/fish_stock.png"
+---
+
+

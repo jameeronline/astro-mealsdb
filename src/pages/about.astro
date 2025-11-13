@@ -1,0 +1,237 @@
+---
+import Layout from "src/layouts/Layout.astro";
+
+//icons
+import { Rocket, Eye } from "@lucide/astro";
+
+//component
+import Team from "@/components/ui/Team.astro";
+
+//data fetching
+const teamMembers = [
+  {
+    name: "Jane Doe",
+    role: "Founder & CEO",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuCPMoFCG03I1X-cgejuJP6YP1yAGbBX76bpHxyf-grKFYEC0db7216yUQH-iPzl8l98_KfQOdql33bf_jTmDZBLzNNUW1B1c5qQhnkkb22lAG09xDPqzRK40Oah4Slb3v652ADw3ELg-k0fJkKo2B3lOV7WU1RQvONU2VbNHsb_LQ616aAuxwI54X7J7kvZLXaFRmrMsQP1-p3lHLa-Q9pZGvM--63v9M00T0UzA6kSGb6HQJrc5w--5xtZqKLR9uDh01rxA23aTfn7",
+    quote:
+      "Food is the universal language that connects us all. Our mission is to make that connection stronger.",
+    alt: "Photo of Jane Doe, CEO",
+  },
+  {
+    name: "John Smith",
+    role: "Head Chef & Recipe Curator",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDCM4n78qsVLZirDo1iQMvBK8tYj06KfbZfRWLX1yw3zVxe5OovDAgcfCNhVOw3eIbIxrwqErsoqE3jTz7woFqVUlgRlfQyHo_e7Gs4Ix2jyy0TFpSzxDyso1HN1CJ3n8bAhkfRHokdz1tjSM8vNU8kTdRQxYzlQSu3-vwz1b6VgO31yPyYn9tcRa1NrVCua8KZpnHkiNZhR09pfaCHHazyyGPPih-NgY_tCuJrjdBi9yig89SeMF-bT8DnZFshqanmKitDNpeUmpJV",
+    quote:
+      "Every recipe tells a story. I'm here to help you discover and create your own.",
+    alt: "Photo of John Smith, Head Chef",
+  },
+  {
+    name: "Emily White",
+    role: "Lead Developer",
+    image:
+      "https://lh3.googleusercontent.com/aida-public/AB6AXuDKwjCALayMYTWlWXly8S1np4Sc-6CUu2bdh4Hb213aFeuYPDYBQ2X2zcPhLR4p-kstqCWxdt_leLSsChFfu7P_z9NY3SAMRg_vcUb7iduO_zg-kcrgInpv2x5wKLz9hYTCzy5gefxSh8qKqDPSnVaWjRVR4Oeg2h7TEkQdswR7Y4atbmeno9VvWM1DONHXm97Kr8w-IH1BZLsReyt_rof4tSOZ7moytr17t8ZDH3f4X6EHfka-RCQcWtp7pttSF0AVTS8egT_4-Kh6",
+    quote:
+      "Building a seamless and beautiful platform to bring our community's love for food to life.",
+    alt: "Photo of Emily White, Lead Developer",
+  },
+];
+---
+
+<Layout
+  title="About Us | MealsDB"
+  description="Learn more about MealsDB, our mission, vision, and the passionate team behind our culinary platform."
+>
+  <div class="py-8 md:py-16 max-w-7xl mx-auto">
+    <!-- Hero Section -->
+    <div class="@container mb-16 sm:mb-24" data-scroll-animate>
+      <div class="@[480px]:p-4">
+        <div
+          class="flex min-h-[480px] flex-col items-center justify-center gap-6 rounded-xl bg-cover bg-center bg-no-repeat p-4 @[480px]:gap-8"
+          data-alt="A birds-eye view of a beautifully set dinner table with various delicious meals."
+          style="
+                  background-image: linear-gradient(
+                      rgba(26, 26, 26, 0.4) 0%,
+                      rgba(26, 26, 26, 0.7) 100%
+                    ),
+                    url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpZCxZa_LJHPyRUJzzA1t-ZrlHOHdbs0xZl6XXRH46iFdVgsqBOhjKd6PDVi4cS98kAJj4qXGlIiWpCWye_EYWRzX8ql_d8F2v98rzQ8p9t1vyyeYAbWUwAWYoqQVfn4r0Rnlz4TJNE2r67KMfW-4doiJhep8i0SQl6MrNv0PVnZ-6FO6cWBpw4_exhAjeNpWg25tmfS6ToNjF3IofvoQEA2AW6NylXmskrdj3TSXf32ux6B3tncGZXMtd4LppareammY7hXxyF6iH');
+                "
+        >
+          <div class="flex flex-col gap-2 text-center">
+            <h1
+              class="text-4xl font-black leading-tight tracking-tighter text-white @[480px]:text-6xl"
+              data-scroll-animate
+            >
+              Our Culinary Journey
+            </h1>
+            <h2
+              class="max-w-xl text-base font-normal leading-normal text-white/90 @[480px]:text-lg"
+              data-scroll-animate
+            >
+              Discover our passion for food and the story behind our global
+              community.
+            </h2>
+          </div>
+          <button
+            class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-background-dark transition-opacity hover:opacity-90"
+            data-scroll-animate
+          >
+            <span class="truncate">Explore Meals</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Feature Section -->
+    <div class="flex flex-col gap-10 px-4 py-10 @container">
+      <div class="flex flex-col gap-4">
+        <h2
+          class="text-4xl font-black leading-tight tracking-tighter text-text-light dark:text-text-dark sm:text-5xl"
+          data-scroll-animate
+        >
+          What Drives Us
+        </h2>
+        <p
+          class="max-w-3xl text-base font-normal leading-normal text-text-light/70 dark:text-text-dark/70"
+          data-scroll-animate
+        >
+          We are dedicated to building a global community of food lovers, one
+          recipe at a time.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2" data-scroll-animate>
+        <div
+          class="flex flex-1 flex-col gap-4 rounded-xl border border-white/10 bg-card-light p-6 dark:bg-card-dark"
+          data-scroll-animate
+        >
+          <Rocket class="text-primary" size={32} />
+          <div class="flex flex-col gap-1">
+            <h3
+              class="text-xl font-bold leading-tight text-text-light dark:text-text-dark"
+            >
+              Our Mission
+            </h3>
+            <p
+              class="text-sm font-normal leading-normal text-text-light/60 dark:text-text-dark/60"
+            >
+              To make cooking accessible, fun, and inspiring for everyone,
+              regardless of skill level.
+            </p>
+          </div>
+        </div>
+        <div
+          class="flex flex-1 flex-col gap-4 rounded-xl border border-white/10 bg-card-light p-6 dark:bg-card-dark"
+          data-scroll-animate
+        >
+          <Eye class="text-primary" size={32} />
+          <div class="flex flex-col gap-1">
+            <h3
+              class="text-xl font-bold leading-tight text-text-light dark:text-text-dark"
+            >
+              Our Vision
+            </h3>
+            <p
+              class="text-sm font-normal leading-normal text-text-light/60 dark:text-text-dark/60"
+            >
+              To build a global community where food lovers can connect, share,
+              and celebrate culinary traditions.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Our Story Section -->
+    <div class="mt-16 px-4 sm:mt-24">
+      <h2
+        class="text-4xl font-black leading-tight tracking-tighter text-text-light dark:text-text-dark sm:text-5xl"
+      >
+        Our Story
+      </h2>
+      <div
+        class="mt-8 grid grid-cols-1 gap-y-4 md:grid-cols-[1fr_auto_1fr] md:gap-x-12"
+      >
+        <div class="hidden md:block"></div>
+        <div class="hidden h-full w-px bg-white/10 md:block"></div>
+        <div class="relative pl-8 md:pl-0">
+          <div
+            class="absolute -left-2 top-1.5 size-4 rounded-full border-2 border-primary bg-background-dark md:left-auto md:-right-[25px]"
+          >
+          </div>
+          <p class="text-lg font-bold text-text-light dark:text-text-dark">
+            2021
+          </p>
+          <p
+            class="text-base font-medium text-text-light/90 dark:text-text-dark/90"
+          >
+            The Idea Was Born
+          </p>
+          <p class="text-sm text-text-light/60 dark:text-text-dark/60">
+            A group of friends with a shared passion for food decided to create
+            a platform for discovering and sharing recipes.
+          </p>
+        </div>
+        <div class="relative text-left md:text-right">
+          <div
+            class="absolute -left-2 top-1.5 size-4 rounded-full border-2 border-primary bg-background-dark md:-left-[25px]"
+          >
+          </div>
+          <p class="text-lg font-bold text-text-light dark:text-text-dark">
+            2022
+          </p>
+          <p
+            class="text-base font-medium text-text-light/90 dark:text-text-dark/90"
+          >
+            Launched 1,000 Recipes
+          </p>
+          <p class="text-sm text-text-light/60 dark:text-text-dark/60">
+            We hit our first major milestone, offering a diverse collection of
+            curated recipes from around the world.
+          </p>
+        </div>
+        <div class="hidden h-full w-px bg-white/10 md:block"></div>
+        <div class="hidden md:block"></div>
+        <div class="hidden md:block"></div>
+        <div class="hidden h-full w-px bg-white/10 md:block"></div>
+        <div class="relative pl-8 md:pl-0">
+          <div
+            class="absolute -left-2 top-1.5 size-4 rounded-full border-2 border-primary bg-background-dark md:left-auto md:-right-[25px]"
+          >
+          </div>
+          <p class="text-lg font-bold text-text-light dark:text-text-dark">
+            2024
+          </p>
+          <p
+            class="text-base font-medium text-text-light/90 dark:text-text-dark/90"
+          >
+            Reached 1 Million Users
+          </p>
+          <p class="text-sm text-text-light/60 dark:text-text-dark/60">
+            Our community grew to over a million food lovers, connecting and
+            sharing their culinary passion daily.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- Team Section -->
+    <div class="mt-16 px-4 sm:mt-24">
+      <div class="flex flex-col items-center gap-4 text-center" data-scroll-animate>
+        <h2
+          class="text-4xl font-black leading-tight tracking-tighter text-text-light dark:text-text-dark sm:text-5xl"
+          data-scroll-animate
+        >
+          Meet The Team
+        </h2>
+        <p
+          class="max-w-3xl text-base font-normal leading-normal text-text-light/70 dark:text-text-dark/70"
+          data-scroll-animate
+        >
+          The passionate individuals dedicated to bringing you the best culinary
+          experiences.
+        </p>
+      </div>
+      <div class="mt-12 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+        {teamMembers.map((member) => <Team member={member} />)}
+      </div>
+    </div>
+  </div>
+</Layout>
