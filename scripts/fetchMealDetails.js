@@ -18,8 +18,210 @@ function slugify(text) {
 }
 
 // Configuration
-const API_URL = "http://www.themealdb.com/api/json/v1/1/search.php?f=a";
+// const API_URL = "http://www.themealdb.com/api/json/v1/1/search.php?f=a";
+// const OUTPUT_DIR = "./src/content/recipes"; // Output directory for MD files
+
+// Configuration
+const BASE_API_URL = "http://www.themealdb.com/api/json/v1/1";
 const OUTPUT_DIR = "./src/content/recipes"; // Output directory for MD files
+
+// Batch configuration - different ways to fetch recipes
+const BATCH_CONFIG = {
+  // Search by first letter (a-z) - Always enabled unless --categories-only or similar
+  byFirstLetter: {
+    enabled: !args.includes('--categories-only') && !args.includes('--areas-only') && !args.includes('--random-only'),
+    letters: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'],
+    endpoint: 'search.php?f='
+  },
+  
+  // Search by category
+  // byCategory: {
+  //   enabled: enableCategories,
+  //   categories: ['Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter', 'Vegan', 'Vegetarian', 'Breakfast', 'Goat'],
+  //   endpoint: 'filter.php?c='
+  // },
+  
+  // Search by area/cuisine
+  // byArea: {
+  //   enabled: enableAreas,
+  //   areas: ['American', 'British', 'Canadian', 'Chinese', 'Croatian', 'Dutch', 'Egyptian', 'French', 'Greek', 'Indian', 'Irish', 'Italian', 'Jamaican', 'Japanese', 'Kenyan', 'Malaysian', 'Mexican', 'Moroccan', 'Polish', 'Portuguese', 'Russian', 'Spanish', 'Thai', 'Tunisian', 'Turkish', 'Vietnamese', 'Ukrainian'],
+  //   endpoint: 'filter.php?a='
+  // },
+  
+  // Random meals (for variety)
+  // random: {
+  //   enabled: enableRandom,
+  //   count: 20, // Number of random meals to fetch
+  //   endpoint: 'random.php'
+  // }
+};
+
+/**
+ * Fetch data from a specific API endpoint
+ */
+async function fetchFromEndpoint(url, retries = 3) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      console.log(`  Fetching: ${url}`);
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`API error: ${response.status}`);
+      }
+      const data = await response.json();
+      
+      // Add delay between requests to be respectful to the API
+      if (i < retries - 1) {
+        await new Promise(resolve => setTimeout(resolve, 1000));
+      }
+      
+      return data.meals;
+    } catch (error) {
+      console.error(`  Attempt ${i + 1} failed for ${url}:`, error.message);
+      if (i === retries - 1) throw error;
+      
+      // Wait before retry
+      await new Promise(resolve => setTimeout(resolve, 2000));
+    }
+  }
+}
+
+/**
+ * Fetch meal details by ID (for filtered results that only return basic info)
+ */
+async function fetchMealDetails(mealId) {
+  try {
+    const url = `${BASE_API_URL}/lookup.php?i=${mealId}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status}`);
+    }
+    const data = await response.json();
+    return data.meals ? data.meals[0] : null;
+  } catch (error) {
+    console.error(`Error fetching meal ${mealId}:`, error.message);
+    return null;
+  }
+}
+
+/**
+ * Fetch all meals using batch configuration
+ */
+async function fetchBatchData() {
+  const allMeals = [];
+  const processedIds = new Set(); // To avoid duplicates
+  
+  console.log("Starting batch data fetch...\n");
+  
+  // 1. Fetch by first letter
+  if (BATCH_CONFIG.byFirstLetter.enabled) {
+    console.log("🔤 Fetching meals by first letter...");
+    for (const letter of BATCH_CONFIG.byFirstLetter.letters) {
+      try {
+        const url = `${BASE_API_URL}/${BATCH_CONFIG.byFirstLetter.endpoint}${letter}`;
+        const meals = await fetchFromEndpoint(url);
+        
+        if (meals && meals.length > 0) {
+          const newMeals = meals.filter(meal => !processedIds.has(meal.idMeal));
+          allMeals.push(...newMeals);
+          newMeals.forEach(meal => processedIds.add(meal.idMeal));
+          console.log(`  ✓ Letter '${letter}': ${newMeals.length} new meals (${meals.length} total)`);
+        } else {
+          console.log(`  - Letter '${letter}': No meals found`);
+        }
+      } catch (error) {
+        console.error(`  ✗ Letter '${letter}': ${error.message}`);
+      }
+    }
+  }
+  
+  // 2. Fetch by category
+  if (BATCH_CONFIG.byCategory.enabled) {
+    console.log("\n🍽️  Fetching meals by category...");
+    for (const category of BATCH_CONFIG.byCategory.categories) {
+      try {
+        const url = `${BASE_API_URL}/${BATCH_CONFIG.byCategory.endpoint}${encodeURIComponent(category)}`;
+        const basicMeals = await fetchFromEndpoint(url);
+        
+        if (basicMeals && basicMeals.length > 0) {
+          console.log(`  📥 Category '${category}': Fetching details for ${basicMeals.length} meals...`);
+          
+          for (const basicMeal of basicMeals) {
+            if (!processedIds.has(basicMeal.idMeal)) {
+              const fullMeal = await fetchMealDetails(basicMeal.idMeal);
+              if (fullMeal) {
+                allMeals.push(fullMeal);
+                processedIds.add(fullMeal.idMeal);
+              }
+            }
+          }
+          
+          const newCount = basicMeals.filter(meal => processedIds.has(meal.idMeal)).length;
+          console.log(`  ✓ Category '${category}': ${newCount} meals processed`);
+        } else {
+          console.log(`  - Category '${category}': No meals found`);
+        }
+      } catch (error) {
+        console.error(`  ✗ Category '${category}': ${error.message}`);
+      }
+    }
+  }
+  
+  // 3. Fetch by area
+  if (BATCH_CONFIG.byArea.enabled) {
+    console.log("\n🌍 Fetching meals by area/cuisine...");
+    for (const area of BATCH_CONFIG.byArea.areas) {
+      try {
+        const url = `${BASE_API_URL}/${BATCH_CONFIG.byArea.endpoint}${encodeURIComponent(area)}`;
+        const basicMeals = await fetchFromEndpoint(url);
+        
+        if (basicMeals && basicMeals.length > 0) {
+          console.log(`  📥 Area '${area}': Fetching details for ${basicMeals.length} meals...`);
+          
+          for (const basicMeal of basicMeals) {
+            if (!processedIds.has(basicMeal.idMeal)) {
+              const fullMeal = await fetchMealDetails(basicMeal.idMeal);
+              if (fullMeal) {
+                allMeals.push(fullMeal);
+                processedIds.add(fullMeal.idMeal);
+              }
+            }
+          }
+          
+          const newCount = basicMeals.filter(meal => processedIds.has(meal.idMeal)).length;
+          console.log(`  ✓ Area '${area}': ${newCount} meals processed`);
+        } else {
+          console.log(`  - Area '${area}': No meals found`);
+        }
+      } catch (error) {
+        console.error(`  ✗ Area '${area}': ${error.message}`);
+      }
+    }
+  }
+  
+  // 4. Fetch random meals
+  if (BATCH_CONFIG.random.enabled) {
+    console.log("\n🎲 Fetching random meals...");
+    for (let i = 0; i < BATCH_CONFIG.random.count; i++) {
+      try {
+        const url = `${BASE_API_URL}/${BATCH_CONFIG.random.endpoint}`;
+        const meals = await fetchFromEndpoint(url);
+        
+        if (meals && meals.length > 0 && !processedIds.has(meals[0].idMeal)) {
+          allMeals.push(meals[0]);
+          processedIds.add(meals[0].idMeal);
+          console.log(`  ✓ Random meal ${i + 1}: ${meals[0].strMeal}`);
+        } else {
+          console.log(`  - Random meal ${i + 1}: Duplicate or no meal found`);
+        }
+      } catch (error) {
+        console.error(`  ✗ Random meal ${i + 1}: ${error.message}`);
+      }
+    }
+  }
+  
+  console.log(`\n📊 Total unique meals collected: ${allMeals.length}`);
+  return allMeals;
+}
 
 /**
  * Fetch bulk data from API
@@ -76,8 +278,9 @@ function createMarkdownContent(item) {
   const frontmatter = {
     id: item.idMeal || "unknown",
     title: item.strMeal || "Untitled",
+    description: generateDescription(item),
     slug: slugify(item.strMeal || `meal-${item.idMeal || "unknown"}`),
-    date: item.date || new Date().toISOString().slice(0, 19).replace('T', ' '),
+    date: item.date || new Date().toISOString(),
     thumbnail: item.strMealThumb || "",
     category: item.strCategory || "Unknown",
     cuisine: item.strArea || "Unknown",

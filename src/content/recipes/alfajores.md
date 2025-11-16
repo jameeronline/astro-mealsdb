@@ -1,8 +1,9 @@
 ---
 id: "53138"
 title: "Alfajores"
+description: "Easy Alfajores recipe - a classic dessert from Argentinian using All purpose flour, Cornstarch, Butter. Perfect for beginners."
 slug: "alfajores"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.978Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/a4kgf21763075288.jpg"
 category: "Dessert"
 cuisine: "Argentinian"
@@ -31,10 +32,10 @@ ingredients:
     measure: "Sprinkling"
 addons:
   servings: 4
-  prepTime: 29
-  cookTime: 41
+  prepTime: 20
+  cookTime: 19
   difficulty: "medium"
-  totalTime: 101
+  totalTime: 115
 nutrition:
   calories: 350
   fat: 12
@@ -52,6 +53,6 @@ nutrition:
 6. Let cool.
 7. Assemble: Spread dulce de leche on one cookie, then sandwich with another.
 8. Roll the edges in coconut flakes.
-9. Pro Tips:.
-10. Chill the dough before rolling it out to make it easier to handle and to prevent the cookies from spreading too much while baking.
-11. Dip the alfajores in melted chocolate and let them set on a wire rack for an extra decadent treat.
+9. Pro Tips:
+Chill the dough before rolling it out to make it easier to handle and to prevent the cookies from spreading too much while baking.
+10. Dip the alfajores in melted chocolate and let them set on a wire rack for an extra decadent treat.

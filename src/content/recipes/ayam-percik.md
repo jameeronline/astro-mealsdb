@@ -1,8 +1,9 @@
 ---
 id: "53050"
 title: "Ayam Percik"
+description: "Easy Ayam Percik recipe - a classic chicken from Malaysian using Chicken Thighs, Challots, Ginger. Perfect for beginners."
 slug: "ayam-percik"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.986Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/020z181619788503.jpg"
 category: "Chicken"
 cuisine: "Malaysian"
@@ -41,10 +42,10 @@ ingredients:
     measure: "1 cup"
 addons:
   servings: 4
-  prepTime: 48
-  cookTime: 29
+  prepTime: 15
+  cookTime: 90
   difficulty: "medium"
-  totalTime: 104
+  totalTime: 69
 nutrition:
   calories: 350
   fat: 12

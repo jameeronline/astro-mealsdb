@@ -1,8 +1,9 @@
 ---
 id: "53133"
 title: "Asado"
+description: "Learn to make authentic Asado - a traditional Argentinian beef featuring Mixed Beef Cuts, Chorizo, Morcilla."
 slug: "asado"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.984Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/kgfh3q1763075438.jpg"
 category: "Beef"
 cuisine: "Argentinian"
@@ -23,10 +24,10 @@ ingredients:
     measure: "To taste"
 addons:
   servings: 4
-  prepTime: 20
-  cookTime: 28
+  prepTime: 40
+  cookTime: 61
   difficulty: "medium"
-  totalTime: 74
+  totalTime: 112
 nutrition:
   calories: 350
   fat: 12
@@ -44,10 +45,10 @@ nutrition:
 6. Typically, ribs may take up to 2 hours; thinner cuts will cook faster.
 7. Rest and Serve: Let the meat rest for about 10 minutes before slicing.
 8. Serve with chimichurri sauce and grilled vegetables.
-9. Pro Tips:.
-10. Use a mix of wood and charcoal for a consistent heat source.
-11. Wood adds flavor, while charcoal maintains temperature.
-12. Season the meat just before grilling to ensure it retains its moisture and flavor.
-13. Serving Suggestions:.
-14. Serve with a side of chimichurri sauce, a fresh tomato salad, and crusty bread.
-15. Pair with a robust Malbec wine to complement the rich flavors of the meat.
+9. Pro Tips:
+Use a mix of wood and charcoal for a consistent heat source.
+10. Wood adds flavor, while charcoal maintains temperature.
+11. Season the meat just before grilling to ensure it retains its moisture and flavor.
+12. Serving Suggestions:
+Serve with a side of chimichurri sauce, a fresh tomato salad, and crusty bread.
+13. Pair with a robust Malbec wine to complement the rich flavors of the meat.

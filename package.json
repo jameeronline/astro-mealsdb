@@ -9,6 +9,7 @@
     "astro": "astro",
     "fetch-content": "node scripts/fetchAndGenerateMD.js",
     "fetch-meals": "node scripts/fetchMealDetails.js",
+    "meals": "node scripts/fetch-meal-details.js",
     "new-recipe": "node scripts/new-recipe.js",
     "recipe-init": "node scripts/new-recipe-interactive.js",
     "index": "node scripts/algolia-index.js"

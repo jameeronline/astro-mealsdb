@@ -1,8 +1,9 @@
 ---
 id: "53049"
 title: "Apam balik"
+description: "Easy Apam balik recipe - a classic dessert from Malaysian using Milk, Oil, Eggs. Perfect for beginners."
 slug: "apam-balik"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.980Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"
 category: "Dessert"
 cuisine: "Malaysian"
@@ -33,10 +34,10 @@ ingredients:
     measure: "3 tbs"
 addons:
   servings: 4
-  prepTime: 50
-  cookTime: 58
+  prepTime: 35
+  cookTime: 23
   difficulty: "medium"
-  totalTime: 108
+  totalTime: 98
 nutrition:
   calories: 350
   fat: 12

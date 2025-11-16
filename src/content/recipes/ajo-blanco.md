@@ -1,8 +1,9 @@
 ---
 id: "53169"
 title: "Ajo blanco"
+description: "Learn to make authentic Ajo blanco - a traditional Spanish starter featuring White bread, Almonds, Extra Virgin Olive Oil."
 slug: "ajo-blanco"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.977Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/5jdtie1763289302.jpg"
 category: "Starter"
 cuisine: "Spanish"
@@ -25,10 +26,10 @@ ingredients:
     measure: "1 ½ tbsp"
 addons:
   servings: 4
-  prepTime: 16
-  cookTime: 76
+  prepTime: 33
+  cookTime: 83
   difficulty: "medium"
-  totalTime: 90
+  totalTime: 61
 nutrition:
   calories: 350
   fat: 12
@@ -38,10 +39,7 @@ nutrition:
   protein: 25
 ---
 
-1. step 1.
-2. Tip the bread into a bowl and pour over 350ml water.
-3. Leave to soak for 10 mins.
-4. step 2.
-5. Blend the ingredients together with 350ml water and 1 tsp salt.
-6. step 3.
-7. Let the soup cool in the fridge for 1 hr or so, then serve with a drizzle of oil and some black pepper.
+1. Tip the bread into a bowl and pour over 350ml water.
+2. Leave to soak for 10 mins.
+3. Blend the ingredients together with 350ml water and 1 tsp salt.
+4. Let the soup cool in the fridge for 1 hr or so, then serve with a drizzle of oil and some black pepper.

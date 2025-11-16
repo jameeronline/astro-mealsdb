@@ -1,8 +1,9 @@
 ---
 id: "52893"
 title: "Apple & Blackberry Crumble"
+description: "Delicious British dessert made with Plain Flour, Caster Sugar, Butter. Easy apple & blackberry crumble recipe perfect for any occasion."
 slug: "apple-blackberry-crumble"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.980Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg"
 category: "Dessert"
 cuisine: "British"
@@ -33,10 +34,10 @@ ingredients:
     measure: "to serve"
 addons:
   servings: 4
-  prepTime: 26
-  cookTime: 49
+  prepTime: 36
+  cookTime: 78
   difficulty: "medium"
-  totalTime: 118
+  totalTime: 99
 nutrition:
   calories: 350
   fat: 12

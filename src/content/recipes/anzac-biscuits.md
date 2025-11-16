@@ -1,8 +1,9 @@
 ---
 id: "53111"
 title: "Anzac biscuits"
+description: "Anzac biscuits: A flavorful dessert from Australian with Porridge oats, Desiccated Coconut, Plain Flour. Step-by-step recipe included."
 slug: "anzac-biscuits"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.979Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/q47rkb1762324620.jpg"
 category: "Dessert"
 cuisine: "Australian"
@@ -29,10 +30,10 @@ ingredients:
     measure: "1 teaspoon"
 addons:
   servings: 4
-  prepTime: 37
-  cookTime: 54
+  prepTime: 27
+  cookTime: 22
   difficulty: "medium"
-  totalTime: 99
+  totalTime: 88
 nutrition:
   calories: 350
   fat: 12
@@ -42,15 +43,12 @@ nutrition:
   protein: 25
 ---
 
-1. step 1.
-2. Heat oven to 180C/fan 160C/gas 4.
-3. Put the oats, coconut, flour and sugar in a bowl.
-4. Melt the butter in a small pan and stir in the golden syrup.
-5. Add the bicarbonate of soda to 2 tbsp boiling water, then stir into the golden syrup and butter mixture.
-6. step 2.
-7. Make a well in the middle of the dry ingredients and pour in the butter and golden syrup mixture.
-8. Stir gently to incorporate the dry ingredients.
-9. step 3.
-10. Put dessertspoonfuls of the mixture on to buttered baking sheets, about 2.5cm/1in apart to allow room for spreading.
-11. Bake in batches for 8-10 mins until golden.
-12. Transfer to a wire rack to cool.
+1. Heat oven to 180C/fan 160C/gas 4.
+2. Put the oats, coconut, flour and sugar in a bowl.
+3. Melt the butter in a small pan and stir in the golden syrup.
+4. Add the bicarbonate of soda to 2 tbsp boiling water, then stir into the golden syrup and butter mixture.
+5. Make a well in the middle of the dry ingredients and pour in the butter and golden syrup mixture.
+6. Stir gently to incorporate the dry ingredients.
+7. Put dessertspoonfuls of the mixture on to buttered baking sheets, about 2.5cm/1in apart to allow room for spreading.
+8. Bake in batches for 8-10 mins until golden.
+9. Transfer to a wire rack to cool.

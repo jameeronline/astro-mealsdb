@@ -9,9 +9,26 @@ import { navLinks, homeNavLink } from "@/data/navbar";
 //ui library
 import { Button } from "@/components/starwind/button";
 
-
 //icons
 import { Search } from "@lucide/astro";
+
+// Get current URL for active menu highlighting
+const { pathname } = Astro.url;
+
+// Function to check if a link is active
+function isActiveLink(href: string, currentPath: string): boolean {
+  // Exact match for home page
+  if (href === "/" && currentPath === "/") {
+    return true;
+  }
+  
+  // For other pages, check if current path starts with the href
+  if (href !== "/" && currentPath.startsWith(href)) {
+    return true;
+  }
+  
+  return false;
+}
 ---
 
 <header
@@ -33,7 +50,11 @@ import { Search } from "@lucide/astro";
           >
         </span>
         <a
-          class="text-text-light dark:text-text-dark text-xl font-bold"
+          class={`text-xl font-bold transition-colors ${
+            isActiveLink(homeNavLink.href, pathname)
+              ? "text-primary"
+              : "text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary"
+          }`}
           href={homeNavLink.href}
         >
           {homeNavLink.text}
@@ -41,14 +62,23 @@ import { Search } from "@lucide/astro";
       </div>
       <nav class="hidden md:flex flex-1 justify-center items-center gap-9">
         {
-          navLinks.map((link) => (
-            <a
-              class="font-medium hover:text-primary dark:hover:text-primary transition-colors"
-              href={link.href}
-            >
-              {link.text}
-            </a>
-          ))
+          navLinks.map((link) => {
+            const isActive = isActiveLink(link.href, pathname);
+            return (
+              <a
+                class={`font-medium transition-colors relative ${
+                  isActive
+                    ? "text-primary"
+                    : "text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary"
+                } ${
+                  isActive ? "after:absolute after:-bottom-1 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full" : ""
+                }`}
+                href={link.href}
+              >
+                {link.text}
+              </a>
+            );
+          })
         }
       </nav>
       <div class="flex items-center gap-4">
@@ -60,7 +90,11 @@ import { Search } from "@lucide/astro";
           <span class="truncate">Login</span>
         </button>
         <a
-          class="flex min-w-12xl cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-text-light dark:text-text-dark text-sm font-bold"
+          class={`flex min-w-12xl cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold transition-all ${
+            isActiveLink("/search", pathname)
+              ? "bg-primary text-text-light border border-primary"
+              : "bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:border-primary hover:bg-primary/10"
+          }`}
           href="/search"
         >
           <Search class="w-5 h-5" />

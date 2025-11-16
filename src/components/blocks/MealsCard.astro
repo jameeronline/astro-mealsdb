@@ -1,0 +1,107 @@
+---
+import Image from "astro/components/Image.astro";
+const { recipe } = Astro.props;
+
+// Destructure hit object
+const { title, description, slug, thumbnail, addons, category, cuisine } =
+  recipe;
+---
+
+<!-- <a
+  class="flex flex-col overflow-hidden rounded-xl border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group cursor-pointer transition-all duration-300 transform hover:-translate-y-1"
+  href={`/recipes/${slug}`}
+>
+  <div class="relative">
+    {
+      thumbnail && (
+        <Image
+          src={thumbnail}
+          alt={title}
+          class="h-48 w-full object-cover"
+          width={400}
+          height={192}
+        />
+      )
+    }
+    {
+      addons?.cookTime && (
+        <div class="absolute top-3 right-3 flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-dark/70 px-3 backdrop-blur-sm">
+          <p class="text-white text-sm font-medium leading-normal">
+            {addons.cookTime}
+          </p>
+        </div>
+      )
+    }
+  </div>
+  <div class="flex flex-col gap-3 p-4">
+    <div class="flex gap-2">
+      {
+        category && (
+          <span class="text-xs font-semibold uppercase tracking-wider text-primary">
+            {category}
+          </span>
+        )
+      }
+      {
+        cuisine && (
+          <span class="text-xs font-semibold uppercase tracking-wider text-text-secondary-dark">
+            {cuisine}
+          </span>
+        )
+      }
+    </div>
+    <h3 class="text-lg font-bold leading-tight text-text-main-dark">
+      {title}
+    </h3>
+    <p class="text-sm text-text-secondary-dark line-clamp-2">
+      {description}
+    </p>
+  </div>
+</a> -->
+
+<div class="flex flex-col gap-3 pb-3 group" data-scroll-animate>
+    <div
+        class="w-full bg-center bg-no-repeat aspect-[3/4] bg-cover rounded-xl overflow-hidden"
+        
+    >
+        <!-- <div
+            class="w-full h-full bg-center bg-no-repeat bg-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+            data-alt={title}
+            
+        >
+        </div> -->
+        {
+            thumbnail ? (
+                <Image
+                    class="w-full h-full bg-center bg-no-repeat object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                    src={thumbnail}
+                    alt={title}
+                    width={400}
+                    height={533}
+                />
+            ) : (
+                <Image
+                    class="w-full h-full bg-center bg-no-repeat object-cover group-hover:scale-110 transition-transform duration-300 ease-in-out"
+                    src="/fallback-image.jpg"
+                    alt={title}
+                    width={400}
+                    height={533}
+                />
+            )
+        }
+    </div>
+    <div>
+        <p class="text-text-light dark:text-text-dark text-base font-medium leading-normal">
+            {title}
+        </p>
+        <p class="text-text-muted-light dark:text-text-muted-dark text-sm font-normal leading-normal">
+            <!-- {category ? `${category}` : category} -->
+            {cuisine ? `${cuisine}` : cuisine}
+            {addons?.cookTime && `, ${addons.cookTime} min`}
+        </p>
+        <a
+            class="text-primary text-sm font-medium leading-normal mt-1 block hover:underline"
+            href={`/recipe/${slug}`}>View Recipe</a
+        >
+    </div>
+</div>

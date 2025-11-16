@@ -85,14 +85,16 @@ const pricingPlans = [
       <div
         class="flex flex-wrap justify-between gap-6 px-4 py-3 text-center md:text-left"
       >
-        <div class="flex w-full flex-col gap-3 mb-10">
+        <div class="flex w-full flex-col gap-3 mb-10" data-scroll-animate>
           <h1
             class="text-text-light dark:text-text-dark text-4xl font-black leading-tight tracking-[-0.033em] md:text-5xl"
+            data-scroll-animate
           >
             Find the Perfect Plan for Your Culinary Journey
           </h1>
           <p
             class="text-text-light/80 dark:text-text-dark/80 text-base font-normal leading-normal md:text-lg"
+            data-scroll-animate
           >
             Choose the plan that best fits your needs and unlock a world of
             culinary delights.
@@ -102,9 +104,11 @@ const pricingPlans = [
       <div class="flex justify-center px-4 py-3 mb-4">
         <div
           class="flex h-10 w-full max-w-sm items-center justify-center rounded-lg bg-background-light dark:bg-background-dark p-1"
+          data-scroll-animate
         >
           <label
             class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-2 text-sm font-medium leading-normal text-[#a3b99d] has-[:checked]:bg-[#1e271c] has-[:checked]:text-white has-[:checked]:shadow-[0_1px_3px_rgba(0,0,0,0.1)]"
+            data-scroll-animate
           >
             <span class="truncate">Monthly</span>
             <input
@@ -116,6 +120,7 @@ const pricingPlans = [
           </label>
           <label
             class="flex h-full grow cursor-pointer items-center justify-center overflow-hidden rounded-md px-2 text-sm font-medium leading-normal text-[#a3b99d] has-[:checked]:bg-[#1e271c] has-[:checked]:text-white has-[:checked]:shadow-[0_1px_3px_rgba(0,0,0,0.1)]"
+            data-scroll-animate
           >
             <span class="truncate">Annual (Save 20%)</span>
             <input
@@ -128,7 +133,7 @@ const pricingPlans = [
           </label>
         </div>
       </div>
-      <div class="grid grid-cols-1 gap-6 px-4 py-3 md:grid-cols-3">
+      <div class="grid grid-cols-1 gap-6 px-4 py-3 md:grid-cols-3" data-scroll-animate>
         {
           pricingPlans.map((plan) => (
             <div
@@ -137,6 +142,7 @@ const pricingPlans = [
                   ? "border-2 border-solid border-primary bg-card-light dark:bg-card-dark ring-4 ring-primary/20"
                   : "border border-solid border-border-light bg-card-light dark:border-border-dark dark:bg-card-dark"
               }`}
+              data-scroll-animate
             >
               <div class="flex flex-col gap-2">
                 <div class="flex items-center justify-between">
@@ -177,16 +183,17 @@ const pricingPlans = [
           ))
         }
       </div>
-      <div class="mt-16 flex flex-col items-center gap-8 px-4 py-3">
+      <div class="mt-16 flex flex-col items-center gap-8 px-4 py-3" data-scroll-animate>
         <h3
           class="text-center text-3xl font-bold text-text-light dark:text-text-dark"
+          data-scroll-animate
         >
           Frequently Asked Questions
         </h3>
         <div class="w-full max-w-2xl space-y-4">
           {
             faqs.map((faq) => (
-              <details class="group rounded-lg bg-card-light dark:bg-card-dark p-4 open:ring-1 open:ring-white/10">
+              <details class="group rounded-lg bg-card-light dark:bg-card-dark p-4 open:ring-1 open:ring-white/10" data-scroll-animate>
                 <summary class="flex cursor-pointer items-center justify-between font-medium text-text-light dark:text-text-dark">
                   {faq.question}
                   <span class="material-symbols-outlined transition-transform duration-200 group-open:rotate-180">

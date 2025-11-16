@@ -1,8 +1,9 @@
 ---
 id: "52768"
 title: "Apple Frangipan Tart"
+description: "Apple Frangipan Tart: A flavorful dessert from British with digestive biscuits, butter, Bramley apples. Step-by-step recipe included."
 slug: "apple-frangipan-tart"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.981Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg"
 category: "Dessert"
 cuisine: "British"
@@ -34,9 +35,9 @@ ingredients:
 addons:
   servings: 4
   prepTime: 49
-  cookTime: 35
+  cookTime: 87
   difficulty: "medium"
-  totalTime: 59
+  totalTime: 80
 nutrition:
   calories: 350
   fat: 12

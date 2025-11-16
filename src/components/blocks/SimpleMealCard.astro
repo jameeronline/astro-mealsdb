@@ -1,0 +1,28 @@
+---
+import Image from "astro/components/Image.astro";
+const { recipe } = Astro.props;
+
+// Destructure hit object
+const { title, description, slug, thumbnail, addons, category, cuisine } =
+  recipe;
+---
+
+<a
+    class="flex flex-col rounded-xl overflow-hidden bg-card-light dark:bg-card-dark shadow-sm transition-transform hover:-translate-y-1"
+    href={`/recipe/${slug}`}
+>
+    <div
+        class="bg-cover bg-center aspect-video"
+        data-alt={description}
+        style={`background-image: url('${thumbnail}');`}
+    >
+    </div>
+    <div class="p-4">
+        <h4 class="text-lg font-bold text-gray-900 dark:text-gray-100">
+            {title}
+        </h4>
+        <p class="text-sm text-text-light/40 dark:text-text-dark/60 mt-1 line-clamp-2">
+            {description}
+        </p>
+    </div>
+</a>

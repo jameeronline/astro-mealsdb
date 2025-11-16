@@ -1,8 +1,9 @@
 ---
 id: "53158"
 title: "Air fryer patatas bravas"
+description: "Easy Air fryer patatas bravas recipe - a classic vegetarian from Spanish using Potatoes, Olive Oil, Onion. Perfect for beginners."
 slug: "air-fryer-patatas-bravas"
-date: "2025-11-16 11:04:11"
+date: "2025-11-16T12:29:43.973Z"
 thumbnail: "https://www.themealdb.com/images/media/meals/3m8yae1763257951.jpg"
 category: "Vegetarian"
 cuisine: "Spanish"
@@ -31,10 +32,10 @@ ingredients:
     measure: "To serve"
 addons:
   servings: 4
-  prepTime: 22
-  cookTime: 89
+  prepTime: 11
+  cookTime: 22
   difficulty: "medium"
-  totalTime: 77
+  totalTime: 69
 nutrition:
   calories: 350
   fat: 12
@@ -44,16 +45,13 @@ nutrition:
   protein: 25
 ---
 
-1. step 1.
-2. Soak the potatoes in just-boiled water for 30 mins, then drain and leave to air-dry for 5 mins.
-3. Heat the air fryer to 200C.
-4. Tip the potatoes into a bowl and drizzle over 1 tbsp of the oil and add 1/2 tsp each of salt and freshly ground black pepper.
-5. Mix to coat the potatoes all over, then tip into the air fryer basket and cook for 20-30 mins until crisp and golden.
-6. step 2.
-7. Meanwhile, heat the remaining oil in a small pan over a medium-low heat and fry the onion for 8-10 mins until softened but not golden.
-8. Stir in the garlic and cook for a minute before adding the paprika and cooking for 30 seconds more.
-9. Stir in the tomato purée, cook for 1 min, then tip in the chopped tomatoes.
-10. Cook for 5-10 mins over a medium heat until thickened slightly.
-11. step 3.
-12. Once the potatoes are cooked, tip out onto a platter and pour over the tomato sauce.
-13. Sprinkle with the basil leaves, then serve.
+1. Soak the potatoes in just-boiled water for 30 mins, then drain and leave to air-dry for 5 mins.
+2. Heat the air fryer to 200C.
+3. Tip the potatoes into a bowl and drizzle over 1 tbsp of the oil and add 1/2 tsp each of salt and freshly ground black pepper.
+4. Mix to coat the potatoes all over, then tip into the air fryer basket and cook for 20-30 mins until crisp and golden.
+5. Meanwhile, heat the remaining oil in a small pan over a medium-low heat and fry the onion for 8-10 mins until softened but not golden.
+6. Stir in the garlic and cook for a minute before adding the paprika and cooking for 30 seconds more.
+7. Stir in the tomato purée, cook for 1 min, then tip in the chopped tomatoes.
+8. Cook for 5-10 mins over a medium heat until thickened slightly.
+9. Once the potatoes are cooked, tip out onto a platter and pour over the tomato sauce.
+10. Sprinkle with the basil leaves, then serve.
