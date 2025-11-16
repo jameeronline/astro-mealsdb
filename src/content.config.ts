@@ -33,6 +33,8 @@ const recipesCollection = defineCollection({
     dateModified: z.string().optional(),
     video: z.string().url().or(z.literal("")).optional(),
     tags: z.array(z.string()),
+    keywords: z.array(z.string()),
+    rating: z.number().optional(),
     ingredients: z.array(
       z.object({
         name: z.string(),
@@ -40,16 +42,20 @@ const recipesCollection = defineCollection({
       })
     ),
     addons: z.object({
-      servings: z.string().optional(),
-      prepTime: z.string().optional(),
-      cookTime: z.string().optional(),
+      servings: z.number().optional(),
+      prepTime: z.number().optional(),
+      cookTime: z.number().optional(),
+      difficulty: z.string().optional(),
+      totalTime: z.number().optional(),
     }),
     nutrition: z
       .object({
-        calories: z.string().optional(),
-        fat: z.string().optional(),
-        carbs: z.string().optional(),
-        protein: z.string().optional(),
+        calories: z.number().optional(),
+        fat: z.number().optional(),
+        carbs: z.number().optional(),
+        fiber: z.number().optional(),
+        sugar: z.number().optional(),
+        protein: z.number().optional(),
       })
       .optional(),
   }),

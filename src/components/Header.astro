@@ -1,18 +1,14 @@
 ---
 //components/Header.astro
-import DarkMode from "./DarkMode.astro";
-import ThemeSelect from "./ThemeSelect.astro";
+import DarkMode from "@/components/modules/DarkMode.astro";
+import ThemeSelect from "@/components/modules/ThemeSelect.astro";
 
-const navLinks = [
-  //   { text: "Home", href: "/" },
-  { text: "Categories", href: "/categories" },
-  { text: "Cuisines", href: "/cuisines" },
-  { text: "Ingredients", href: "/ingredients" },
-  { text: "Features", href: "/features" },
-  { text: "Blog", href: "/blog" },
-  { text: "Pricing", href: "/pricing" },
-  { text: "About", href: "/about" },
-];
+//data
+import { navLinks, homeNavLink } from "@/data/navbar";
+
+//ui library
+import { Button } from "@/components/starwind/button";
+
 
 //icons
 import { Search } from "@lucide/astro";
@@ -38,9 +34,9 @@ import { Search } from "@lucide/astro";
         </span>
         <a
           class="text-text-light dark:text-text-dark text-xl font-bold"
-          href="/"
+          href={homeNavLink.href}
         >
-          MealsDB
+          {homeNavLink.text}
         </a>
       </div>
       <nav class="hidden md:flex flex-1 justify-center items-center gap-9">

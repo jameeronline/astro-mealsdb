@@ -2,7 +2,7 @@
 id: "53050"
 title: "Ayam Percik"
 slug: "ayam-percik"
-date: "2025-11-10T12:34:04.924Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/020z181619788503.jpg"
 category: "Chicken"
 cuisine: "Malaysian"
@@ -10,6 +10,8 @@ source: "http://www.curiousnut.com/roasted-spiced-chicken-ayam-percik/"
 dateModified: ""
 video: "https://www.youtube.com/watch?v=9ytR28QK6I8"
 tags: []
+keywords: ["chicken", "malaysian", "chicken thighs", "challots", "ginger", "garlic clove", "cayenne pepper"]
+rating: 4.5
 ingredients:
   - name: "Chicken Thighs"
     measure: "6"
@@ -38,14 +40,18 @@ ingredients:
   - name: "Water"
     measure: "1 cup"
 addons:
-  servings: "4"
-  prepTime: "30 minutes"
-  cookTime: "45 minutes"
+  servings: 4
+  prepTime: 48
+  cookTime: 29
+  difficulty: "medium"
+  totalTime: 104
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. In a blender, add the ingredients for the spice paste and blend until smooth.

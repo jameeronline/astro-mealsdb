@@ -1,0 +1,125 @@
+---
+// Sidebar.astro
+import { getCollection } from 'astro:content';
+
+interface PageNode {
+  title: string;
+  path: string;
+  children?: PageNode[];
+}
+
+// Get all pages from the pages directory
+const allPages = await Astro.glob('../../pages/static/**/*.{md,mdx}');
+
+// Function to extract title from frontmatter or filename
+function getPageTitle(page: any): string {
+  return page.frontmatter?.title || 
+         page.file.split('/').pop()?.replace(/\.(md|mdx)$/, '') || 
+         'Untitled';
+}
+
+// Function to get the URL path from file path
+function getUrlPath(filePath: string): string {
+  const match = filePath.match(/\/pages\/(.+)\.(md|mdx)$/);
+  if (!match) return '/';
+  
+  let path = match[1];
+  // Remove index from path
+  path = path.replace(/\/index$/, '');
+  path = path.replace(/^index$/, '');
+  
+  return '/' + path;
+}
+
+// Build hierarchical structure
+function buildHierarchy(pages: any[]): PageNode[] {
+  const tree: { [key: string]: PageNode } = {};
+  const roots: PageNode[] = [];
+
+  pages.forEach(page => {
+    const urlPath = getUrlPath(page.file);
+    const parts = urlPath.split('/').filter(p => p);
+    
+    if (parts.length === 0) {
+      // Root level page
+      roots.push({
+        title: getPageTitle(page),
+        path: '/',
+      });
+      return;
+    }
+
+    let currentPath = '';
+    let parent: PageNode[] = roots;
+
+    parts.forEach((part, index) => {
+      currentPath += '/' + part;
+      const isLastPart = index === parts.length - 1;
+
+      if (isLastPart) {
+        // This is the actual page
+        parent.push({
+          title: getPageTitle(page),
+          path: urlPath,
+        });
+      } else {
+        // This is a folder
+        let folder = parent.find(node => 
+          node.path === currentPath && node.children
+        );
+
+        if (!folder) {
+          folder = {
+            title: part.charAt(0).toUpperCase() + part.slice(1),
+            path: currentPath,
+            children: [],
+          };
+          parent.push(folder);
+        }
+
+        parent = folder.children!;
+      }
+    });
+  });
+
+  return roots;
+}
+
+const hierarchy = buildHierarchy(allPages);
+
+// Recursive component for rendering tree
+interface TreeProps {
+  nodes: PageNode[];
+  depth?: number;
+}
+
+const renderTree = (nodes: PageNode[], depth = 0) => {
+  return nodes.map(node => {
+    const hasChildren = node.children && node.children.length > 0;
+    const paddingLeft = `${depth * 1}rem`;
+    
+    return `
+      <div class="nav-item" style="padding-left: ${paddingLeft}">
+        ${hasChildren ? `
+          <details ${depth === 0 ? 'open' : ''}>
+            <summary class="folder-title">${node.title}</summary>
+            <div class="folder-content">
+              ${renderTree(node.children!, depth + 1)}
+            </div>
+          </details>
+        ` : `
+          <a href="${node.path}" class="page-link">
+            ${node.title}
+          </a>
+        `}
+      </div>
+    `;
+  }).join('');
+};
+---
+
+<aside class="sidebar">
+  <nav class="sidebar-nav">
+    <Fragment set:html={renderTree(hierarchy)} />
+  </nav>
+</aside>

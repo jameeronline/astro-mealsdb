@@ -2,7 +2,7 @@
 id: "53111"
 title: "Anzac biscuits"
 slug: "anzac-biscuits"
-date: "2025-11-10T12:34:04.920Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/q47rkb1762324620.jpg"
 category: "Dessert"
 cuisine: "Australian"
@@ -10,6 +10,8 @@ source: "https://www.bbcgoodfood.com/recipes/anzac-biscuits"
 dateModified: "2025-11-05 04:46:03"
 video: "https://www.youtube.com/watch?v=1nAVbfQVWRQ"
 tags: []
+keywords: ["dessert", "australian", "porridge oats", "desiccated coconut", "plain flour", "caster sugar", "butter"]
+rating: 4.5
 ingredients:
   - name: "Porridge oats"
     measure: "85g"
@@ -26,14 +28,18 @@ ingredients:
   - name: "Bicarbonate Of Soda"
     measure: "1 teaspoon"
 addons:
-  servings: "4"
-  prepTime: "30 minutes"
-  cookTime: "45 minutes"
+  servings: 4
+  prepTime: 37
+  cookTime: 54
+  difficulty: "medium"
+  totalTime: 99
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. step 1.

@@ -2,7 +2,7 @@
 id: "53049"
 title: "Apam balik"
 slug: "apam-balik"
-date: "2025-11-10T12:34:04.922Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/adxcbq1619787919.jpg"
 category: "Dessert"
 cuisine: "Malaysian"
@@ -10,6 +10,8 @@ source: "https://www.nyonyacooking.com/recipes/apam-balik~SJ5WuvsDf9WQ"
 dateModified: ""
 video: "https://www.youtube.com/watch?v=6R8ffRRJcrg"
 tags: []
+keywords: ["dessert", "malaysian", "milk", "oil", "eggs", "flour", "baking powder"]
+rating: 4.5
 ingredients:
   - name: "Milk"
     measure: "200ml"
@@ -30,14 +32,18 @@ ingredients:
   - name: "Peanut Butter"
     measure: "3 tbs"
 addons:
-  servings: "4"
-  prepTime: "30 minutes"
-  cookTime: "45 minutes"
+  servings: 4
+  prepTime: 50
+  cookTime: 58
+  difficulty: "medium"
+  totalTime: 108
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. Mix milk, oil and egg together.

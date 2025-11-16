@@ -1,35 +1,7 @@
 ---
-interface FooterLink {
-  text: string;
-  url: string;
-}
-
-interface FooterSection {
-  title: string;
-  links: FooterLink[];
-}
-
 const linkPrefix = "/static";
 
-const footerSections: FooterSection[] = [
-  {
-    title: "Quick Links",
-    links: [
-      { text: "Home", url: "/" },
-      { text: "Categories", url: "/categories" },
-      { text: "Blog", url: "/blog" },
-      { text: "About Us", url: "/about" }
-    ]
-  },
-  {
-    title: "Legal",
-    links: [
-      { text: "Privacy Policy", url: "/privacy-policy" },
-      { text: "Terms and Conditions", url: "/terms-and-conditions" },
-      { text: "Contact Us", url: "/contact" }
-    ]
-  }
-];
+import { footerSections } from "@/data/footer";
 ---
 
 <!-- Footer -->
@@ -37,8 +9,8 @@ const footerSections: FooterSection[] = [
   class="bg-card-light dark:bg-card-dark border-t border-border-light dark:border-border-dark mt-16"
 >
   <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div class="col-span-1 md:col-span-2">
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+      <div class="col-span-4 md:col-span-1 lg:col-span-4">
         <div class="flex items-center gap-2 mb-4">
           <span class="material-symbols-outlined text-primary text-2xl"
             >ramen_dining</span
@@ -52,8 +24,10 @@ const footerSections: FooterSection[] = [
           delicious meals from around the world.
         </p>
       </div>
+      <div class="col-span-6 md:col-span-7 lg:col-span-8">
+      <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
       {footerSections.map((section) => (
-        <div>
+        <div class="col-span-4 md:col-span-1 lg:col-span-3">
           <h3 class="font-bold mb-4">{section.title}</h3>
           <ul class="space-y-2 text-sm">
             {section.links.map((link) => (
@@ -66,6 +40,8 @@ const footerSections: FooterSection[] = [
           </ul>
         </div>
       ))}
+      </div>
+      </div>
     </div>
     <div
       class="mt-12 pt-8 border-t border-border-light dark:border-border-dark text-center text-sm"

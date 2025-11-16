@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/StaticPagesLayout.astro"
+layout: "../../../layouts/StaticPagesLayout.astro"
 title: "Terms and Conditions"
 description: "Terms and conditions for using our meal recipe website and services"
 ---

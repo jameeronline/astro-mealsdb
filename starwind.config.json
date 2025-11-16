@@ -10,6 +10,10 @@
     {
       "name": "select",
       "version": "1.6.1"
+    },
+    {
+      "name": "button",
+      "version": "2.2.0"
     }
   ]
 }

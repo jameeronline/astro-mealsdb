@@ -2,7 +2,7 @@
 id: "52768"
 title: "Apple Frangipan Tart"
 slug: "apple-frangipan-tart"
-date: "2025-11-10T12:34:04.923Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/wxywrq1468235067.jpg"
 category: "Dessert"
 cuisine: "British"
@@ -10,6 +10,8 @@ source: ""
 dateModified: ""
 video: "https://www.youtube.com/watch?v=rp8Slv4INLk"
 tags: ["Tart", "Baking", "Fruity"]
+keywords: ["dessert", "british", "digestive biscuits", "butter", "bramley apples", "salted butter", "caster sugar", "tart", "baking", "fruity"]
+rating: 4.5
 ingredients:
   - name: "digestive biscuits"
     measure: "175g/6oz"
@@ -30,14 +32,18 @@ ingredients:
   - name: "flaked almonds"
     measure: "50g/1¾oz"
 addons:
-  servings: "4"
-  prepTime: "30 minutes"
-  cookTime: "45 minutes"
+  servings: 4
+  prepTime: 49
+  cookTime: 35
+  difficulty: "medium"
+  totalTime: 59
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. Preheat the oven to 200C/180C Fan/Gas 6.

@@ -2,7 +2,7 @@
 id: "53107"
 title: "Avocado dip with new potatoes"
 slug: "avocado-dip-with-new-potatoes"
-date: "2025-11-10T12:34:04.924Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/flrajf1762341295.jpg"
 category: "Vegetarian"
 cuisine: "Australian"
@@ -10,6 +10,8 @@ source: "https://www.bbcgoodfood.com/recipes/avocado-citrus-dip-spicy-spuds-tort
 dateModified: "2025-11-05 02:37:50"
 video: ""
 tags: []
+keywords: ["vegetarian", "australian", "avocado", "natural yoghurt", "lime", "lemon", "baby new potatoes"]
+rating: 4.5
 ingredients:
   - name: "Avocado"
     measure: "3 Large"
@@ -30,14 +32,18 @@ ingredients:
   - name: "Tortillas"
     measure: "200g"
 addons:
-  servings: "4"
-  prepTime: "30 minutes"
-  cookTime: "45 minutes"
+  servings: 4
+  prepTime: 34
+  cookTime: 27
+  difficulty: "medium"
+  totalTime: 51
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. step 1.

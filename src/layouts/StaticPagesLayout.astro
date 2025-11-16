@@ -1,8 +1,11 @@
 ---
-import Layout from "./Layout.astro";
+import Layout from "@/layouts/Layout.astro";
 
 //import icons
 import { Home, Info, Phone, GitHub, ExternalLink } from "@lucide/astro";
+
+//components sidebar
+import Sidebar from "@/components/blocks/Sidebar.astro";
 
 //get frontmatter props
 const { frontmatter } = Astro.props;
@@ -31,7 +34,8 @@ const staticPages = {
 ---
 <Layout title={title} description={description}>
     <div class="grid grid-cols-1 md:grid-cols-4 gap-10 min-h-screen my-8 md:my-16 px-4">
-        <aside class="col-span-1">
+        <Sidebar />
+        <!-- <aside class="col-span-1">
             <nav class="bg-card-light/75 dark:bg-card-dark rounded-xl h-full">
                 <ul class="flex flex-col space-y-10 p-6">
                     {Object.entries(staticPages).map(([key, section]) => (
@@ -58,7 +62,7 @@ const staticPages = {
                         </li>
                     ))}
                 </ul>
-            </nav>
+            </nav> -->
         </aside>
         <article class="col-span-3 prose prose-primary dark:prose-invert">
             <slot />

@@ -1,5 +1,5 @@
 ---
-layout: "../../layouts/StaticPagesLayout.astro"
+layout: "../../../layouts/StaticPagesLayout.astro"
 title: "Privacy Policy"
 description: "Privacy policy for our meal recipe website and how we handle your data"
 ---

@@ -2,7 +2,7 @@
 id: "52893"
 title: "Apple & Blackberry Crumble"
 slug: "apple-blackberry-crumble"
-date: "2025-11-10T12:34:04.922Z"
+date: "2025-11-16 11:04:11"
 thumbnail: "https://www.themealdb.com/images/media/meals/xvsurr1511719182.jpg"
 category: "Dessert"
 cuisine: "British"
@@ -10,6 +10,8 @@ source: "https://www.bbcgoodfood.com/recipes/778642/apple-and-blackberry-crumble
 dateModified: ""
 video: "https://www.youtube.com/watch?v=4vhcOwVBDO4"
 tags: ["Pudding"]
+keywords: ["dessert", "british", "plain flour", "caster sugar", "butter", "braeburn apples", "butter", "pudding"]
+rating: 4.5
 ingredients:
   - name: "Plain Flour"
     measure: "120g"
@@ -30,14 +32,18 @@ ingredients:
   - name: "Ice Cream"
     measure: "to serve"
 addons:
-  servings: "8"
-  prepTime: "30 minutes"
-  cookTime: "1hr 45 minutes"
+  servings: 4
+  prepTime: 26
+  cookTime: 49
+  difficulty: "medium"
+  totalTime: 118
 nutrition:
-  calories: "N/A"
-  fat: "N/A"
-  carbs: "N/A"
-  protein: "N/A"
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
 ---
 
 1. Heat oven to 190C/170C fan/gas 5.

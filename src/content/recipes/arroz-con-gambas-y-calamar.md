@@ -1,0 +1,63 @@
+---
+id: "53147"
+title: "Arroz con gambas y calamar"
+slug: "arroz-con-gambas-y-calamar"
+date: "2025-11-16 11:04:11"
+thumbnail: "https://www.themealdb.com/images/media/meals/jc6oub1763196663.jpg"
+category: "Seafood"
+cuisine: "Spanish"
+source: "https://www.bbcgoodfood.com/recipes/arroz-con-gambas-y-calamar"
+dateModified: "2025-11-15 02:00:06"
+video: "https://www.youtube.com/watch?v=nFFp0ebOlOo"
+tags: []
+keywords: ["seafood", "spanish", "raw king prawns", "olive oil", "onion", "bay leaf", "saffron"]
+rating: 4.5
+ingredients:
+  - name: "Raw King Prawns"
+    measure: "24"
+  - name: "Olive Oil"
+    measure: "2 tbsp"
+  - name: "Onion"
+    measure: "1 small"
+  - name: "Bay Leaf"
+    measure: "1"
+  - name: "Saffron"
+    measure: "1 pinch"
+  - name: "Paella Rice"
+    measure: "450g"
+  - name: "Tomato Puree"
+    measure: "2 teaspoons"
+  - name: "White Wine"
+    measure: "200ml"
+  - name: "Seafood stock"
+    measure: "650ml"
+  - name: "Squid"
+    measure: "3 Medium"
+addons:
+  servings: 4
+  prepTime: 35
+  cookTime: 80
+  difficulty: "medium"
+  totalTime: 77
+nutrition:
+  calories: 350
+  fat: 12
+  carbs: 45
+  fiber: 6
+  sugar: 8
+  protein: 25
+---
+
+1. step 1.
+2. Peel and devein most of the prawns (a fishmonger should be able to do this for you), keeping a few whole for decoration, if you like.
+3. Heat the olive oil in a large frying pan or shallow flameproof casserole over a medium-low heat and fry the onion for 5 mins until softened.
+4. Add the bay leaf, saffron, rice and tomato purée, and cook for 1-2 mins more, stirring.
+5. step 2.
+6. Pour in the wine and bubble for 1-2 mins, then pour in the seafood stock and 150ml water.
+7. Cook for 5 mins, then add the squid, season well and stir to combine.
+8. Bring to the boil, then cover and reduce the heat to a gentle simmer.
+9. Cook for 12 mins more, adding a little more water if the mixture starts to look dry.
+10. step 3.
+11. Uncover the pan and stir through the peeled prawns, then arrange any whole prawns on top of the rice mixture.
+12. Cover again and simmer for a further 5-6 mins until the prawns are pink and cooked through.
+13. Leave to stand for a couple of minutes before serving from the pan.
