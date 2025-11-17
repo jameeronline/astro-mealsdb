@@ -6,9 +6,12 @@ import Image from "astro/components/Image.astro";
 import Layout from "src/layouts/Layout.astro";
 
 //components import
-import Ingredients from "@/components/page/details/ingredients.astro";
+import Header from "@/components/page/details/Header.astro";
+import Actions from "@/components/page/details/Actions.astro";
 import Addons from "@/components/page/details/Addons.astro";
+import Ingredients from "@/components/page/details/Ingredients.astro";
 import NutritionInfo from "@/components/page/details/NutritionInfo.astro";
+import Reviews from "@/components/page/details/Reviews.astro";
 
 //fetch meal details based on slug
 const recipes = await getCollection("recipes");
@@ -25,18 +28,17 @@ export async function getStaticPaths() {
 const { recipe } = Astro.props;
 
 //extract data from the recipe
-const { title, ingredients, addons, nutrition, thumbnail } = recipe;
+const { title, ingredients, addons, nutrition, thumbnail, description } = recipe;
 
 const entry = await getEntry("recipes", recipe.slug);
-
 const { Content } = await render(entry);
 ---
 
 <Layout>
-  <div class="flex flex-1 justify-center py-5">
+  <div class="flex flex-1 justify-center">
     <div class="flex flex-col w-full flex-1">
       <!-- Breadcrumbs -->
-      <div class="flex flex-wrap gap-2 py-4">
+      <div class="flex flex-wrap gap-2 py-4 pb-8">
         <a
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
           href="#">Home</a
@@ -66,62 +68,18 @@ const { Content } = await render(entry);
           >{title}</span
         >
       </div>
-      <!-- Hero Section -->
-      <div class="@container mb-8">
-        <div
-          class="bg-cover bg-center flex flex-col justify-end overflow-hidden rounded-xl min-h-[480px]"
-          data-alt="A delicious looking homemade lasagna in a baking dish"
-          style={`
-                  background-image: linear-gradient(
-                    0deg,
-                    rgba(0, 0, 0, 0.6) 0%,
-                    rgba(0, 0, 0, 0) 40%
-                    ),
-                    url('${thumbnail}');
-                `}
-        >
-          <div class="flex flex-col p-6 md:p-8">
-            <h1
-              class="text-white tracking-tight text-3xl md:text-5xl font-bold leading-tight"
-            >
-              {title}
-            </h1>
-            <p
-              class="text-gray-200 text-base font-normal leading-normal max-w-2xl mt-2"
-            >
-              A rich and cheesy lasagna with layers of pasta, beef ragu, creamy
-              béchamel sauce, and melted mozzarella. A perfect comfort food for
-              the whole family.
-            </p>
-          </div>
-        </div>
-      </div>
+      
+      <!-- Hero -->
+      <Header
+        title={title}
+        description={description}
+        thumbnail={thumbnail}
+      />
       <!-- Action Buttons & Info Cards -->
       <div
         class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 mb-8"
       >
-        <div class="flex items-center gap-3">
-          <button
-            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="material-symbols-outlined text-lg">print</span>
-            <span class="truncate">Print Recipe</span>
-          </button>
-          <button
-            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="material-symbols-outlined text-lg"
-              >favorite_border</span
-            >
-            <span class="truncate">Save</span>
-          </button>
-          <button
-            class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
-          >
-            <span class="material-symbols-outlined text-lg">share</span>
-            <span class="truncate">Share</span>
-          </button>
-        </div>
+        <Actions recipe={recipe} />
         <!-- Addon details -->
          <Addons addons={addons} />
       </div>
@@ -190,78 +148,7 @@ const { Content } = await render(entry);
            <NutritionInfo nutrition={nutrition} />
 
           <!-- User Reviews Panel -->
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
-            <div class="flex justify-between items-center mb-4">
-              <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">
-                Reviews
-              </h3>
-              <div class="flex items-center gap-1">
-                <span class="material-symbols-outlined text-yellow-500 !text-xl"
-                  >star</span
-                >
-                <span class="material-symbols-outlined text-yellow-500 !text-xl"
-                  >star</span
-                >
-                <span class="material-symbols-outlined text-yellow-500 !text-xl"
-                  >star</span
-                >
-                <span class="material-symbols-outlined text-yellow-500 !text-xl"
-                  >star</span
-                >
-                <span class="material-symbols-outlined text-yellow-500 !text-xl"
-                  >star_half</span
-                >
-                <span class="text-sm text-gray-600 dark:text-gray-400 ml-1"
-                  >(4.5)</span
-                >
-              </div>
-            </div>
-            <div class="space-y-4">
-              <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <div
-                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
-                    data-alt="User avatar"
-                    style="
-                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1J55XsN-WP0UfSw_w-zm_Z2P8JNp0DFe0nrYhOKmg91k2Uwz1pzmLsPfgE8N8YejJVhyncKGINkbxc5E3pagtsssNByVbgEzdjoBHBk5t1Z0RNSHC0OQL4npLIVR7_PxYdvPvLi2Ch3mAI59TfFKWeHXKdVI6zLwTSaZHQde53scZegPFX9100of068xyW8sEv2zs1rJSIf4n2VA2sbEJeYNI-MAk20POtQPcAtUxrieD33vY5TmPemqLzrPv0U1G3sJZdS6O6cQy');
-                          "
-                  >
-                  </div>
-                  <p class="font-bold text-gray-800 dark:text-gray-200">
-                    Jane Smith
-                  </p>
-                </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  Absolutely delicious! The whole family loved it. Will
-                  definitely make this again.
-                </p>
-              </div>
-              <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
-                <div class="flex items-center gap-2 mb-1">
-                  <div
-                    class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
-                    data-alt="User avatar"
-                    style="
-                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPYP-Xvm1TC85pJRtethF-5l9L4560toC-oIVrSKoytru6u6Nq9UnpuXsSA0jI751v4mHGcG0UkI1pJnSY9DQ0nwfueuc8z3sLnl_SNSTW0wVINX0ucc4i-VwjL_RMNSkKNgPnO64dFZLUXh2bISeQBqYFr8Kb7y-qM1aQB_ou2Bi8VL3FMYGzzr1eZdeb7lUyeopFqItwI0qtYv3c-fpm28ykHPnq4eu6UA_JdoAXEgDBzmqh5sIkhq_7t3ss6_Ca-infK9cq5UOq');
-                          "
-                  >
-                  </div>
-                  <p class="font-bold text-gray-800 dark:text-gray-200">
-                    Mike Davis
-                  </p>
-                </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400">
-                  Great recipe. Easy to follow. I added a little bit of red wine
-                  to the sauce for extra flavor.
-                </p>
-              </div>
-            </div>
-            <button
-              class="mt-6 flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold leading-normal tracking-[0.015em]"
-            >
-              <span class="truncate">Write a Review</span>
-            </button>
-          </div>
+          <Reviews />
         </div>
       </div>
       <!-- Related Meals Section -->

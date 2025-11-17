@@ -1,5 +1,5 @@
 ---
-import { getCollection } from "astro:content";
+import { getCollection, render } from "astro:content";
 import Image from "astro/components/Image.astro";
 
 //layout import
@@ -17,14 +17,14 @@ export async function getStaticPaths() {
   const categories = await getCollection("categories");
 
   return categories.map((category) => ({
-    params: { category: category.data.value },
+    params: { category: category.data.slug },
     props: { category: category.data },
   }));
 }
 
 //props
 const { category } = Astro.props;
-const selectedCategory = category.value.toLocaleLowerCase();
+const selectedCategory = category.slug.toLocaleLowerCase();
 
 //fetch recipes based on selected category
 const allRecipes = await getCollection("recipes");
@@ -32,50 +32,50 @@ const categoryRecipes = allRecipes.filter(recipe =>
   recipe.data.category.toLocaleLowerCase() === selectedCategory
 );
 
-console.log(`Found ${categoryRecipes.length} recipes for category: ${selectedCategory}`);
+//get selected category content
+const selectedCategoryData = categories.find(cat => 
+  cat.data.slug.toLocaleLowerCase() === selectedCategory
+);
+const { Content } = await render(selectedCategoryData);
 ---
 
-<Layout>
-  <div class="py-8 md:py-16">
-    <div class="flex flex-wrap justify-between gap-3 py-4 mb-6">
-      <div class="flex min-w-72 flex-col gap-3">
+<Layout title={category.title} description={`Explore delicious recipes in the ${category.title} category.`} >
+    <!-- Category Header -->
+    <div class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center">
+      <div class="flex flex-col gap-3">
         <p
           class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
         >
-          Browse Meal Categories
+          Browse {category.title && category.title} Category Recipes 
         </p>
-        <p
-          class="text-text-muted-light dark:text-[#a3b99d] text-base font-normal leading-normal"
+        <p class="text-primary capitalize">{categoryRecipes.length} results found</p>
+        <div
+          class="text-text-light/60 dark:text-text-dark/60 text-base font-normal leading-normal"
         >
-          Select a category to discover delicious new recipes.
-        </p>
+          <Content />
+        </div>
       </div>
     </div>
-
     <!-- Category Tags -->
-    <div class="flex gap-3 py-3 mb-6">
+    <div class="flex justify-center gap-3 py-3 mb-6">
       {
         categories.map((category) => (
           <a
-            href={`/category/${category.data.value}`}
+            href={`/category/${category.data.slug}`}
             page-active={
-              category.data.value === selectedCategory ? "true" : "false"
+              category.data.slug === selectedCategory ? "true" : "false"
             }
-            class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark pl-4 pr-4 hover:bg-primary/20 hover:border-primary-dark transition-colors border border-border-light dark:border-card-dark  [&[page-active='true']]:text-background-dark dark:[&[page-active='true']]:text-background-light [&[page-active='true']]:border-primary  [&[page-active='true']]:bg-primary"
+            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark px-5 hover:bg-primary/20 hover:border-primary-dark transition-colors border border-border-light dark:border-card-dark  [&[page-active='true']]:text-background-dark [&[page-active='true']]:border-primary  [&[page-active='true']]:bg-primary"
           >
-            <p class="text-text-light dark:text-white text-sm font-medium leading-normal">
-              {category.data?.label && category.data.label}
-            </p>
+            <span class="text-sm font-medium leading-normal">
+              {category.data?.title && category.data.title}
+            </span>
           </a>
         ))
       }
     </div>
-    <h2
-      class="text-text-light dark:text-primary/80 text-2xl font-bold leading-tight tracking-tight pb-3 pt-5"
-    >
-      {category.label && category.label} Recipes
-    </h2>
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(200px,1fr))] gap-6 py-4" data-scroll-animate>
+    <!-- Recipe Grid -->
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 py-4" data-scroll-animate>
       {
         categoryRecipes.map((recipe) => (
           <MealsCard recipe={recipe.data} />
@@ -83,33 +83,4 @@ console.log(`Found ${categoryRecipes.length} recipes for category: ${selectedCat
         ))
       }
     </div>
-    <!-- <div class="flex justify-center items-center gap-2 py-4 mt-8">
-      <button
-        class="flex items-center justify-center h-10 px-4 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors disabled:opacity-50 disabled:cursor-not-allowed border border-border-light dark:border-card-dark"
-        disabled=""
-      >
-        Previous
-      </button>
-      <button
-        class="flex items-center justify-center size-10 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
-      >
-        1
-      </button>
-      <button
-        class="flex items-center justify-center size-10 rounded-lg bg-primary text-background-dark text-sm font-bold"
-      >
-        2
-      </button>
-      <button
-        class="flex items-center justify-center size-10 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
-      >
-        3
-      </button>
-      <button
-        class="flex items-center justify-center h-10 px-4 rounded-lg bg-card-light dark:bg-card-dark text-text-light dark:text-white text-sm font-medium hover:bg-zinc-100 dark:hover:bg-card-dark/70 transition-colors border border-border-light dark:border-card-dark"
-      >
-        Next
-      </button>
-    </div> -->
-  </div>
 </Layout>

@@ -53,7 +53,6 @@ async function indexContent() {
         category: data.category || '',
         cuisine: data.cuisine || '',
         tags: data.tags || [],
-        url: `/recipes/${data.slug || file.replace('src/content/recipes/', '').replace('.md', '')}`,
         thumbnail: data.thumbnail || '',
         ...data
       };

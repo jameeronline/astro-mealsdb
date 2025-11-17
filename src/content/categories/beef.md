@@ -1,8 +1,9 @@
 ---
+id: 1
 title: "Beef"
 slug: "beef"
 date: "2025-11-10T14:05:03.058Z"
-thumbnail: "https://www.themealdb.com/images/category/beef.png"
+thumbnail: "../../assets/categories/beef.png"
 ---
 
-Beef is the culinary name for meat from cattle, particularly skeletal muscle. Humans have been eating beef since prehistoric times.[1] Beef is a source of high-quality protein and essential nutrients.[2]
+Beef is a versatile protein source from cattle, rich in amino acids, iron, and B vitamins. Popular worldwide, it's used in everything from steaks to stews across various cuisines.

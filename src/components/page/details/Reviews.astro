@@ -1,0 +1,58 @@
+---
+import { Star } from "@lucide/astro";
+---
+
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+  <div class="flex justify-between items-center mb-4">
+    <h3 class="text-xl font-bold text-gray-900 dark:text-gray-100">Reviews</h3>
+    <div class="flex items-center gap-1">
+      <Star class="text-yellow-500 text-xl" />
+      <Star class="text-yellow-500 text-xl" />
+      <Star class="text-yellow-500 text-xl" />
+      <Star class="text-yellow-500 text-xl" />
+      <Star class="text-yellow-500 text-xl" />
+      <span class="text-sm text-gray-600 dark:text-gray-400 ml-1">(4.5)</span>
+    </div>
+  </div>
+  <div class="space-y-4">
+    <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+      <div class="flex items-center gap-2 mb-1">
+        <div
+          class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+          data-alt="User avatar"
+          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuD1J55XsN-WP0UfSw_w-zm_Z2P8JNp0DFe0nrYhOKmg91k2Uwz1pzmLsPfgE8N8YejJVhyncKGINkbxc5E3pagtsssNByVbgEzdjoBHBk5t1Z0RNSHC0OQL4npLIVR7_PxYdvPvLi2Ch3mAI59TfFKWeHXKdVI6zLwTSaZHQde53scZegPFX9100of068xyW8sEv2zs1rJSIf4n2VA2sbEJeYNI-MAk20POtQPcAtUxrieD33vY5TmPemqLzrPv0U1G3sJZdS6O6cQy');
+                          "
+        >
+        </div>
+        <p class="font-bold text-gray-800 dark:text-gray-200">Jane Smith</p>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Absolutely delicious! The whole family loved it. Will definitely make
+        this again.
+      </p>
+    </div>
+    <div class="border-b border-gray-200 dark:border-gray-700 pb-4">
+      <div class="flex items-center gap-2 mb-1">
+        <div
+          class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-8"
+          data-alt="User avatar"
+          style="
+                            background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAPYP-Xvm1TC85pJRtethF-5l9L4560toC-oIVrSKoytru6u6Nq9UnpuXsSA0jI751v4mHGcG0UkI1pJnSY9DQ0nwfueuc8z3sLnl_SNSTW0wVINX0ucc4i-VwjL_RMNSkKNgPnO64dFZLUXh2bISeQBqYFr8Kb7y-qM1aQB_ou2Bi8VL3FMYGzzr1eZdeb7lUyeopFqItwI0qtYv3c-fpm28ykHPnq4eu6UA_JdoAXEgDBzmqh5sIkhq_7t3ss6_Ca-infK9cq5UOq');
+                          "
+        >
+        </div>
+        <p class="font-bold text-gray-800 dark:text-gray-200">Mike Davis</p>
+      </div>
+      <p class="text-sm text-gray-600 dark:text-gray-400">
+        Great recipe. Easy to follow. I added a little bit of red wine to the
+        sauce for extra flavor.
+      </p>
+    </div>
+  </div>
+  <button
+    class="mt-6 flex w-full min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-gray-900 text-sm font-bold leading-normal tracking-[0.015em]"
+  >
+    <span class="truncate">Write a Review</span>
+  </button>
+</div>

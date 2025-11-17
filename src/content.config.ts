@@ -1,23 +1,26 @@
 import { defineCollection, z } from "astro:content";
 import { file, glob } from "astro/loaders";
 
-const cuisinesCollection = defineCollection({
-  loader: file("src/content/meals-cuisine.json"),
-  schema: z.object({
-    id: z.number(),
-    value: z.string(),
-    label: z.string(),
-  }),
+const categoriesCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/categories" }),
+  schema: ({ image }) =>
+    z.object({
+      id: z.number(),
+      title: z.string(),
+      slug: z.string(),
+      date: z.string(),
+      thumbnail: image(),
+    }),
 });
 
-const categoriesCollection = defineCollection({
-  loader: file("src/content/meals-categories.json"),
-  schema: z.object({
-    id: z.number(),
-    value: z.string(),
-    label: z.string(),
-  }),
-});
+// const categoriesCollection = defineCollection({
+//   loader: file("src/content/meals-categories.json"),
+//   schema: z.object({
+//     id: z.number(),
+//     value: z.string(),
+//     label: z.string(),
+//   }),
+// });
 
 const recipesCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/recipes" }),
@@ -63,7 +66,7 @@ const recipesCollection = defineCollection({
 });
 
 export const collections = {
-  cuisines: cuisinesCollection,
+  //cuisines: cuisinesCollection,
   categories: categoriesCollection,
   recipes: recipesCollection,
 };

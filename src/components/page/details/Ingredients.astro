@@ -1,33 +1,34 @@
 ---
 type Ingredient = {
-    name: string;
-    measure: string;
+  name: string;
+  measure: string;
 };
 
 type Props = {
-    ingredients: Ingredient[];
+  ingredients: Ingredient[];
 };
 
 const { ingredients } = Astro.props;
 ---
+
 <!-- Ingredients Card -->
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
-            <h2
-              class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4"
-            >
-              Ingredients
-            </h2>
-            <ul class="space-y-3">
-            {ingredients.map((ingredient) => (
-                <li class="flex items-start gap-3">
-                    <input
-                        class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
-                        type="checkbox"
-                    />
-                    <span class="text-gray-700 dark:text-gray-300">
-                        {ingredient.measure} {ingredient.name}
-                    </span>
-                </li>
-            ))}
-            </ul>
-          </div>
+<div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+  <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4">
+    Ingredients
+  </h2>
+  <ul class="space-y-3">
+    {
+      ingredients.map((ingredient) => (
+        <li class="flex items-start gap-3">
+          <input
+            class="form-checkbox mt-1 h-5 w-5 rounded text-primary focus:ring-primary/50 border-gray-300 dark:border-gray-600 dark:bg-gray-700"
+            type="checkbox"
+          />
+          <span class="text-gray-700 dark:text-gray-300">
+            {ingredient.measure} {ingredient.name}
+          </span>
+        </li>
+      ))
+    }
+  </ul>
+</div>
