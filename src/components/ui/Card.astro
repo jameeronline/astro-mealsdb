@@ -4,15 +4,16 @@ export interface Props {
   imageUrl: string;
   imageAlt: string;
   category: string;
-  area?: string;
+  cuisine?: string;
   href: string;
 }
 
 //import astro components
-import Image from "astro/components/Image.astro";
+import { Image } from "astro:assets";
 
 //props
-const { title, imageUrl, imageAlt, category, area, href } = Astro.props;
+const { title, imageUrl, imageAlt, category, cuisine, href } = Astro.props;
+
 ---
 
 <div
@@ -27,16 +28,16 @@ const { title, imageUrl, imageAlt, category, area, href } = Astro.props;
     height={192}
   />
   <div class="flex flex-1 flex-col p-4">
-    <div class="flex items-center gap-2 mb-2">
+    <div class="flex items-center justify-between gap-2 mb-2">
       <span
-        class="text-xs font-semibold uppercase tracking-wider bg-primary/20 text-primary py-1 px-2 rounded-full"
+        class="text-xs font-semibold uppercase tracking-wider bg-primary/10 text-primary py-1 px-2 rounded-full"
       >
         {category}
       </span>
       {
-        area && (
-          <span class="text-xs font-semibold uppercase tracking-wider bg-primary/20 text-primary py-1 px-2 rounded-full">
-            {area}
+        cuisine && (
+          <span class="text-xs font-semibold uppercase tracking-wider bg-primary/10 text-primary py-1 px-2 rounded-full">
+            {cuisine}
           </span>
         )
       }
@@ -45,7 +46,7 @@ const { title, imageUrl, imageAlt, category, area, href } = Astro.props;
     <div class="mt-auto pt-4">
       <a
         class="w-full text-center flex items-center justify-center rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold tracking-[0.015em]"
-        href={"/details"}
+        href={href}
       >
         View Recipe
       </a>

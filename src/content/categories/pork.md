@@ -1,5 +1,4 @@
 ---
-id: 9
 title: "Pork"
 slug: "pork"
 date: "2025-11-10T14:05:03.062Z"

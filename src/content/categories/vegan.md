@@ -1,5 +1,4 @@
 ---
-id: 13
 title: "Vegan"
 slug: "vegan"
 date: "2025-11-10T14:05:03.064Z"

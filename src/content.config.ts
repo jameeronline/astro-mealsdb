@@ -5,7 +5,6 @@ const categoriesCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/categories" }),
   schema: ({ image }) =>
     z.object({
-      id: z.number(),
       title: z.string(),
       slug: z.string(),
       date: z.string(),
@@ -13,14 +12,16 @@ const categoriesCollection = defineCollection({
     }),
 });
 
-// const categoriesCollection = defineCollection({
-//   loader: file("src/content/meals-categories.json"),
-//   schema: z.object({
-//     id: z.number(),
-//     value: z.string(),
-//     label: z.string(),
-//   }),
-// });
+const cuisinesCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/cuisines" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      slug: z.string(),
+      date: z.string(),
+      thumbnail: image(),
+    }),
+});
 
 const recipesCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/recipes" }),
@@ -65,8 +66,30 @@ const recipesCollection = defineCollection({
   }),
 });
 
+
+// Blog Collections
+const posts = defineCollection({
+  loader: glob({ pattern: "**/*.{md,mdx}", base: "src/content/posts" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      author: z.string(),
+      description: z.string(),
+      cover: z.object({
+        image: image().optional(),
+        alt: z.string(),
+      }),
+      pubDate: z.date(),
+      tags: z.array(z.string()),
+      categories: z.array(z.string()),
+      featured: z.boolean().optional(),
+      draft: z.boolean().optional(),
+    }),
+});
+
 export const collections = {
-  //cuisines: cuisinesCollection,
+  cuisines: cuisinesCollection,
   categories: categoriesCollection,
   recipes: recipesCollection,
+  posts: posts,
 };

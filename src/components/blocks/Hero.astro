@@ -1,22 +1,31 @@
 ---
+import { Image } from "astro:assets"
 import AlgoliaAutoComplete from "@/components/modules/AlgoliaAutoComplete.astro"
+
+//image
+import heroImage from 'src/assets/banner.png';
 ---
 
 <!-- HeroSection -->
 <section class="relative" data-scroll-animate>
   <div class="">
     <div
-      class="flex min-h-[480px] flex-col gap-6 rounded-xl bg-cover bg-center bg-no-repeat items-center justify-center p-8"
+      class="flex min-h-[480px] flex-col gap-6 rounded-xl items-center justify-center p-8 relative overflow-hidden"
       data-alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
-      style="
-                background-image: linear-gradient(
-                    rgba(0, 0, 0, 0.2) 0%,
-                    rgba(0, 0, 0, 0.5) 100%
-                  ),
-                  url('https://lh3.googleusercontent.com/aida-public/AB6AXuApdKgwbmxdKX5_EVDRIM6ET7GDM2qafKVU8fvfbfOQeIw_sm08E7UJTEOIDcobZt3K-IxvV-OgcOoUH9ErpcCaVcGWnvODeaeRCczvqe4AtnnFitiXshs7dsIX0liaVtrsHfCZ-IaQH0MmcrU6seKRtNilE_M3R0ph4kMoHLNDLcWI9TOhGRemn2Efc1eXcXBsm9hdRhH_MTSc2C0nR3eR8T2IRztJ61NQGeCAQ-F9dqgbapgQfZQJaGX3Tf_-NQZPjEL2oB5sKBtE');
-              "
     >
-      <div class="flex flex-col gap-4 text-center text-white max-w-2xl">
+      <Image
+      src={heroImage}
+      alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
+      class="absolute inset-0 w-full h-full object-cover rounded-xl z-0"
+      aria-hidden="true"
+      />
+      <div
+      class="absolute inset-0 rounded-xl pointer-events-none"
+      style="background: linear-gradient(rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);"
+      aria-hidden="true"
+      ></div>
+      <!-- Content goes here -->
+      <div class="flex flex-col gap-4 text-center text-white max-w-2xl z-10">
         <h1
           class="text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
         >
@@ -28,13 +37,13 @@ import AlgoliaAutoComplete from "@/components/modules/AlgoliaAutoComplete.astro"
       </div>
       <div class="flex flex-col w-full max-w-xl mt-4">
         <div class="flex w-full flex-1 items-stretch rounded-lg h-full">
+          <!-- <AlgoliaAutoComplete /> -->
           <!-- <div
             class="text-[#6b8961] flex border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark items-center justify-center pl-4 rounded-l-lg border-r-0"
           >
             <span class="material-symbols-outlined">search</span>
-          </div> -->
-          <AlgoliaAutoComplete />
-          <!-- <input
+          </div>
+          <input
             class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden text-text-light dark:text-text-dark focus:outline-0 focus:ring-0 border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark focus:border-primary h-full placeholder:text-[#6b8961] border-r-0 border-l-0 px-4 text-base"
             placeholder="Search for a meal..."
             value=""

@@ -1,5 +1,4 @@
 ---
-id: 1
 title: "Beef"
 slug: "beef"
 date: "2025-11-10T14:05:03.058Z"

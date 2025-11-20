@@ -1,0 +1,47 @@
+---
+export interface Props {
+    title?: string;
+    description?: string;
+    image?: string;
+    url?: string;
+    type?: string;
+    siteName?: string;
+}
+
+const {
+    title = "MealsDB - Discover Amazing Recipes",
+    description = "Explore thousands of delicious recipes from around the world with MealsDB. Find your next favorite meal today!",
+    image = "/og-image.jpg",
+    url = Astro.url.href,
+    type = "website",
+    siteName = "MealsDB"
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!-- Primary Meta Tags -->
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<link rel="canonical" href={canonicalURL} />
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type} />
+<meta property="og:url" content={url} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={image} />
+<meta property="og:site_name" content={siteName} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={url} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={image} />
+
+<!-- Additional SEO Tags -->
+<meta name="robots" content="index, follow" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8" />

@@ -1,5 +1,4 @@
 ---
-id: 11
 title: "Side"
 slug: "side"
 date: "2025-11-10T14:05:03.063Z"

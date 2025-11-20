@@ -1,5 +1,4 @@
 ---
-id: 10
 title: "Seafood"
 slug: "seafood"
 date: "2025-11-10T14:05:03.062Z"

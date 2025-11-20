@@ -1,0 +1,113 @@
+---
+import type { Page } from 'astro';
+
+interface Props {
+    page: Page;
+}
+
+const { page } = Astro.props;
+
+// Generate page numbers to show
+function getPageNumbers(currentPage: number, lastPage: number) {
+    const delta = 2; // Pages to show on each side
+    const range: (number | string)[] = [];
+    
+    for (let i = 1; i <= lastPage; i++) {
+        if (
+            i === 1 || 
+            i === lastPage || 
+            (i >= currentPage - delta && i <= currentPage + delta)
+        ) {
+            range.push(i);
+        } else if (range[range.length - 1] !== '...') {
+            range.push('...');
+        }
+    }
+    
+    return range;
+}
+
+const pageNumbers = getPageNumbers(page.currentPage, page.lastPage);
+---
+
+{page.lastPage > 1 && (
+    <nav class="flex flex-col items-center gap-6 my-12" aria-label="Pagination">
+        <div class="text-gray-500 text-sm">
+            Page {page.currentPage} of {page.lastPage}
+        </div>
+
+        <ul class="flex gap-2 list-none p-0 m-0 flex-wrap justify-center">
+            {page.url.prev ? (
+                <li>
+                    <a 
+                        href={page.url.prev} 
+                        class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
+                        aria-label="Go to previous page"
+                    >
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="sm:inline hidden">Previous</span>
+                    </a>
+                </li>
+            ) : (
+                <li>
+                    <span class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-300 cursor-not-allowed min-w-[40px] justify-center">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
+                        </svg>
+                        <span class="sm:inline hidden">Previous</span>
+                    </span>
+                </li>
+            )}
+
+            {pageNumbers.map((num) => (
+                num === '...' ? (
+                    <li>
+                        <span class="px-2 py-2 text-gray-500">...</span>
+                    </li>
+                ) : (
+                    <li>
+                        {num === page.currentPage ? (
+                            <span class="flex items-center gap-2 px-3 py-2 bg-primary border border-primary rounded-md text-white font-medium cursor-default min-w-[40px] justify-center" aria-current="page">
+                                {num}
+                            </span>
+                        ) : (
+                            <a 
+                                href={num === 1 ? page.url.first : `${page.url.first === undefined ? page.url.current : page.url.first}/${num}`}
+                                class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
+                                aria-label={`Go to page ${num}`}
+                            >
+                                {num}
+                            </a>
+                        )}
+                    </li>
+                )
+            ))}
+
+            {page.url.next ? (
+                <li>
+                    <a 
+                        href={page.url.next} 
+                        class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
+                        aria-label="Go to next page"
+                    >
+                        <span class="sm:inline hidden">Next</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                        </svg>
+                    </a>
+                </li>
+            ) : (
+                <li>
+                    <span class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-300 cursor-not-allowed min-w-[40px] justify-center">
+                        <span class="sm:inline hidden">Next</span>
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
+                        </svg>
+                    </span>
+                </li>
+            )}
+        </ul>
+    </nav>
+)}

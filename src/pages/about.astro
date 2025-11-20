@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import Layout from "src/layouts/Layout.astro";
 
 //icons
@@ -6,6 +7,9 @@ import { Rocket, Eye } from "@lucide/astro";
 
 //component
 import Team from "@/components/ui/Team.astro";
+
+//image
+import aboutImage from 'src/assets/about.png';
 
 //data fetching
 const teamMembers = [
@@ -48,17 +52,17 @@ const teamMembers = [
     <div class="@container mb-16 sm:mb-24" data-scroll-animate>
       <div class="@[480px]:p-4">
         <div
-          class="flex min-h-[480px] flex-col items-center justify-center gap-6 rounded-xl bg-cover bg-center bg-no-repeat p-4 @[480px]:gap-8"
-          data-alt="A birds-eye view of a beautifully set dinner table with various delicious meals."
-          style="
-                  background-image: linear-gradient(
-                      rgba(26, 26, 26, 0.4) 0%,
-                      rgba(26, 26, 26, 0.7) 100%
-                    ),
-                    url('https://lh3.googleusercontent.com/aida-public/AB6AXuDpZCxZa_LJHPyRUJzzA1t-ZrlHOHdbs0xZl6XXRH46iFdVgsqBOhjKd6PDVi4cS98kAJj4qXGlIiWpCWye_EYWRzX8ql_d8F2v98rzQ8p9t1vyyeYAbWUwAWYoqQVfn4r0Rnlz4TJNE2r67KMfW-4doiJhep8i0SQl6MrNv0PVnZ-6FO6cWBpw4_exhAjeNpWg25tmfS6ToNjF3IofvoQEA2AW6NylXmskrdj3TSXf32ux6B3tncGZXMtd4LppareammY7hXxyF6iH');
-                "
+          class="relative aspect-video flex flex-col items-center justify-center gap-6 rounded-xl p-4 @[480px]:gap-8 overflow-hidden"
         >
-          <div class="flex flex-col gap-2 text-center">
+          <Image
+            src={aboutImage}
+            alt="A birds-eye view of a beautifully set dinner table with various delicious meals"
+            width={1200}
+            height={800}
+            class="absolute inset-0 w-full h-full object-cover rounded-xl"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/70 rounded-xl"></div>
+          <div class="relative z-10 flex flex-col gap-2 text-center">
             <h1
               class="text-4xl font-black leading-tight tracking-tighter text-white @[480px]:text-6xl"
               data-scroll-animate
@@ -75,7 +79,7 @@ const teamMembers = [
           </div>
           <a 
             href="/search"
-            class="flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-background-dark transition-opacity hover:opacity-90"
+            class="relative z-10 flex h-12 min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg bg-primary px-6 text-base font-bold text-background-dark transition-opacity hover:opacity-90"
             data-scroll-animate
           >
             <span class="truncate">Explore Meals</span>
@@ -145,6 +149,7 @@ const teamMembers = [
     <div class="mt-16 px-4 sm:mt-24">
       <h2
         class="text-4xl font-black leading-tight tracking-tighter text-text-light dark:text-text-dark sm:text-5xl"
+        data-scroll-animate
       >
         Our Story
       </h2>

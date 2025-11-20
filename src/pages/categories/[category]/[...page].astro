@@ -1,0 +1,149 @@
+---
+//export const prerender = false;
+import { getCollection, render } from "astro:content";
+
+//layout import
+import Layout from "src/layouts/Layout.astro";
+import Pagination from "@/components/Pagination.astro";
+
+//components import
+import MealsCard from "src/components/blocks/MealsCard.astro";
+import SimpleMealCard from "src/components/blocks/SimpleMealCard.astro";
+
+//fetch categories for category tags
+const categories = await getCollection("categories");
+
+//generate static paths for each category
+export async function getStaticPaths({ paginate }) {
+  //getting categories collection to generate paths
+  const categories = await getCollection("categories");
+
+  //get all recipes
+  const allRecipes = await getCollection("recipes");
+
+  //generate paths for each category with pagination
+  return categories.flatMap((category) => {
+    //filter recipes for this category
+    const categoryRecipes = allRecipes
+      .filter(
+      (recipe) =>
+        recipe.data.category.toLocaleLowerCase() ===
+        category.data.slug.toLocaleLowerCase()
+      )
+      .sort((a, b) => a.data.title.localeCompare(b.data.title));
+
+    //return paginated paths for this category
+    return paginate(categoryRecipes, {
+      params: { category: category.data.slug },
+      props: { category: categoryRecipes, selectedCategory: category.data },
+      pageSize: 10,
+    });
+  });
+}
+
+//get sort parameter from URL
+const url = new URL(Astro.request.url);
+const sortParam = url.searchParams.get("sort") || "a-z";
+
+console.log("Sort Param:", sortParam);
+
+//get selected category
+const { category } = Astro.params;
+const { selectedCategory, page } = Astro.props;
+console.log("Selected Category:", selectedCategory);
+
+const recipiesData = page?.data;
+
+//const selectedCategorySlug = selectedCategory.slug.toLocaleLowerCase();
+//fetch recipes based on selected category
+// const allRecipes = await getCollection("recipes");
+// const categoryRecipes = allRecipes.filter(recipe =>
+//   recipe.data.category.toLocaleLowerCase() === selectedCategory
+// );
+
+//get selected category content to display description
+// const selectedCategoryData = categories.find(
+//   (cat) => cat.data.slug.toLocaleLowerCase() === selectedCategorySlug
+// );
+
+//const { Content } = await render(selectedCategoryData);
+---
+
+<Layout
+  title={category.title}
+  description={`Explore delicious recipes in the ${category.title} category.`}
+>
+  <!-- Category Header -->
+  <div
+    class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center"
+  >
+    <div class="flex flex-col gap-3">
+      <p
+        class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
+      >
+        Browse {category.title && category.title} Category Recipes
+      </p>
+      <p class="text-primary capitalize">
+        {recipiesData.length} results found
+      </p>
+      <div
+        class="text-text-light/60 dark:text-text-dark/60 text-base font-normal leading-normal"
+      >
+        <!-- <Content /> -->
+      </div>
+    </div>
+  </div>
+  <!-- Category Tags -->
+  <div class="flex justify-center gap-3 py-3 mb-6">
+    {
+      categories.map((category) => (
+        <a
+          href={`/categories/${category.data.slug}`}
+          page-active={
+            category.data.slug === selectedCategory.slug ? "true" : "false"
+          }
+          class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark px-5 hover:bg-primary/20 hover:border-primary-dark transition-colors border border-border-light dark:border-card-dark  [&[page-active='true']]:text-background-dark [&[page-active='true']]:border-primary  [&[page-active='true']]:bg-primary"
+        >
+          <span class="text-sm font-medium leading-normal">
+            {category.data?.title && category.data.title}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <!-- filter and sort -->
+  <div class="flex flex-wrap items-center justify-between gap-3 py-3 mb-6">
+    <div class="text-text-light dark:text-text-dark text-sm font-medium">
+      Sort by:
+      <select
+        id="sortSelect"
+        class="form-select ml-2 bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark border border-border-light dark:border-card-dark rounded-md px-2 py-1"
+      >
+        <option value="a-z" selected={sortParam === "a-z"}>A-Z</option>
+        <option value="z-a" selected={sortParam === "z-a"}>Z-A</option>
+      </select>
+    </div>
+  </div>
+  <!-- Recipe Grid -->
+  <div
+    class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 py-4 mx-auto"
+    data-scroll-animate
+  >
+    {
+      recipiesData.map((recipe) => (
+        <MealsCard recipe={recipe.data} />
+        // <SimpleMealCard recipe={recipe.data} />
+      ))
+    }
+  </div>
+  <Pagination page={page} />
+
+  <script>
+    document.getElementById('sortSelect').addEventListener('change', function(e) {
+      const url = new URL(window.location);
+      url.searchParams.set('sort', e.target.value);
+      window.location.href = url.toString();
+    });
+  </script>
+</Layout>

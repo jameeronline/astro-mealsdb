@@ -15,8 +15,8 @@ function slugify(text) {
 }
 
 // Configuration
-const API_URL = "http://www.themealdb.com/api/json/v1/1/list.php?i=list";
-const OUTPUT_DIR = "./src/content/ingredients"; // Output directory for MD files
+const API_URL = "http://www.themealdb.com/api/json/v1/1/list.php?a=list";
+const OUTPUT_DIR = "./src/content/cuisines"; // Output directory for MD files
 
 /**
  * Fetch bulk data from API
@@ -41,10 +41,10 @@ async function fetchBulkData() {
 function createMarkdownContent(item) {
   // Extract frontmatter fields (customize based on your data structure)
   const frontmatter = {
-    title: item.strIngredient || "Untitled",
-    slug: slugify(item.strIngredient || "untitled"),
-    date: item.date || new Date().toISOString(),
-    thumbnail: item.strThumb || "Unknown",
+    title: item.strArea || "Untitled",
+    slug: slugify(item.strArea || "untitled"),
+    date: item.date || new Date().toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ''),
+    thumbnail: item.strThumb || "",
   };
 
   // Build frontmatter
@@ -77,8 +77,8 @@ function generateFilename(item, index) {
     return `${item.slug}.md`;
   }
 
-  if (item.strIngredient) {
-    return `${slugify(item.strIngredient)}.md`;
+  if (item.strArea) {
+    return `${slugify(item.strArea)}.md`;
   }
 
   return `post-${item.id || index}.md`;

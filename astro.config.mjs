@@ -3,16 +3,18 @@ import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "astro/config";
 
 import alpinejs from "@astrojs/alpinejs";
-
 import react from "@astrojs/react";
-
 import tailwindcss from "@tailwindcss/vite";
 import sanity from "@sanity/astro";
+import sitemap from '@astrojs/sitemap';
+
 
 // https://astro.build/config
 export default defineConfig({
+  site: 'https://astro-meals.netlify.app/',
   integrations: [
     alpinejs(),
+    sitemap(),
     react(),
     sanity({
       projectId: "futd0pge",

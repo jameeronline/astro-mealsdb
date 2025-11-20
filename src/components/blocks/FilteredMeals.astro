@@ -77,6 +77,13 @@ const meals = [
   },
 ];
 
+import { getCollection } from "astro:content";
+
+// Get 12 random recipes from the "recipes" collection
+const allRecipes = await getCollection("recipes");
+const shuffled = allRecipes.sort(() => 0.5 - Math.random());
+const randomRecipes = shuffled.slice(0, 12);
+
 //components
 import Card from "@/components/ui/Card.astro";
 
@@ -139,14 +146,16 @@ const { categories, areas } = Astro.props;
   <div
     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
   >
+  
     {
-      meals.map((meal) => (
+      randomRecipes.map((meal) => (
         <Card
-          title={meal.name}
-          category={meal.category}
-          cuisine={meal.cuisine}
-          imageUrl={meal.imageUrl}
-          alt={meal.alt}
+          title={meal.data.title}
+          imageUrl={meal.data.thumbnail}
+          imageAlt={meal.data.title}
+          category={meal.data.category}
+          cuisine={meal.data.cuisine}
+          href={`/recipe/${meal.data.slug}`}
         />
       ))
     }

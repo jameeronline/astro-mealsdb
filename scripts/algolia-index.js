@@ -54,6 +54,7 @@ async function indexContent() {
         cuisine: data.cuisine || '',
         tags: data.tags || [],
         thumbnail: data.thumbnail || '',
+        isDifficulty: (data.addons.prepTime || 0) + (data.addons.cookTime || 0) > 60 ? true : false,
         ...data
       };
     });

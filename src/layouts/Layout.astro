@@ -9,6 +9,7 @@ import "../styles/global.css";
 //components
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import SEO from "@/components/SEO.astro";
 
 //scripts
 import LocalScript from "@/scripts/LocalScript.astro";
@@ -28,18 +29,20 @@ const {
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="generator" content={Astro.generator} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <title>{title}</title>
     <meta name="description" content={description} />
     <link
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
       rel="stylesheet"
     />
+    <SEO title={title} description={description} />
   </head>
   <body
     class="bg-background-light dark:bg-background-dark font-display text-text-light dark:text-text-dark grid grid-cols-1 grid-rows-[auto_1fr_auto] min-h-full"
   >
     <Header />
-    <main class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <main class="xl:container mx-auto px-4 md:px-6 w-full">
       <slot />
     </main>
     <Footer />

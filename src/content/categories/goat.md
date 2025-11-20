@@ -1,5 +1,4 @@
 ---
-id: 5
 title: "Goat"
 slug: "goat"
 date: "2025-11-10T14:05:03.065Z"

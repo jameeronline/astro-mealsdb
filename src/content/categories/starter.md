@@ -1,5 +1,4 @@
 ---
-id: 12
 title: "Starter"
 slug: "starter"
 date: "2025-11-10T14:05:03.063Z"

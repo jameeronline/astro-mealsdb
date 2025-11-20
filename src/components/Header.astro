@@ -10,7 +10,7 @@ import { navLinks, homeNavLink } from "@/data/navbar";
 import { Button } from "@/components/starwind/button";
 
 //icons
-import { Search } from "@lucide/astro";
+import { Search, Menu } from "@lucide/astro";
 
 // Get current URL for active menu highlighting
 const { pathname } = Astro.url;
@@ -32,9 +32,9 @@ function isActiveLink(href: string, currentPath: string): boolean {
 ---
 
 <header
-  class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark mb-16"
+  class="sticky top-0 z-50 bg-background-light/80 dark:bg-background-dark/80 backdrop-blur-sm border-b border-border-light dark:border-border-dark mb-8 md:mb-16 print:hidden"
 >
-  <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="xl:container mx-auto px-4 md:px-6">
     <div class="flex h-16 items-center justify-between">
       <div class="flex items-center gap-4">
         <span>
@@ -81,24 +81,26 @@ function isActiveLink(href: string, currentPath: string): boolean {
           })
         }
       </nav>
-      <div class="flex items-center gap-4">
+      <div class="flex items-center gap-2">
+        <Menu class="w-6 h-6 lg:hidden cursor-pointer hover:text-primary transition-colors" />
         <DarkMode />
-        <ThemeSelect />
-        <button
+        <!-- <button
           class="flex min-w-[84px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-primary text-text-light text-sm font-bold tracking-[0.015em]"
         >
           <span class="truncate">Login</span>
-        </button>
+        </button> -->
         <a
-          class={`flex min-w-12xl cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 text-sm font-bold transition-all ${
+          class={`flex cursor-pointer items-center justify-center overflow-hidden size-10 text-sm font-bold transition-all ${
             isActiveLink("/search", pathname)
-              ? "bg-primary text-text-light border border-primary"
-              : "bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark text-text-light dark:text-text-dark hover:border-primary hover:bg-primary/10"
+              ? "text-text-light border border-primary"
+              : "hover:text-primary"
           }`}
           href="/search"
         >
           <Search class="w-5 h-5" />
         </a>
+
+        <ThemeSelect />
       </div>
     </div>
   </div>

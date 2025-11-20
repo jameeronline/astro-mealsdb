@@ -38,7 +38,7 @@ const { Content } = await render(entry);
   <div class="flex flex-1 justify-center">
     <div class="flex flex-col w-full flex-1">
       <!-- Breadcrumbs -->
-      <div class="flex flex-wrap gap-2 py-4 pb-8">
+      <div class="flex flex-wrap gap-2 pb-8 print:hidden">
         <a
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
           href="#">Home</a
@@ -91,55 +91,15 @@ const { Content } = await render(entry);
           <Ingredients ingredients={ingredients} />
           
           <!-- Instructions Card -->
-          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+          <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm print:p-0 print:shadow-none print:text-black">
             <h2
               class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6"
             >
               Instructions
             </h2>
-            <div class="[&>ol]:space-y-4 [&>ol]:list-decimal [&>ol]:list-inside [&>ol]:marker:text-primary [&>ol]:marker:font-bold">
-            <Content />
+            <div class="[&>ol]:space-y-4 [&>ol]:list-decimal [&>ol]:list-inside [&>ol]:marker:text-primary [&>ol]:marker:font-bold print:[&>ol]:marker:text-black">
+              <Content />
             </div>
-            <!-- <ol
-              class="space-y-6 list-decimal list-inside marker:text-primary marker:font-bold"
-            >
-              <li class="text-gray-700 dark:text-gray-300">
-                <span class="ml-2"
-                  >In a Dutch oven, cook sausage, ground beef, onion, and garlic
-                  over medium heat until well browned. Stir in crushed tomatoes
-                  and tomato paste. Bring to a boil, reduce heat, and simmer,
-                  covered, for about 1 1/2 hours, stirring occasionally.</span
-                >
-              </li>
-              <li class="text-gray-700 dark:text-gray-300">
-                <span class="ml-2"
-                  >Bring a large pot of lightly salted water to a boil. Cook
-                  lasagna noodles in boiling water for 8 to 10 minutes. Drain
-                  noodles, and rinse with cold water.</span
-                >
-              </li>
-              <li class="text-gray-700 dark:text-gray-300">
-                <span class="ml-2"
-                  >Preheat oven to 375 degrees F (190 degrees C).</span
-                >
-              </li>
-              <li class="text-gray-700 dark:text-gray-300">
-                <span class="ml-2"
-                  >To assemble, spread 1 1/2 cups of meat sauce in the bottom of
-                  a 9x13 inch baking dish. Arrange 6 noodles lengthwise over
-                  meat sauce. Spread with one half of the ricotta cheese. Top
-                  with a third of mozzarella cheese slices. Spoon 1 1/2 cups
-                  meat sauce over mozzarella, and sprinkle with 1/4 cup Parmesan
-                  cheese. Repeat layers.</span
-                >
-              </li>
-              <li class="text-gray-700 dark:text-gray-300">
-                <span class="ml-2"
-                  >Bake in preheated oven for 25 minutes. Remove foil, and bake
-                  an additional 25 minutes. Cool for 15 minutes before serving.</span
-                >
-              </li>
-            </ol> -->
           </div>
         </div>
         <!-- Right Column: Nutrition, Reviews, etc. -->
@@ -151,8 +111,9 @@ const { Content } = await render(entry);
           <Reviews />
         </div>
       </div>
+
       <!-- Related Meals Section -->
-      <div class="mt-12">
+      <div class="mt-12 print:hidden">
         <h2
           class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-4 px-2"
         >

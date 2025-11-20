@@ -2,7 +2,7 @@
 import Layout from "src/layouts/Layout.astro";
 
 //icons
-import { SlidersHorizontal, ListFilter, Settings2 } from "@lucide/astro";
+import { SlidersHorizontal, ListFilter, Settings2, Clock } from "@lucide/astro";
 
 //components
 import Badge from "@/components/micros/Badge.astro";
@@ -13,6 +13,7 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
   title="Search Meals | MealsDB"
   description="Search for your favorite meals and recipes on MealsDB."
 >
+
   <section class="mx-auto flex max-w-6xl flex-col gap-8 mb-16">
     <!-- Page Heading & Search Bar -->
     <header class="flex flex-col gap-6">
@@ -55,108 +56,118 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
     </header>
   </section>
 
+  <!-- Search Loader -->
+  <div id="search-loader" class="flex justify-center my-20">
+    <div class="loader ease-linear rounded-full border-8 border-t-8 border-border-light dark:border-border-dark h-16 w-16"></div>
+  </div>
+  
   <!-- Search Results -->
-  <section class="flex flex-col gap-6 my-10">
-    <div class="flex items-baseline justify-between">
-      <h2 class="text-2xl font-bold text-text-main-dark" id="stats"></h2>
-      <div class="flex items-center gap-2">
-        <label class="text-sm text-text-secondary-dark" for="sort"
-          >Sort by:</label
-        >
-        <select
-          class="form-select bg-surface-dark border-border-dark rounded-md text-sm text-text-main-dark focus:ring-primary/50 focus:border-primary/50"
-          id="sort"
-          name="sort"
-        >
-          <option>Relevance</option>
-          <option>Newest</option>
-          <option>Cooking Time</option>
-        </select>
-      </div>
-    </div>
-  </section>
-
-  <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
-    <div class="col-span-4 lg:col-span-3 space-y-8">
-      <!-- Category Filter -->
-      <div
-        class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
-      >
-        <header
-          class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
-        >
-          <div class="flex items-center gap-3">
-            <SlidersHorizontal />
-            <p
-              class="text-text-main-dark text-base font-semibold leading-normal"
-            >
-              Categories
-            </p>
-          </div>
-        </header>
-        <div
-          class="border-t border-border-light dark:border-border-dark p-6 gap-8"
-        >
-          <div id="category-list"></div>
+  <div
+    id="search-results"
+    style="display: none;"
+  >
+    <section class="flex flex-col gap-6 my-10">
+      <div class="flex items-baseline justify-between">
+        <h2 class="text-2xl font-bold text-text-main-dark" id="stats"></h2>
+        <div class="flex items-center gap-2">
+          <label class="text-sm text-text-secondary-dark" for="sort"
+            >Sort by:</label
+          >
+          <select
+            class="form-select bg-surface-dark border-border-dark rounded-md text-sm text-text-main-dark focus:ring-primary/50 focus:border-primary/50"
+            id="sort"
+            name="sort"
+          >
+            <option>Relevance</option>
+            <option>Newest</option>
+            <option>Cooking Time</option>
+          </select>
         </div>
       </div>
+    </section>
 
-      <!-- Cuisine Filter -->
-      <div
-        class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
-      >
-        <header
-          class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
-        >
-          <div class="flex items-center gap-3">
-            <ListFilter />
-            <p
-              class="text-text-main-dark text-base font-semibold leading-normal"
-            >
-              Cuisine
-            </p>
-          </div>
-        </header>
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
+      <div class="col-span-4 lg:col-span-3 space-y-8">
+        <!-- Category Filter -->
         <div
-          class="border-t border-border-light dark:border-border-dark p-6 gap-8"
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
         >
-          <div id="cuisine-list"></div>
+          <header
+            class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
+          >
+            <div class="flex items-center gap-3">
+              <SlidersHorizontal />
+              <p
+                class="text-text-main-dark text-base font-semibold leading-normal"
+              >
+                Categories
+              </p>
+            </div>
+          </header>
+          <div
+            class="border-t border-border-light dark:border-border-dark p-6 gap-8"
+          >
+            <div id="category-list"></div>
+          </div>
         </div>
+
+        <!-- Cuisine Filter -->
+        <div
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+        >
+          <header
+            class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
+          >
+            <div class="flex items-center gap-3">
+              <ListFilter />
+              <p
+                class="text-text-main-dark text-base font-semibold leading-normal"
+              >
+                Cuisine
+              </p>
+            </div>
+          </header>
+          <div
+            class="border-t border-border-light dark:border-border-dark p-6 gap-8"
+          >
+            <div id="cuisine-list"></div>
+          </div>
+        </div>
+
+        <!-- Cuisine Filter -->
+        <div
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+        >
+          <header
+            class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
+          >
+            <div class="flex items-center gap-3">
+              <Settings2 />
+              <p
+                class="text-text-main-dark text-base font-semibold leading-normal"
+              >
+                Servings
+              </p>
+            </div>
+          </header>
+          <div
+            class="border-t border-border-light dark:border-border-dark p-6 gap-8"
+          >
+            <div id="servings-slider"></div>
+          </div>
+        </div>
+
+        <!-- <h5>Tags</h5>
+        <div id="tag-list"></div> -->
+        <div id="clear-refinements"></div>
       </div>
 
-      <!-- Cuisine Filter -->
-      <div
-        class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
-      >
-        <header
-          class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
-        >
-          <div class="flex items-center gap-3">
-            <Settings2 />
-            <p
-              class="text-text-main-dark text-base font-semibold leading-normal"
-            >
-              Servings
-            </p>
-          </div>
-        </header>
-        <div
-          class="border-t border-border-light dark:border-border-dark p-6 gap-8"
-        >
-          <div id="servings-slider"></div>
-        </div>
+      <div class="col-span-4 lg:col-span-9">
+        <!-- Results Grid -->
+        <div id="hits"></div>
+        <!-- Pagination -->
+        <div id="pagination" class="mt-10"></div>
       </div>
-
-      <!-- <h5>Tags</h5>
-      <div id="tag-list"></div> -->
-      <div id="clear-refinements"></div>
-    </div>
-
-    <div class="col-span-4 lg:col-span-9">
-      <!-- Results Grid -->
-      <div id="hits"></div>
-      <!-- Pagination -->
-      <div id="pagination" class="mt-10"></div>
     </div>
   </div>
 
@@ -182,6 +193,12 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
     const search = instantsearch({
       indexName: "astro_mealsdb_content",
       searchClient,
+    });
+
+    search.on("render", () => {
+      // Add any custom behavior after each render if needed
+      document.getElementById('search-loader').style.display = 'none';
+    document.getElementById('search-results').style.display = '';
     });
 
     // Search box widget
@@ -211,6 +228,10 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
     search.addWidgets([
       configure({
         hitsPerPage: 12,
+        // Example: filter for multiple keywords (dessert OR breakfast)
+        // filters: 'keywords:dessert OR keywords:breakfast',
+        //filters: 'isDifficulty:true',
+
       }),
     ]);
 
@@ -256,11 +277,13 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
                 <div
                   class="absolute top-3 right-3 flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-background-dark/70 px-3 backdrop-blur-sm"
                 >
-                  <p class="text-white text-sm font-medium leading-normal">${hit.addons?.cookTime} min</p>
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 text-white"><path d="M12 6v6l4 2"/><circle cx="12" cy="12" r="10"/></svg>
+                  <p class="text-white text-sm font-medium leading-normal">${hit.addons?.prepTime} min</p>
+                  <p class="text-white text-sm font-medium leading-normal hidden">${hit.addons?.cookTime} min</p>
                 </div>
               </div>
               <div class="flex flex-col gap-3 p-4">
-                <div class="flex gap-2">
+                <div class="flex gap-2 justify-between">
                   ${
                     hit.category
                       ? `
@@ -443,7 +466,7 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
         cssClasses: {
           list: "flex items-center justify-center text-sm list-none md:gap-1 text-slate-700",
           item: "",
-          link: "flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark border border-border-dark text-text-light dark:text-text-dark font-bold text-sm hover:border-primary hover:text-primary hover:bg-primary/10 transition-colors group-[.ais-Pagination-item--selected]:bg-primary group-[.ais-Pagination-item--selected]:border-primary group-[.ais-Pagination-item--selected]:text-text-light",
+          link: "flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark text-text-light border border-transparent dark:text-text-dark font-bold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors group-[.ais-Pagination-item--selected]:bg-primary group-[.ais-Pagination-item--selected]:border-primary group-[.ais-Pagination-item--selected]:text-text-light",
           selectedItem: "group",
           disabledItem: "text-gray-400 cursor-not-allowed",
           firstPageItem: "mr-1",

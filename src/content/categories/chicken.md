@@ -1,5 +1,4 @@
 ---
-id: 3
 title: "Chicken"
 slug: "chicken"
 date: "2025-11-10T14:05:03.060Z"

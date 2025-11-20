@@ -1,5 +1,4 @@
 ---
-id: 2
 title: "Breakfast"
 slug: "breakfast"
 date: "2025-11-10T14:05:03.064Z"
