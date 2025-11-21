@@ -8,6 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sanity from "@sanity/astro";
 import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
+import partytown from '@astrojs/partytown';
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +26,7 @@ export default defineConfig({
     alpinejs(),
     sitemap(),
     react(),
+    partytown(),
     sanity({
       projectId: "futd0pge",
       dataset: "production",

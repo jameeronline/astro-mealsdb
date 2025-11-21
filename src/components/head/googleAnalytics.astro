@@ -1,0 +1,25 @@
+---
+import { PUBLIC_GOOGLE_ANALYTICS_ID } from "astro:env/server";
+---
+
+<script
+  type="text/partytown"
+  src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GOOGLE_ANALYTICS_ID}`}
+></script>
+
+<script
+  type="text/partytown"
+  data-ga-measurement-id={PUBLIC_GOOGLE_ANALYTICS_ID}
+  id="ga-init"
+>
+  const measurementId = document
+    .getElementById("ga-init")
+    .getAttribute("data-ga-measurement-id");
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+
+  gtag("config", measurementId);
+</script>
