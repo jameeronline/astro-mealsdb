@@ -13,6 +13,14 @@ import netlify from "@astrojs/netlify";
 export default defineConfig({
   site: "https://astro-meals.netlify.app/",
   adapter: netlify(),
+  image: {
+    domains: ["themealdb.com"],
+    remotePatterns: [
+      {
+        protocol: "https",
+      },
+    ],
+  },
   integrations: [
     alpinejs(),
     sitemap(),
