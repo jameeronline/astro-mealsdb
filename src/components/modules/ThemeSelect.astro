@@ -1,4 +1,5 @@
 ---
+import {Check} from "@lucide/astro"
 ---
 
 <div class="theme-switcher">
@@ -6,16 +7,16 @@
     <!-- Current theme display button -->
     <button
       id="theme-toggle"
-      class="theme-toggle-btn"
+      class="flex items-center gap-2 px-3 py-2 bg-card-light border border-border rounded-lg text-foreground cursor-pointer transition-all duration-200 ease-in-out text-sm font-medium min-w-[120px] select-none"
       aria-label="Change theme"
       aria-expanded="false"
     >
-      <span id="current-theme-icon" class="current-theme-icon theme-green"
+      <span id="current-theme-icon" class="theme-green w-4 h-4 rounded border border-border shrink-0 inline-block"
       ></span>
       <span id="current-theme-text">Green</span>
       <svg
         id="chevron-icon"
-        class="chevron-icon"
+        class="w-4 h-4 transition-transform duration-200 ease-in-out ml-auto"
         fill="none"
         stroke="currentColor"
         viewBox="0 0 24 24"
@@ -31,35 +32,35 @@
     <!-- Theme dropdown panel -->
     <div id="theme-panel" class="theme-panel">
       <div class="theme-options">
-        <button class="theme-option" data-theme="green">
+        <button class="theme-option group" data-theme="green">
           <span class="theme-color-preview theme-green"></span>
-          <span class="theme-name">Green</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Green</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
-        <button class="theme-option" data-theme="blue">
+        <button class="theme-option group" data-theme="blue">
           <span class="theme-color-preview theme-blue"></span>
-          <span class="theme-name">Blue</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Blue</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
-        <button class="theme-option" data-theme="orange">
+        <button class="theme-option group" data-theme="orange">
           <span class="theme-color-preview theme-orange"></span>
-          <span class="theme-name">Orange</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Orange</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
-        <button class="theme-option" data-theme="red">
+        <button class="theme-option group" data-theme="red">
           <span class="theme-color-preview theme-red"></span>
-          <span class="theme-name">Red</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Red</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
-        <button class="theme-option" data-theme="purple">
+        <button class="theme-option group" data-theme="purple">
           <span class="theme-color-preview theme-purple"></span>
-          <span class="theme-name">Purple</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Purple</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
-        <button class="theme-option" data-theme="teal">
+        <button class="theme-option group" data-theme="teal">
           <span class="theme-color-preview theme-teal"></span>
-          <span class="theme-name">Teal</span>
-          <span class="theme-check">✓</span>
+          <span class="text-text-light">Teal</span>
+          <Check class="transition-opacity duration-150 opacity-0 group-[.active]:opacity-100 size-4" />
         </button>
       </div>
     </div>

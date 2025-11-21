@@ -43,11 +43,11 @@ const { Content } = await render(selectedCuisineData);
     <!-- Category Header -->
     <div class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center">
       <div class="flex flex-col gap-3">
-        <p
-          class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
+        <h1
+          class="font-heading text-text-light dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]"
         >
-          Browse {cuisine.title && cuisine.title} Cuisine Recipes 
-        </p>
+          Browse <span class="text-primary underline underline-offset-4">{cuisine.title && cuisine.title}</span> Cuisine Recipes 
+        </h1>
         <p class="text-primary capitalize">{cuisineRecipes.length} results found</p>
         <div
           class="text-text-light/60 dark:text-text-dark/60 text-base font-normal leading-normal"
@@ -57,30 +57,61 @@ const { Content } = await render(selectedCuisineData);
       </div>
     </div>
     <!-- Category Tags -->
-    <div class="flex justify-center gap-3 py-3 mb-6">
-      {
+    <div class="flex justify-center flex-wrap gap-3 py-3 mb-6">
+      <!-- Desktop: Category Tags -->
+      <div class="hidden sm:flex justify-center flex-wrap gap-3 w-full">
+        {
+          cuisines.map((cuisine) => (
+        <a
+          href={`/cuisines/${cuisine.data.slug}`}
+          page-active={
+            cuisine.data.slug === selectedCuisine ? "true" : "false"
+          }
+          class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark px-5 hover:bg-primary/20 hover:border-primary-dark transition-colors border border-border-light dark:border-card-dark  [&[page-active='true']]:text-background-dark [&[page-active='true']]:border-primary  [&[page-active='true']]:bg-primary"
+        >
+          <span class="text-sm font-medium leading-normal">
+            {cuisine.data?.title && cuisine.data.title}
+          </span>
+        </a>
+          ))
+        }
+      </div>
+      <!-- Mobile: Select Dropdown -->
+      <div class="sm:hidden w-full flex justify-center">
+        <select
+        id="mobileCuisineSelect"
+          class="block w-full max-w-xs rounded-full border border-border-light dark:border-card-dark bg-card-light dark:bg-card-dark px-4 py-2 text-base text-text-light dark:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+          
+          value={selectedCuisine}
+        >
+          {
         cuisines.map((cuisine) => (
-          <a
-            href={`/cuisines/${cuisine.data.slug}`}
-            page-active={
-              cuisine.data.slug === selectedCuisine ? "true" : "false"
-            }
-            class="flex h-9 shrink-0 items-center justify-center gap-x-2 rounded-full bg-card-light dark:bg-card-dark px-5 hover:bg-primary/20 hover:border-primary-dark transition-colors border border-border-light dark:border-card-dark  [&[page-active='true']]:text-background-dark [&[page-active='true']]:border-primary  [&[page-active='true']]:bg-primary"
-          >
-            <span class="text-sm font-medium leading-normal">
-              {cuisine.data?.title && cuisine.data.title}
-            </span>
-          </a>
+          <option value={cuisine.data.slug} selected={cuisine.data.slug === selectedCuisine}>
+            {cuisine.data?.title && cuisine.data.title}
+          </option>
         ))
-      }
+          }
+        </select>
+      </div>
     </div>
     <!-- Recipe Grid -->
     <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 py-4" data-scroll-animate>
       {
         cuisineRecipes.map((recipe) => (
           <MealsCard recipe={recipe.data} />
-          // <SimpleMealCard recipe={recipe.data} />
         ))
       }
     </div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const select = document.getElementById('mobileCuisineSelect');
+    if (select) {
+      select.addEventListener('change', function(e) {
+        const selectedSlug = e.target.value;
+        window.location.href = `/cuisines/${selectedSlug}`;
+      });
+    }
+  });
+</script>
 </Layout>

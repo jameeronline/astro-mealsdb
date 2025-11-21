@@ -44,7 +44,7 @@ function createMarkdownContent(item) {
     title: item.strArea || "Untitled",
     slug: slugify(item.strArea || "untitled"),
     date: item.date || new Date().toISOString().replace('T', ' ').replace(/\.\d{3}Z$/, ''),
-    thumbnail: item.strThumb || "",
+    thumbnail: item.strThumb || `../../assets/cuisines/${slugify(item.strArea || "untitled")}.png`,
   };
 
   // Build frontmatter

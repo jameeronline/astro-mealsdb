@@ -1,6 +1,7 @@
 interface FooterLink {
   text: string;
   url: string;
+  isStatic?: boolean;
 }
 
 interface FooterSection {
@@ -15,7 +16,8 @@ export const footerSections: FooterSection[] = [
             { text: "Home", url: "/" },
             { text: "Categories", url: "/categories" },
             { text: "Blog", url: "/blog" },
-            { text: "About Us", url: "/about" }
+            { text: "About Us", url: "/about" },
+            { text: "Favorites", url: "/favorites", isStatic: false }
         ]
     },
     {

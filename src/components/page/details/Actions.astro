@@ -15,10 +15,13 @@ import {Share, Share2, Printer, Heart} from "@lucide/astro"
 
   <!-- favorite -->
   <button
+    id="favorite-btn"
     class="flex items-center gap-2 min-w-[84px] cursor-pointer justify-center overflow-hidden rounded-lg h-10 px-4 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 text-sm font-bold leading-normal tracking-[0.015em]"
+    type="button"
+    onclick="toggleFavorite()"
   >
-    <Heart class="size-5" />
-    <span class="truncate">Save</span>
+    <Heart id="favorite-icon" class="size-5" />
+    <span id="favorite-text" class="truncate">Save</span>
   </button>
 
   <!-- share -->
@@ -47,5 +50,56 @@ import {Share, Share2, Printer, Heart} from "@lucide/astro"
         });
       }
     }
+  </script>
+
+
+  <script is:inline>
+    // You should provide a unique recipeId for each recipe page
+    const recipeId = window.location.pathname; // Use pathname as a simple unique id
+    const FAVORITES_KEY = 'astro_meals_favorites';
+
+    function getFavorites() {
+      try {
+        return JSON.parse(localStorage.getItem(FAVORITES_KEY)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function setFavorites(favs) {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(favs));
+    }
+
+    function isFavorite(id) {
+      return getFavorites().includes(id);
+    }
+
+    function updateFavoriteUI() {
+      const icon = document.getElementById('favorite-icon');
+      const text = document.getElementById('favorite-text');
+      if (isFavorite(recipeId)) {
+        icon.style.fill = 'red';
+        icon.style.color = 'red';
+        text.textContent = 'Saved';
+      } else {
+        icon.style.fill = '';
+        icon.style.color = '';
+        text.textContent = 'Save';
+      }
+    }
+
+    function toggleFavorite() {
+      let favs = getFavorites();
+      if (isFavorite(recipeId)) {
+        favs = favs.filter(id => id !== recipeId);
+      } else {
+        favs.push(recipeId);
+      }
+      setFavorites(favs);
+      updateFavoriteUI();
+    }
+
+    // Initialize UI on load
+    updateFavoriteUI();
   </script>
 </div>

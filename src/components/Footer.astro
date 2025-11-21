@@ -35,7 +35,10 @@ import { footerSections } from "@/data/footer";
             <ul class="space-y-2 text-sm">
               {section.links.map((link) => (
                 <li>
-                  <a class="hover:text-primary hover:underline hover:underline-offset-2 transition-colors" href={`${linkPrefix}${link.url}`}>
+                  <a
+                    class="hover:text-primary hover:underline hover:underline-offset-2 transition-colors"
+                    href={link.isStatic ? `${linkPrefix}${link.url}` : link.url}
+                  >
                     {link.text}
                   </a>
                 </li>

@@ -29,13 +29,13 @@ import Layout from "src/layouts/Layout.astro";
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <header class="flex flex-col gap-3 text-center mb-12" data-scroll-animate>
         <h1
-          class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark"
+          class="text-4xl md:text-5xl font-heading font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark"
           data-scroll-animate
         >
           Browse All Meal Cuisines
         </h1>
         <p
-          class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto"
+          class="text-lg text-text-muted-light font-sans dark:text-text-muted-dark max-w-2xl mx-auto"
           data-scroll-animate
         >
           Find your next favorite dish by exploring our curated cuisines.
@@ -50,7 +50,7 @@ import Layout from "src/layouts/Layout.astro";
           <select
             id="sortSelect"
             name="sort"
-            class="ml-2 bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark border border-border-light dark:border-card-dark rounded-md px-2 py-1"
+            class="ml-2 form-select bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark border border-border-light dark:border-card-dark rounded-md px-2 py-1"
             value={sortParam}
           >
             <option value="default" selected={sortParam === 'default'}>Default</option>

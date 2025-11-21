@@ -2,7 +2,7 @@
 import Layout from "src/layouts/Layout.astro";
 
 //icons
-import { SlidersHorizontal, ListFilter, Settings2, Clock } from "@lucide/astro";
+import { SlidersHorizontal, ListFilter, Settings2, Clock,  ChevronDown} from "@lucide/astro";
 
 //components
 import Badge from "@/components/micros/Badge.astro";
@@ -86,83 +86,86 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
       </div>
     </section>
 
-    <div class="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
-      <div class="col-span-4 lg:col-span-3 space-y-8">
+    <div class="grid grid-cols-4 gap-6 md:grid-cols-9 lg:grid-cols-12">
+      <div class="col-span-4 md:col-span-3 lg:col-span-3 space-y-8">
         <!-- Category Filter -->
-        <div
-          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+        <details
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group md:open"
         >
-          <header
+          <summary
             class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
           >
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 w-full">
               <SlidersHorizontal />
               <p
                 class="text-text-main-dark text-base font-semibold leading-normal"
               >
                 Categories
               </p>
+              <ChevronDown class="ms-auto" />
             </div>
-          </header>
+          </summary>
           <div
             class="border-t border-border-light dark:border-border-dark p-6 gap-8"
           >
             <div id="category-list"></div>
           </div>
-        </div>
+        </details>
 
         <!-- Cuisine Filter -->
-        <div
-          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+        <details
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group md:open"
         >
-          <header
+          <summary
             class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
           >
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 w-full">
               <ListFilter />
               <p
                 class="text-text-main-dark text-base font-semibold leading-normal"
               >
                 Cuisine
               </p>
+              <ChevronDown class="ms-auto" />
             </div>
-          </header>
+          </summary>
           <div
             class="border-t border-border-light dark:border-border-dark p-6 gap-8"
           >
             <div id="cuisine-list"></div>
           </div>
-        </div>
+        </details>
 
         <!-- Cuisine Filter -->
-        <div
-          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group"
+        <details
+          class="flex flex-col rounded-lg border border-border-light dark:border-border-dark bg-card-light dark:bg-card-dark group md:open"
         >
-          <header
+          <summary
             class="flex cursor-pointer list-none items-center justify-between gap-6 p-4"
           >
-            <div class="flex items-center gap-3">
+            <div class="flex items-center gap-3 w-full">
               <Settings2 />
               <p
                 class="text-text-main-dark text-base font-semibold leading-normal"
               >
                 Servings
               </p>
+              <ChevronDown class="ms-auto" />
             </div>
-          </header>
+          </summary>
           <div
             class="border-t border-border-light dark:border-border-dark p-6 gap-8"
           >
             <div id="servings-slider"></div>
           </div>
-        </div>
+        </details>
 
         <!-- <h5>Tags</h5>
         <div id="tag-list"></div> -->
         <div id="clear-refinements"></div>
       </div>
 
-      <div class="col-span-4 lg:col-span-9">
+      <div class="col-span-4 md:col-span-6 lg:col-span-9">
         <!-- Results Grid -->
         <div id="hits"></div>
         <!-- Pagination -->
@@ -186,8 +189,8 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
     } from "instantsearch.js/es/widgets";
 
     const searchClient = algoliasearch(
-      "GC5TS4PFK2",
-      "05ab21682a73a5f888b8d2f92ddfbd06"
+      import.meta.env.PUBLIC_ALGOLIA_APP_ID,
+      import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
     );
 
     const search = instantsearch({
@@ -198,7 +201,7 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
     search.on("render", () => {
       // Add any custom behavior after each render if needed
       document.getElementById('search-loader').style.display = 'none';
-    document.getElementById('search-results').style.display = '';
+      document.getElementById('search-results').style.display = '';
     });
 
     // Search box widget
@@ -209,16 +212,16 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
         cssClasses: {
           form: "relative",
           input:
-            "relative w-full h-14 px-4 pl-12 transition-all border rounded outline-none focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent peer border-slate-200 text-slate-500 autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400",
+            "relative w-full h-14 px-4 pl-12 transition-all border bg-card-light dark:bg-card-dark rounded outline-none border-border-light dark:border-border-dark focus:outline-none focus:ring-2 focus:ring-green-600/50 focus:border-transparent peer autofill:bg-white invalid:border-pink-500 invalid:text-pink-500 focus:border-emerald-500 focus:outline-none invalid:focus:border-pink-500 disabled:cursor-not-allowed disabled:bg-slate-50 disabled:text-slate-400",
           submit:
-            "absolute left-0.5 top-3 bg-transparent text-slate-800 px-4 py-1 rounded",
+            "absolute left-0.5 top-3 bg-transparent text-slate-800 dark:text-text-dark px-4 py-1 rounded",
           reset: "absolute right-16 top-2 text-slate-800 px-2 py-1 rounded",
           submitIcon: "w-6 h-6",
           resetIcon: "w-6 h-6",
         },
         templates: {
           submit:
-            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#1f1f1f"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>',
+            '<svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" class="fill-text-light dark:fill-text-dark"><path d="M784-120 532-372q-30 24-69 38t-83 14q-109 0-184.5-75.5T120-580q0-109 75.5-184.5T380-840q109 0 184.5 75.5T640-580q0 44-14 83t-38 69l252 252-56 56ZM380-400q75 0 127.5-52.5T560-580q0-75-52.5-127.5T380-760q-75 0-127.5 52.5T200-580q0 75 52.5 127.5T380-400Z"/></svg>',
           reset: "",
         },
       }),
@@ -433,7 +436,7 @@ import SearchMealCard from "@/components/blocks/SearchMealCard.astro";
         container: "#clear-refinements",
         templates: {
           resetLabel({ hasRefinements }) {
-            return `<button class="flex min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-border-light text-text-main-dark text-sm font-bold hover:bg-border-light/80 transition-colors"> <span class="truncate">Clear All ${hasRefinements ? "✕" : ""}</span> </button>`;
+            return `<button class="flex gap-2 min-w-[84px] cursor-pointer items-center justify-center rounded-lg h-10 px-4 bg-border-light text-text-main-dark text-sm font-bold hover:bg-border-light/80 transition-colors"> <span class="truncate">Clear All ${hasRefinements ? "✕" : ""}</span> </button>`;
           },
         },
       }),

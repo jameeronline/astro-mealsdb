@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+
+// Utility function to get favourites from localStorage
+function getFavourites() {
+  try {
+    const stored = localStorage.getItem('astro_meals_favorites');
+    if (!stored) return [];
+    const parsed = JSON.parse(stored);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (e) {
+    return [];
+  }
+}
+
+// Usage example
+//const favouritesList = getFavourites();
+//console.log("Favourites List:", favouritesList);
+
+// const favoriteIds =
+//   typeof window !== "undefined"
+//     ? JSON.parse(window.localStorage.getItem("astro_meals_favorites") || "[]")
+//     : [];
+
+// console.log("Favorite IDs:", favoriteIds);    
+
+const recipes = await getCollection("recipes");
+
+// const favoriteRecipes = recipes.filter((recipe) =>
+//     favoriteIds.includes(recipe.slug)
+// );
+
+//console.log("Favorite Recipes:", favoriteRecipes);
+---
+
+<Layout
+  title="Your Favorite Recipes"
+  description="Browse and manage your favorite recipes."
+>
+  <div
+    class="flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+  >
+    <h1
+      class="font-heading text-text-light dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] mb-6"
+    >
+      Your Favorite Recipes
+    </h1>
+    <p
+      class="text-text-light/70 dark:text-text-dark/70 text-lg mb-8 text-center max-w-2xl"
+    >
+      Here you can find all the recipes you have marked as favorites. Easily
+      access and manage your favorite meals in one place.
+    </p>
+    <!-- Favorites List Placeholder -->
+    <div class="w-full max-w-4xl">
+      <p class="text-center text-text-light/50 dark:text-text-dark/50">
+        You have no favorite recipes yet.
+      </p>
+    </div>
+  </div>
+</Layout>
