@@ -1,15 +1,15 @@
 ---
-import { PUBLIC_GOOGLE_ANALYTICS_ID } from "astro:env/server";
+const gaId = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
 ---
 
 <script
   type="text/partytown"
-  src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GOOGLE_ANALYTICS_ID}`}
+  src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
 ></script>
 
 <script
   type="text/partytown"
-  data-ga-measurement-id={PUBLIC_GOOGLE_ANALYTICS_ID}
+  data-ga-measurement-id={gaId}
   id="ga-init"
 >
   const measurementId = document
