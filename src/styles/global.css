@@ -7,8 +7,9 @@
 @theme {
   /* Font configurations */
   --font-display: "IBM Plex Sans Variable", sans-serif;
-  --font-body: "Work Sans Variable", sans-serif;
+  /* --font-body: "Work Sans Variable", sans-serif; */
   --font-heading: "Playfair Display Variable", serif;
+  --font-sans: "Inter Variable", sans-serif;
 
 
   /* Border radius */

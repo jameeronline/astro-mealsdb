@@ -23,6 +23,17 @@ const cuisinesCollection = defineCollection({
     }),
 });
 
+const ingredientsCollection = defineCollection({
+  loader: glob({ pattern: "**/*.md", base: "./src/content/ingredients" }),
+  schema: ({ image }) =>
+    z.object({
+      title: z.string(),
+      slug: z.string(),
+      date: z.string(),
+      thumbnail: image(),
+    }),
+});
+
 const recipesCollection = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./src/content/recipes" }),
   schema: z.object({
@@ -90,6 +101,7 @@ const posts = defineCollection({
 export const collections = {
   cuisines: cuisinesCollection,
   categories: categoriesCollection,
+  ingredients: ingredientsCollection,
   recipes: recipesCollection,
   posts: posts,
 };

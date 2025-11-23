@@ -1,113 +1,118 @@
 ---
-import type { Page } from 'astro';
+import type { Page } from "astro";
+
+//icons import
+import { ChevronLeft, ChevronRight } from "@lucide/astro";
 
 interface Props {
-    page: Page;
+  page: Page;
 }
 
 const { page } = Astro.props;
 
 // Generate page numbers to show
 function getPageNumbers(currentPage: number, lastPage: number) {
-    const delta = 2; // Pages to show on each side
-    const range: (number | string)[] = [];
-    
-    for (let i = 1; i <= lastPage; i++) {
-        if (
-            i === 1 || 
-            i === lastPage || 
-            (i >= currentPage - delta && i <= currentPage + delta)
-        ) {
-            range.push(i);
-        } else if (range[range.length - 1] !== '...') {
-            range.push('...');
-        }
+  const delta = 2; // Pages to show on each side
+  const range: (number | string)[] = [];
+
+  for (let i = 1; i <= lastPage; i++) {
+    if (
+      i === 1 ||
+      i === lastPage ||
+      (i >= currentPage - delta && i <= currentPage + delta)
+    ) {
+      range.push(i);
+    } else if (range[range.length - 1] !== "...") {
+      range.push("...");
     }
-    
-    return range;
+  }
+
+  return range;
 }
 
 const pageNumbers = getPageNumbers(page.currentPage, page.lastPage);
 ---
 
-{page.lastPage > 1 && (
-    <nav class="flex flex-col items-center gap-6 my-12" aria-label="Pagination">
-        <div class="text-gray-500 text-sm">
-            Page {page.currentPage} of {page.lastPage}
-        </div>
+{
+  page.lastPage > 1 && (
+    <nav class="flex flex-col items-center gap-6 mt-12" aria-label="Pagination">
+      <div class="text-text-light dark:text-text-dark text-sm hidden">
+        Page <span class="text-bold">{page.currentPage}</span> of{" "}
+        {page.lastPage}
+      </div>
 
-        <ul class="flex gap-2 list-none p-0 m-0 flex-wrap justify-center">
-            {page.url.prev ? (
-                <li>
-                    <a 
-                        href={page.url.prev} 
-                        class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
-                        aria-label="Go to previous page"
-                    >
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
-                        </svg>
-                        <span class="sm:inline hidden">Previous</span>
-                    </a>
-                </li>
-            ) : (
-                <li>
-                    <span class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-300 cursor-not-allowed min-w-[40px] justify-center">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z"/>
-                        </svg>
-                        <span class="sm:inline hidden">Previous</span>
-                    </span>
-                </li>
-            )}
+      <ul class="flex items-center justify-center text-sm list-none md:gap-1">
+        {page.url.prev ? (
+          <li>
+            <a
+              href={page.url.prev}
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-text-light dark:text-text-dark font-bold text-sm border border-transparent  hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors"
+              aria-label="Go to previous page"
+            >
+              <ChevronLeft class="w-6 h-6" />
+              {/* <span class="sm:inline hidden">Previous</span> */}
+            </a>
+          </li>
+        ) : (
+          <li>
+            <span class="flex h-10 w-10 items-center justify-center text-text-light/50 dark:text-text-dark/50 font-bold text-sm cursor-not-allowed pointer-events-none border border-transparent">
+              <ChevronLeft class="w-6 h-6" />
+              {/* <span class="sm:inline hidden">Previous</span> */}
+            </span>
+          </li>
+        )}
 
-            {pageNumbers.map((num) => (
-                num === '...' ? (
-                    <li>
-                        <span class="px-2 py-2 text-gray-500">...</span>
-                    </li>
-                ) : (
-                    <li>
-                        {num === page.currentPage ? (
-                            <span class="flex items-center gap-2 px-3 py-2 bg-primary border border-primary rounded-md text-white font-medium cursor-default min-w-[40px] justify-center" aria-current="page">
-                                {num}
-                            </span>
-                        ) : (
-                            <a 
-                                href={num === 1 ? page.url.first : `${page.url.first === undefined ? page.url.current : page.url.first}/${num}`}
-                                class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
-                                aria-label={`Go to page ${num}`}
-                            >
-                                {num}
-                            </a>
-                        )}
-                    </li>
-                )
-            ))}
+        {pageNumbers.map((num) =>
+          num === "..." ? (
+            <li>
+              <span class="px-2 py-2 text-gray-500">...</span>
+            </li>
+          ) : (
+            <li>
+              {num === page.currentPage ? (
+                <span
+                  class="flex h-10 w-10 items-center justify-center rounded-lg text-text-light dark:text-text-dark bg-primary border border-transparent font-bold text-sm cursor-not-allowed"
+                  aria-current="page"
+                >
+                  {num}
+                </span>
+              ) : (
+                <a
+                  href={
+                    num === 1
+                      ? page.url.first
+                      : `${page.url.first === undefined ? page.url.current : page.url.first}/${num}`
+                  }
+                  class="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-dark text-text-light border border-transparent dark:text-text-dark font-bold text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors group-[.ais-Pagination-item--selected]:bg-primary group-[.ais-Pagination-item--selected]:border-primary group-[.ais-Pagination-item--selected]:text-text-light"
+                  aria-label={`Go to page ${num}`}
+                >
+                  {num}
+                </a>
+              )}
+            </li>
+          )
+        )}
 
-            {page.url.next ? (
-                <li>
-                    <a 
-                        href={page.url.next} 
-                        class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-700 font-medium transition-all duration-200 min-w-[40px] justify-center hover:bg-gray-50 hover:border-primary hover:text-primary"
-                        aria-label="Go to next page"
-                    >
-                        <span class="sm:inline hidden">Next</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
-                        </svg>
-                    </a>
-                </li>
-            ) : (
-                <li>
-                    <span class="flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-md text-gray-300 cursor-not-allowed min-w-[40px] justify-center">
-                        <span class="sm:inline hidden">Next</span>
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
-                            <path d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"/>
-                        </svg>
-                    </span>
-                </li>
-            )}
-        </ul>
+        {page.url.next ? (
+          <li>
+            <a
+              href={page.url.next}
+              class="flex h-10 w-10 items-center justify-center rounded-lg text-text-light dark:text-text-dark font-bold text-sm border border-transparent  hover:border-primary hover:text-primary hover:bg-primary/5 transition-colors"
+              aria-label="Go to next page"
+            >
+              {/* <span class="sm:inline hidden">Next</span> */}
+              <ChevronRight class="w-6 h-6" />
+            </a>
+          </li>
+        ) : (
+          <li>
+            <span class="flex h-10 w-10 items-center justify-center text-text-light/50 dark:text-text-dark/50 font-bold text-sm cursor-not-allowed pointer-events-none border border-transparent">
+              {/* <span class="sm:inline hidden">Next</span> */}
+              <ChevronRight class="w-6 h-6" />
+            </span>
+          </li>
+        )}
+      </ul>
     </nav>
-)}
+  )
+}

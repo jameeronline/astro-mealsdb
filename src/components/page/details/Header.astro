@@ -11,23 +11,25 @@ const { thumbnail, title, description } = Astro.props;
 ---
 
 <!-- Hero Section -->
-<div class="@container mb-8">
+<div class="mb-8">
   <div
-    class="relative h-[480px] w-full rounded-xl overflow-hidden flex items-end print:rounded-none print:flex-col print:h-auto"
+    class="relative aspect-square md:h-[480px] w-full rounded-xl overflow-hidden flex items-end print:rounded-none print:flex-col print:h-auto"
     data-scroll-animate
   >
     <Image
       src={thumbnail}
       alt={title}
-      width="1500"
-      height="480"
+      inferSize
       class="absolute inset-0 w-full h-full object-cover print:static print:w-full print:aspect-video print:order-2"
+      loading="lazy"
+      decoding="async"
+      format="webp"
     />
     <div
       class="flex flex-col p-6 md:p-8 relative w-full bg-gradient-to-t from-black/70 to-transparent print:bg-none print:p-0 print:text-black print:order-1 print:mb-10"
     >
       <h1
-        class="text-white tracking-tight text-3xl md:text-5xl font-bold leading-tight print:text-black"
+        class="font-heading text-white tracking-tight text-3xl md:text-5xl font-bold leading-tight print:text-black"
         data-scroll-animate
       >
         {title}

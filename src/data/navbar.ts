@@ -16,10 +16,10 @@ export const homeNavLink: HomeNavLink = {
 };
 
 export const navLinks: NavLink[] = [
+    { text: "Features", href: "/features" },
   { text: "Categories", href: "/categories" },
   { text: "Cuisines", href: "/cuisines" },
   { text: "Ingredients", href: "/ingredients" },
-  { text: "Features", href: "/features" },
   { text: "Blog", href: "/blog" },
   { text: "Pricing", href: "/pricing" },
   { text: "About", href: "/about" },

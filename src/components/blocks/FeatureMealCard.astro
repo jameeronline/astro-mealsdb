@@ -1,0 +1,104 @@
+---
+export interface Props {
+    title?: string
+    subtitle?: string
+    imageUrl: string
+    imageAlt?: string
+    tag?: string
+    recipeName: string
+    description: string
+    time?: string
+    servings?: string
+    rating?: string
+    reviews?: number
+    onViewRecipe?: () => void
+    onSaveFavorite?: () => void
+}
+
+const {
+    title = "Featured Recipe Card",
+    subtitle = "A large-format card for highlighting a special recipe on the homepage or at the top of a category.",
+    imageUrl,
+    imageAlt = "",
+    tag = "Must Try Recipe",
+    recipeName,
+    description,
+    time = "25 min",
+    servings = "4 servings",
+    rating = "5.0",
+    reviews = 212,
+    onViewRecipe,
+    onSaveFavorite,
+} = Astro.props;
+---
+
+<div class="pt-10">
+    <h2
+        class="text-text-primary-light dark:text-text-primary-dark text-[22px] font-bold leading-tight tracking-[-0.015em] px-4 pb-3 pt-5"
+    >
+        {title}
+    </h2>
+    <p
+        class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal pb-3 pt-1 px-4"
+    >
+        {subtitle}
+    </p>
+    <div class="p-4">
+        <div
+            class="grid grid-cols-1 md:grid-cols-2 rounded-xl overflow-hidden bg-white dark:bg-background-dark shadow-lg"
+        >
+            <div
+                class="w-full h-64 md:h-full bg-center bg-no-repeat bg-cover"
+                data-alt={imageAlt}
+                style={`background-image: url("${imageUrl}");`}
+            >
+            </div>
+            <div class="p-6 md:p-8 flex flex-col justify-center">
+                <span
+                    class="text-sm font-bold uppercase tracking-widest text-primary dark:text-primary mb-2"
+                    >{tag}</span
+                >
+                <h3
+                    class="text-text-primary-light dark:text-text-primary-dark text-2xl lg:text-3xl font-black leading-tight tracking-tighter"
+                >
+                    {recipeName}
+                </h3>
+                <p
+                    class="text-text-secondary-light dark:text-text-secondary-dark text-base font-normal leading-normal mt-3"
+                >
+                    {description}
+                </p>
+                <div
+                    class="flex items-center flex-wrap gap-x-6 gap-y-2 mt-4 text-text-secondary-light dark:text-text-secondary-dark"
+                >
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined !text-xl">timer</span>
+                        <span class="font-medium">{time}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined !text-xl">group</span>
+                        <span class="font-medium">{servings}</span>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <span class="material-symbols-outlined !text-xl text-yellow-500"
+                            >star</span
+                        >
+                        <span class="font-medium">{rating} ({reviews} reviews)</span>
+                    </div>
+                </div>
+                <div class="mt-6 flex flex-col sm:flex-row gap-3">
+                    <button
+                        class="w-full sm:w-auto px-6 py-3 rounded-lg bg-primary text-background-dark font-bold hover:opacity-80 transition-opacity"
+                        onClick={onViewRecipe}
+                        >View Recipe</button
+                    >
+                    <button
+                        class="w-full sm:w-auto px-6 py-3 rounded-lg border border-primary/30 dark:border-primary/50 text-text-primary-light dark:text-text-primary-dark font-bold hover:bg-primary/10 transition-colors"
+                        onClick={onSaveFavorite}
+                        >Save to Favorites</button
+                    >
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

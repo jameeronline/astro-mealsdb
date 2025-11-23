@@ -40,11 +40,11 @@ const { Content } = await render(selectedCuisineData);
 ---
 
 <Layout title={cuisine.title} description={`Explore delicious recipes in the ${cuisine.title} cuisine.`} >
-    <!-- Category Header -->
-    <div class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center">
+    <!-- Cuisine Header -->
+    <header class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center">
       <div class="flex flex-col gap-3">
         <h1
-          class="font-heading text-text-light dark:text-white text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em]"
+          class="font-heading text-text-light dark:text-white text-4xl md:text-5xl font-bold leading-tight tracking-[-0.033em]"
         >
           Browse <span class="text-primary underline underline-offset-4">{cuisine.title && cuisine.title}</span> Cuisine Recipes 
         </h1>
@@ -55,7 +55,8 @@ const { Content } = await render(selectedCuisineData);
           <Content />
         </div>
       </div>
-    </div>
+    </header>
+
     <!-- Category Tags -->
     <div class="flex justify-center flex-wrap gap-3 py-3 mb-6">
       <!-- Desktop: Category Tags -->

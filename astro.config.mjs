@@ -9,6 +9,8 @@ import sanity from "@sanity/astro";
 import sitemap from "@astrojs/sitemap";
 import netlify from "@astrojs/netlify";
 import partytown from '@astrojs/partytown';
+import mdx from '@astrojs/mdx';
+
 
 // https://astro.build/config
 export default defineConfig({
@@ -23,6 +25,7 @@ export default defineConfig({
     ],
   },
   integrations: [
+    mdx(),
     alpinejs(),
     sitemap(),
     react(),

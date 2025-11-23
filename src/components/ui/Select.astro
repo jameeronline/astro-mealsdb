@@ -1,0 +1,32 @@
+---
+interface Props {
+    id?: string;
+    name?: string;
+    className?: string;
+    value?: string;
+    placeholder?: string;
+    options: { value: string; label: string }[];
+}
+
+//props
+const { id = '', name = '', className = '', value = '', placeholder = 'Select', options = [] } = Astro.props;
+---
+
+<select
+    id={id}
+    name={name}
+    class=`me-2 form-select bg-card-light dark:bg-card-dark text-text-light dark:text-text-dark border border-border-light dark:border-border-dark rounded-md ${className}`
+    value={value}
+>
+    <option value="" disabled selected={!value}>
+        {placeholder}
+    </option>
+    {options.map(option => (
+        <option
+            value={option.value}
+            selected={value === option.value}
+        >
+            {option.label}
+        </option>
+    ))}
+</select>

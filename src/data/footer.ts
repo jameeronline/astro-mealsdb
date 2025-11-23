@@ -23,9 +23,9 @@ export const footerSections: FooterSection[] = [
     {
         title: "Legal",
         links: [
-            { text: "Privacy Policy", url: "/privacy-policy" },
-            { text: "Terms and Conditions", url: "/terms-and-conditions" },
-            { text: "Contact Us", url: "/contact" }
+            { text: "Privacy Policy", url: "/legal/privacy-policy" },
+            { text: "Terms and Conditions", url: "/legal/terms-and-conditions" },
+            { text: "Contact Us", url: "/company/contact" }
         ]
     },
     {

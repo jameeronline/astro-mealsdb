@@ -1,9 +1,9 @@
 ---
-import { Image } from "astro:assets"
-import AlgoliaAutoComplete from "@/components/modules/AlgoliaAutoComplete.astro"
+import { Image } from "astro:assets";
+import AlgoliaAutoComplete from "@/components/modules/AlgoliaAutoComplete.astro";
 
 //image
-import heroImage from 'src/assets/banner.png';
+import heroImage from "src/assets/banner.png";
 ---
 
 <!-- HeroSection -->
@@ -14,20 +14,22 @@ import heroImage from 'src/assets/banner.png';
       data-alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
     >
       <Image
-      src={heroImage}
-      alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
-      class="absolute inset-0 w-full h-full object-cover rounded-xl z-0"
-      aria-hidden="true"
+        src={heroImage}
+        alt="A vibrant and colorful overhead shot of a table laden with various fresh ingredients and prepared dishes."
+        class="absolute inset-0 w-full h-full object-cover rounded-xl z-0"
+        aria-hidden="true"
+        priority
       />
       <div
-      class="absolute inset-0 rounded-xl pointer-events-none"
-      style="background: linear-gradient(rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);"
-      aria-hidden="true"
-      ></div>
+        class="absolute inset-0 rounded-xl pointer-events-none"
+        style="background: linear-gradient(rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.5) 100%);"
+        aria-hidden="true"
+      >
+      </div>
       <!-- Content goes here -->
       <div class="flex flex-col gap-4 text-center text-white max-w-2xl z-10">
         <h1
-          class="text-4xl font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
+          class="text-4xl font-heading font-black leading-tight tracking-tight sm:text-5xl md:text-6xl"
         >
           Find Your Next Favorite Meal
         </h1>

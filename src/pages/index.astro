@@ -1,40 +1,21 @@
 ---
 import axios from "axios";
 
-import Layout from "../layouts/Layout.astro";
-import Hero from "../components/blocks/Hero.astro";
-import FilteredMeals from "../components/blocks/FilteredMeals.astro";
+import Layout from "@/layouts/Layout.astro";
+import Hero from "@/components/blocks/Hero.astro";
+import FilteredMeals from "@/components/blocks/FilteredMeals.astro";
+import FeatureMealCard from "@/components/blocks/FeatureMealCard.astro";
 
-//api fetched data with error handling
-let categories = [];
-try {
-  const categoriesResponse = await axios.get(
-    "https://www.themealdb.com/api/json/v1/1/list.php?c=list"
-  );
+//import collections
+import { categories, cuisines } from "../utils/index";
 
-  categories = categoriesResponse.data.meals || [];
-} catch (error) {
-  console.error("Failed to fetch categories:", error);
-  // Fallback data or empty array
-  categories = [];
-}
+const categoryValues = categories.map(item => item.data);
+const cuisineValues = cuisines.map(item => item.data);
 
-//api fetched data for areas with error handling
-let areas = [];
-try {
-  const areasResponse = await axios.get(
-    "https://www.themealdb.com/api/json/v1/1/list.php?a=list"
-  );
-
-  areas = areasResponse.data.meals || [];
-} catch (error) {
-  console.error("Failed to fetch areas:", error);
-  // Fallback data or empty array
-  areas = [];
-}
 ---
 
 <Layout>
   <Hero />
-  <FilteredMeals categories={categories} areas={areas} />
+  <!-- <FeatureMealCard /> -->
+  <FilteredMeals categories={categoryValues} cuisines={cuisineValues} />
 </Layout>

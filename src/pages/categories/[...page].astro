@@ -1,13 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import { getCollection } from "astro:content";
-import type { GetStaticPaths, Page } from 'astro';
+import type { GetStaticPaths, Page } from "astro";
 
-import Pagination from '@/components/Pagination.astro';
+//layout import
+import Layout from "src/layouts/Layout.astro";
 
+//components import
+import Pagination from "@/components/Pagination.astro";
+import PageHeader from "@/components/blocks/PageHeader.astro";
+import CategoryCard from "@/components/blocks/CategoryCard.astro";
+
+//collection fetch
+import { categories } from "@/utils/index";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const categories = await getCollection("categories");
   return paginate(categories, { pageSize: 8 });
 };
 
@@ -16,58 +23,33 @@ interface Props {
 }
 
 //props
-const { page }  = Astro.props;
-const categories = page?.data;
-
-//layout import
-import Layout from "src/layouts/Layout.astro";
+const { page } = Astro.props;
+const categoriesPage = page?.data;
 ---
 
-<Layout title="Categories" description="Explore a variety of meal categories to find your next favorite recipe.">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <header class="flex flex-col gap-3 text-center mb-12">
-        <h1
-          class="text-4xl md:text-5xl font-black leading-tight tracking-[-0.033em] text-text-light dark:text-text-dark"
-        >
-          Browse All Meal Categories
-        </h1>
-        <p
-          class="text-lg text-text-muted-light dark:text-text-muted-dark max-w-2xl mx-auto"
-        >
-          Find your next favorite dish by exploring our curated categories.
-        </p>
-      </header>
-      <div
-        class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
-        data-scroll-animate
-      >
-        {
-          categories.map((category) => (
-            <a
-              class="group relative block overflow-hidden rounded-xl "
-              href={`/categories/${category.data.slug}`}
-              data-scroll-animate
-            >
-              <div class="flex flex-col justify-end aspect-[3/4] transition-transform duration-300 ease-in-out group-hover:scale-105">
-                <div class="absolute left-0 right-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent"></div>
-                <Image
-                  class="h-full w-full object-cover"
-                  alt={category.data.title}
-                  src={category.data.thumbnail}
-                  width={400}
-                  height={533}
-                />
-                <h2 class="text-white text-lg font-bold leading-tight absolute bottom-4 left-4">
-                  {category.data.title}
-                </h2>
-              </div>
-            </a>
-          ))
-        }
-      </div>
+<Layout
+  title="Categories"
+  description="Explore a variety of meal categories to find your next favorite recipe."
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- PageHeader -->
+    <PageHeader
+      title="Browse All Meal Categories"
+      description="Browse through a curated selection of meal categories. Discover new cuisines, explore diverse flavors, and find inspiration for your next delicious recipe adventure."
+    />
 
-      <!-- Pagination page component -->
-      <Pagination page={page} />
-
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
+      data-scroll-animate
+    >
+      {
+        categoriesPage.map((category) => (
+          <CategoryCard item={category} type="categories" />
+        ))
+      }
     </div>
+
+    <!-- Pagination page component -->
+    <Pagination page={page} />
+  </div>
 </Layout>

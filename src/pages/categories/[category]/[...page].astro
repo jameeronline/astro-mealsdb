@@ -50,9 +50,8 @@ console.log("Sort Param:", sortParam);
 //get selected category
 const { category } = Astro.params;
 const { selectedCategory, page } = Astro.props;
-console.log("Selected Category:", selectedCategory);
 
-const recipiesData = page?.data;
+const categoriesData = page?.data;
 
 //const selectedCategorySlug = selectedCategory.slug.toLocaleLowerCase();
 //fetch recipes based on selected category
@@ -74,27 +73,24 @@ const recipiesData = page?.data;
   description={`Explore delicious recipes in the ${category.title} category.`}
 >
   <!-- Category Header -->
-  <div
-    class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center"
-  >
-    <div class="flex flex-col gap-3">
-      <p
-        class="text-text-light dark:text-white text-4xl font-black leading-tight tracking-[-0.033em]"
-      >
-        Browse {category.title && category.title} Category Recipes
-      </p>
-      <p class="text-primary capitalize">
-        {recipiesData.length} results found
-      </p>
-      <div
-        class="text-text-light/60 dark:text-text-dark/60 text-base font-normal leading-normal"
-      >
-        <!-- <Content /> -->
+    <header class="flex flex-wrap justify-center gap-3 py-4 mb-6 max-w-4xl mx-auto text-center">
+      <div class="flex flex-col gap-3">
+        <h1
+          class="font-heading text-text-light dark:text-white text-4xl md:text-5xl font-bold leading-tight tracking-[-0.033em]"
+        >
+          Browse <span class="text-primary underline underline-offset-4">{category.title && category.title}</span> Category Recipes 
+        </h1>
+        <!-- <p class="text-primary capitalize">{categoriesData.length} results found</p> -->
+        <div
+          class="text-text-light/60 dark:text-text-dark/60 text-base font-normal leading-normal"
+        >
+          <!-- <Content /> -->
+        </div>
       </div>
-    </div>
-  </div>
+    </header>
+
   <!-- Category Tags -->
-  <div class="flex justify-center gap-3 py-3 mb-6">
+  <div class="flex flex-wrap justify-center gap-3 py-3 mb-6">
     {
       categories.map((category) => (
         <a
@@ -113,7 +109,7 @@ const recipiesData = page?.data;
   </div>
 
   <!-- filter and sort -->
-  <div class="flex flex-wrap items-center justify-between gap-3 py-3 mb-6">
+  <!-- <div class="flex flex-wrap items-center justify-between gap-3 py-3 mb-6">
     <div class="text-text-light dark:text-text-dark text-sm font-medium">
       Sort by:
       <select
@@ -124,14 +120,14 @@ const recipiesData = page?.data;
         <option value="z-a" selected={sortParam === "z-a"}>Z-A</option>
       </select>
     </div>
-  </div>
+  </div> -->
   <!-- Recipe Grid -->
   <div
     class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-6 py-4 mx-auto"
     data-scroll-animate
   >
     {
-      recipiesData.map((recipe) => (
+      categoriesData.map((recipe) => (
         <MealsCard recipe={recipe.data} />
         // <SimpleMealCard recipe={recipe.data} />
       ))
@@ -140,10 +136,10 @@ const recipiesData = page?.data;
   <Pagination page={page} />
 
   <script>
-    document.getElementById('sortSelect').addEventListener('change', function(e) {
-      const url = new URL(window.location);
-      url.searchParams.set('sort', e.target.value);
-      window.location.href = url.toString();
-    });
+    // document.getElementById('sortSelect').addEventListener('change', function(e) {
+    //   const url = new URL(window.location);
+    //   url.searchParams.set('sort', e.target.value);
+    //   window.location.href = url.toString();
+    // });
   </script>
 </Layout>

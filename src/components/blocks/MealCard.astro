@@ -1,0 +1,92 @@
+---
+import { Image } from "astro:assets";
+
+//icons
+import { Timer, Utensils, Star, Heart } from "@lucide/astro";
+
+export interface Props {
+  image: string;
+  imageAlt?: string;
+  category: string;
+  cuisine?: string;
+  title: string;
+  description: string;
+  time: string | number;
+  difficulty: string;
+  rating: number;
+  href?: string;
+}
+
+const {
+  image,
+  imageAlt = "Recipe image",
+  category,
+  cuisine,
+  title,
+  description,
+  time,
+  difficulty,
+  rating,
+  href,
+} = Astro.props;
+---
+
+<div
+  class="flex flex-col gap-3 rounded-xl overflow-hidden bg-card-light dark:bg-card-dark shadow-sm hover:shadow-lg transition-shadow duration-300 group"
+>
+  <div class="relative">
+    <a href={href}>
+        <Image
+        src={image}
+        alt={imageAlt}
+        class="w-full h-full object-cover rounded-t-lg aspect-video group-hover:scale-105 transition-transform duration-300 ease-in-out"
+        loading="lazy"
+        decoding="async"
+        format="webp"
+        inferSize
+        />
+    </a>
+    <button
+      class="absolute top-2 right-2 bg-white/70 dark:bg-background-dark/70 backdrop-blur-sm p-2 rounded-full text-text-secondary-light dark:text-text-secondary-dark hover:text-red-500 hover:scale-110 transition-all"
+    >
+      <Heart class="size-5" />
+    </button>
+  </div>
+  <div class="p-4 flex flex-col grow">
+    <div class="flex items-center justify-between gap-2 mb-4">
+      <span
+        class="text-xs font-semibold uppercase tracking-wider text-primary dark:text-primary bg-primary/10 dark:bg-primary/30 px-2 py-1 rounded-full"
+        >{category}</span
+      ><span
+        class="text-xs font-semibold uppercase tracking-wider text-primary dark:text-primary bg-primary/10 dark:bg-primary/30 px-2 py-1 rounded-full"
+        >{cuisine}</span
+      >
+    </div>
+    <p
+      class="text-text-light dark:text-text-dark text-lg font-bold leading-tight line-clamp-2"
+    >
+      {title}
+    </p>
+    <p
+      class="text-text-light dark:text-text-dark text-sm font-normal leading-normal mt-1 line-clamp-2"
+    >
+      {description}
+    </p>
+    <div
+      class="flex items-center justify-between text-text-secondary-light dark:text-text-secondary-dark mt-4 pt-4 border-t border-border-light dark:border-border-dark"
+    >
+      <div class="flex items-center gap-2 text-sm">
+        <Timer class="size-5" />
+        <span>{time} min</span>
+      </div>
+      <div class="flex items-center gap-2 text-sm">
+        <Utensils class="size-5" />
+        <span>{difficulty}</span>
+      </div>
+      <div class="flex items-center gap-2 text-sm">
+        <Star class="text-yellow-500 size-5" />
+        <span>{rating}</span>
+      </div>
+    </div>
+  </div>
+</div>
