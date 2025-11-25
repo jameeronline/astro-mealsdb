@@ -2,9 +2,6 @@
 import { Image } from "astro:assets";
 import type { GetStaticPaths, Page } from "astro";
 
-//import type
-//import type { Ingredient } from "src/data/recipes";
-
 interface Props {
   page: Page;
 }
@@ -13,6 +10,7 @@ interface Props {
 import Layout from "src/layouts/Layout.astro";
 import PageHeader from "@/components/blocks/PageHeader.astro";
 import Pagination from "@/components/Pagination.astro";
+import Section from "@/components/ui/Section.astro";
 
 //get ingredients collection
 import { ingredients } from "@/utils/index";
@@ -28,7 +26,7 @@ const ingredientsData = page?.data;
 ---
 
 <Layout>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <Section>
     <!-- page header -->
     <PageHeader
       title="Ingredients"
@@ -54,5 +52,5 @@ const ingredientsData = page?.data;
       }
     </div>
     <Pagination page={page} />
-  </div>
+  </Section>
 </Layout>

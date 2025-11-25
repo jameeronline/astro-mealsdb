@@ -3,7 +3,7 @@
 import type { Category, Cuisine } from "../../data/recipes";
 
 //icons
-import { LayoutGrid, LayoutList } from "@lucide/astro";
+import { LayoutGrid, LayoutList, ChevronLeft, ChevronRight } from "@lucide/astro";
 
 interface Props {
   categories: Category[];
@@ -58,7 +58,7 @@ const cuisineOptions = cuisines.map((cuisine) => ({
     data-scroll-animate
   >
     <div class="flex flex-wrap justify-between w-full gap-3">
-      <div>
+      <div class="flex">
         <Select
           options={categoryOptions}
           id="category-select"
@@ -72,7 +72,7 @@ const cuisineOptions = cuisines.map((cuisine) => ({
           placeholder="Cuisine"
         />
       </div>
-      <div class="flex items-center gap-2">
+      <div class="hidden md:flex items-center gap-2">
         <p class="text-sm font-medium mr-2 hidden sm:block">View:</p>
         <button class="p-2 rounded-lg bg-primary/20 text-primary">
           <LayoutGrid class="size-6" />
@@ -129,7 +129,7 @@ const cuisineOptions = cuisines.map((cuisine) => ({
       class="inline-flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-border-dark text-sm font-medium hover:bg-primary/20 transition-colors"
       href="#"
     >
-      <span class="material-symbols-outlined text-base">chevron_left</span>
+      <ChevronLeft class="size-6" />
     </a>
     <a
       class="inline-flex items-center justify-center size-9 rounded-lg bg-primary text-text-light text-sm font-bold mx-1"
@@ -155,7 +155,7 @@ const cuisineOptions = cuisines.map((cuisine) => ({
       class="inline-flex items-center justify-center size-9 rounded-lg border border-border-light dark:border-border-dark text-sm font-medium hover:bg-primary/20 transition-colors"
       href="#"
     >
-      <span class="material-symbols-outlined text-base">chevron_right</span>
+      <ChevronRight class="size-6" />
     </a>
   </nav>
 </section>

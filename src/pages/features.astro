@@ -40,11 +40,11 @@ const features = [
 ---
 
 <Layout>
-  <div class="max-w-7xl mx-auto space-y-20">
+  <div class="max-w-7xl mx-auto space-y-10 md:space-y-20">
     <!-- HeroSection -->
     <section class="flex flex-1 justify-center" data-scroll-animate>
-      <div class="flex flex-col w-full px-4">
-        <div class="relative flex aspect-video flex-col items-center justify-center gap-6 rounded-xl overflow-hidden p-4 text-center sm:gap-8">
+      <div class="flex flex-col w-full">
+        <div class="relative flex aspect-square md:aspect-video flex-col items-center justify-center gap-6 rounded-xl overflow-hidden p-4 text-center sm:gap-8">
           <Image
             src={featureImage}
             alt="A vibrant overhead shot of a colorful salad being prepared on a dark wooden table."
@@ -52,10 +52,10 @@ const features = [
             width={1200}
             height={675}
           />
-          <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-[#121212]/80"></div>
+          <div class="absolute inset-0 bg-linear-to-b from-black/40 to-[#121212]/80"></div>
           <div class="relative z-10 flex flex-col gap-2">
             <h1
-              class="font-heading text-4xl font-black leading-tight tracking-[-0.033em] text-text-dark sm:text-5xl lg:text-6xl"
+              class="font-heading text-3xl font-black leading-tight tracking-[-0.033em] text-text-dark sm:text-5xl lg:text-6xl"
               data-scroll-animate
             >
               Discover Your Next Favorite Meal
@@ -79,7 +79,7 @@ const features = [
     </section>
     <!-- FeatureSection Cards -->
     <section class="flex flex-1 justify-center">
-      <div class="layout-content-container flex flex-1 flex-col gap-10 px-4">
+      <div class="flex flex-1 flex-col gap-10">
         <div class="flex flex-col items-center gap-4 text-center">
           <h1
             class="max-w-[720px] text-[32px] font-bold leading-tight tracking-light text-text-light dark:text-text-dark sm:text-4xl sm:font-black sm:leading-tight sm:tracking-[-0.033em]"
@@ -122,7 +122,7 @@ const features = [
     <!-- Alternating Feature Section 1 -->
     <section class="flex flex-1 justify-center">
       <div
-        class="layout-content-container flex flex-1 items-center gap-10 px-4 flex-col md:flex-row"
+        class="flex flex-1 items-center gap-10 flex-col md:flex-row"
         data-scroll-animate
       >
         <div class="flex w-full flex-col gap-4 md:w-1/2" data-scroll-animate>
@@ -155,7 +155,7 @@ const features = [
     <!-- Alternating Feature Section 2 -->
     <section class="flex flex-1 justify-center">
       <div
-        class="layout-content-container flex flex-1 items-center gap-10 px-4 flex-col md:flex-row-reverse"
+        class="flex flex-1 items-center gap-10 flex-col md:flex-row-reverse"
         data-scroll-animate
       >
         <div class="flex w-full flex-col gap-4 md:w-1/2" data-scroll-animate>
@@ -188,7 +188,7 @@ const features = [
     <!-- Testimonials Section -->
     <section class="flex flex-1 justify-center">
       <div
-        class="layout-content-container flex flex-1 flex-col items-center gap-10 px-4 text-center"
+        class="flex flex-1 flex-col items-center gap-10 text-center"
         data-scroll-animate
       >
         <div class="flex flex-col gap-4" data-scroll-animate>
@@ -256,7 +256,7 @@ const features = [
     <!-- Final CTA -->
     <section class="flex flex-1 justify-center" data-scroll-animate>
       <div
-        class="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-gradient-to-br from-primary/20 to-primary/5 p-8 text-center sm:p-12"
+        class="flex w-full flex-col items-center justify-center gap-6 rounded-xl bg-linear-to-br from-primary/20 to-primary/5 p-8 text-center sm:p-12"
       >
         <div class="flex flex-col gap-2">
           <h1

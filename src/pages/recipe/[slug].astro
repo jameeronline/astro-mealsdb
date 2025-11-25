@@ -5,6 +5,9 @@ import Image from "astro/components/Image.astro";
 //layout import
 import Layout from "src/layouts/Layout.astro";
 
+//icon
+import { House } from "@lucide/astro";
+
 //components import
 import Header from "@/components/page/details/Header.astro";
 import Actions from "@/components/page/details/Actions.astro";
@@ -14,22 +17,28 @@ import NutritionInfo from "@/components/page/details/NutritionInfo.astro";
 import Reviews from "@/components/page/details/Reviews.astro";
 
 //fetch meal details based on slug
-const recipes = await getCollection("recipes");
+import { recipes, getCategoryDetails, getCuisineDetails, getIngredientDetails } from "@/utils/index";
 
 //find the recipe that matches the slug
 export async function getStaticPaths() {
-  const recipes = await getCollection("recipes");
   return recipes.map((recipe) => ({
     params: { slug: recipe.data.slug },
     props: { recipe: recipe.data },
   }));
 }
 
+
+//props
 const { recipe } = Astro.props;
 
 //extract data from the recipe
-const { title, ingredients, addons, nutrition, thumbnail, description } = recipe;
+const { title, ingredients, addons, nutrition, thumbnail, description, category, cuisine } = recipe;
 
+//get category and cuisine details
+const categoryDetails = getCategoryDetails(category);
+const cuisineDetails = getCuisineDetails(cuisine);
+
+//render recipe content
 const entry = await getEntry("recipes", recipe.slug);
 const { Content } = await render(entry);
 ---
@@ -41,7 +50,9 @@ const { Content } = await render(entry);
       <div class="flex flex-wrap gap-2 pb-8 print:hidden">
         <a
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
-          href="#">Home</a
+          href="/">
+            <House class="inline-block w-4 h-4 mb-0.5 mr-1" />
+          </a
         >
         <span
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"
@@ -49,7 +60,7 @@ const { Content } = await render(entry);
         >
         <a
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
-          href="#">Italian</a
+          href={`/cuisines/${cuisineDetails?.data.slug}`}>{cuisineDetails?.data.title}</a
         >
         <span
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"
@@ -57,7 +68,7 @@ const { Content } = await render(entry);
         >
         <a
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal hover:text-primary dark:hover:text-primary"
-          href="#">Pasta</a
+          href={`/categories/${categoryDetails?.data.slug}`}>{categoryDetails?.data.title}</a
         >
         <span
           class="text-gray-600 dark:text-gray-400 text-sm font-medium leading-normal"

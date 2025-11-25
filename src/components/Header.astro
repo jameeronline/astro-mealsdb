@@ -5,6 +5,7 @@ import ThemeSelect from "@/components/modules/ThemeSelect.astro";
 
 //data
 import { navLinks, homeNavLink } from "@/data/navbar";
+import { siteConfig } from "@/data/site";
 
 //ui library
 import { Button } from "@/components/starwind/button";
@@ -50,14 +51,14 @@ function isActiveLink(href: string, currentPath: string): boolean {
           >
         </span>
         <a
-          class={`text-xl font-bold transition-colors ${
-            isActiveLink(homeNavLink.href, pathname)
+          class={`text-base md:text-xl font-bold transition-colors whitespace-nowrap ${
+            isActiveLink(siteConfig.link, pathname)
               ? ""
               : "text-text-light dark:text-text-dark hover:text-primary dark:hover:text-primary"
           }`}
-          href={homeNavLink.href}
+          href={siteConfig.link}
         >
-          {homeNavLink.text}
+          {siteConfig.title}
         </a>
       </div>
 
@@ -118,8 +119,12 @@ function isActiveLink(href: string, currentPath: string): boolean {
         </a>
 
         <ThemeSelect />
-        <Menu class="w-6 h-6 lg:hidden cursor-pointer hover:text-primary transition-colors" id="menu-button" />
-        <X class="w-6 h-6 lg:hidden hidden" id="menu-close" />
+        <button class="size-10 flex justify-center items-center lg:hidden cursor-pointer hover:text-primary transition-colors" id="menu-button">
+          <Menu class="size-6" />
+        </button>
+        <button  id="menu-close" class="size-10 flex justify-center items-center lg:hidden cursor-pointer hover:text-primary transition-colors hidden">
+          <X class="size-6" />
+        </button>
       </div>
     </div>
   </div>

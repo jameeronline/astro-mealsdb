@@ -2,6 +2,7 @@
 const linkPrefix = "/static";
 
 import { footerSections } from "@/data/footer";
+import { siteConfig } from "@/data/site";
 ---
 
 <!-- Footer -->
@@ -27,12 +28,11 @@ import { footerSections } from "@/data/footer";
           >
         </span>
           <h2 class="text-text-light dark:text-text-dark text-lg font-bold">
-            MealsDB
+            {siteConfig.title}
           </h2>
         </div>
         <p class="text-sm max-w-sm">
-          Your ultimate destination for discovering, cooking, and sharing
-          delicious meals from around the world.
+          {siteConfig.description}
         </p>
       </div>
 
@@ -64,7 +64,7 @@ import { footerSections } from "@/data/footer";
     <div
       class="mt-12 pt-8 border-t border-border-light dark:border-border-dark text-center text-sm"
     >
-        <div class="flex items-center justify-between gap-2">
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between md:gap-2">
           <p>© 2024 <span class="font-bold">MealsDB</span>. All rights reserved.</p>
 
           <div class="flex items-center gap-4 ml-4">

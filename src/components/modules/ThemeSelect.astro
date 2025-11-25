@@ -7,13 +7,13 @@ import {Check} from "@lucide/astro"
     <!-- Current theme display button -->
     <button
       id="theme-toggle"
-      class="flex items-center gap-2 px-3 py-2 bg-card-light border border-border rounded-lg text-foreground cursor-pointer transition-all duration-200 ease-in-out text-sm font-medium min-w-[120px] select-none"
+      class="flex items-center gap-2 px-3 py-2 bg-card-light border border-border rounded-lg text-foreground cursor-pointer transition-all duration-200 ease-in-out text-sm font-medium md:min-w-[120px] select-none"
       aria-label="Change theme"
       aria-expanded="false"
     >
-      <span id="current-theme-icon" class="theme-green w-4 h-4 rounded border border-border shrink-0 inline-block"
+      <span id="current-theme-icon" class="theme-green w-4 h-4 rounded-full shrink-0 inline-block"
       ></span>
-      <span id="current-theme-text">Green</span>
+      <span id="current-theme-text" class="hidden md:inline-flex">Green</span>
       <svg
         id="chevron-icon"
         class="w-4 h-4 transition-transform duration-200 ease-in-out ml-auto"
@@ -333,8 +333,7 @@ import {Check} from "@lucide/astro"
   .theme-color-preview {
     width: 1.25rem;
     height: 1.25rem;
-    border-radius: 0.25rem;
-    border: 1px solid hsl(var(--border));
+    border-radius: 9999px;
     flex-shrink: 0;
     position: relative;
     overflow: hidden;

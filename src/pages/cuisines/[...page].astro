@@ -1,4 +1,5 @@
 ---
+import { Image } from "astro:assets";
 import type { GetStaticPaths, Page } from "astro";
 
 //layout import
@@ -13,47 +14,46 @@ import CategoryCard from "@/components/blocks/CategoryCard.astro";
 //settings
 import { settings } from "@/data/settings";
 
-//collection
-import { categories } from "@/utils/index";
+//collection fetch
+import { cuisines } from "@/utils/index";
 
-//path generation for categories with pagination
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  return paginate(categories, { pageSize: settings.pageLength });
+  return paginate(cuisines, { pageSize: settings.pageLength });
 };
 
-//interface
 interface Props {
   page: Page;
 }
 
 //props
 const { page } = Astro.props;
-const categoriesPage = page?.data;
+const cuisinesPage = page?.data;
 ---
 
 <Layout
-  title="Categories"
-  description="Explore a variety of meal categories to find your next favorite recipe."
+  title="Cuisines"
+  description="Explore a variety of meal cuisines to find your next favorite recipe."
 > 
   <Section>
     <!-- PageHeader -->
     <PageHeader
-      title="Browse All Meal Categories"
-      description="Browse through a curated selection of meal categories. Discover new cuisines, explore diverse flavors, and find inspiration for your next delicious recipe adventure."
+      title="Browse All Meal Cuisines"
+      description="Browse through a curated selection of meal cuisines. Discover new flavors, explore diverse tastes, and find inspiration for your next delicious recipe adventure."
     />
 
+    <!-- Grid of Cuisine Cards -->
     <div
       class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6"
       data-scroll-animate
     >
       {
-        categoriesPage.map((category) => (
-          <CategoryCard item={category} type="categories" />
+        cuisinesPage.map((cuisine) => (
+          <CategoryCard item={cuisine} type="cuisines" />
         ))
       }
     </div>
 
-    <!-- Pagination page component -->
+    <!-- Pagination -->
     <Pagination page={page} />
   </Section>
 </Layout>

@@ -1,0 +1,9 @@
+---
+const { isNarrow = true } = Astro.props;
+---
+
+<section
+  class={`mx-auto w-full ${isNarrow && "max-w-7xl"}`}
+>
+  <slot />
+</section>
